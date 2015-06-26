@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DataStructures": {
+      "commandName": "DataStructures",
+      "commandLineArgs": "F:\\id\\35\\78\\proj\\software_engineering_practice\\data_structures\\data\\students.txt"
+    }
+  }
+}
