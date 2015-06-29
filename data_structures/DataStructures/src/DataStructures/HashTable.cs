@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DataStructures.AssociativeArray;
 
 namespace DataStructures.HashTable
 {
-    interface IHashTable<TKey, TValue>
+    internal interface IHashTable<TKey, TValue> : IAssociativeArray<TKey, TValue>
     {
-        void Add(TKey key, TValue value);
     }
 
     // Handles collisions by separate chaining. Each array element is another structure that holds the values.
-    class HashTableLinkedList<TKey, TValue> : IHashTable<TKey, TValue>
+    public class HashTableLinkedList<TKey, TValue> : IHashTable<TKey, TValue>
     {
         private const int TABLE_SIZE = 137;
         private LinkedList<TValue>[] table = new LinkedList<TValue>[TABLE_SIZE];
@@ -67,6 +67,56 @@ namespace DataStructures.HashTable
                 total += TABLE_SIZE - 1;
             }
             return total;
+        }
+
+        public void Reassign(TKey key, TValue value)
+        {
+            int hashKey = HashKey(key);
+            switch (table[hashKey].Count) {
+                case 0:
+                    // value wasn't there, storing for first time.
+                    // Equivalent to Add.
+                    table[hashKey].AddLast(value);
+                    break;
+                case 1:
+                    // previous value was here, replacing with new.
+                    table[hashKey].RemoveLast();
+                    table[hashKey].AddLast(value);
+                    break;
+                default:
+                    throw new NotImplementedException("Reassignment in a bucket that handles collision not implemented");
+            }
+        }
+
+        public void Remove(TKey key)
+        {
+            int hashKey = HashKey(key);
+            switch (table[hashKey].Count)
+            {
+                case 0:
+                    // no value with this key, nothing happens.
+                    break;
+                case 1:
+                    // value found, removing it.
+                    table[hashKey].RemoveLast();
+                    break;
+                default:
+                    throw new NotImplementedException("Removing with collision not implemented");
+            }
+        }
+
+        public TValue Lookup(TKey key)
+        {
+            int hashKey = HashKey(key);
+            switch (table[hashKey].Count)
+            {
+                case 0:
+                    throw new KeyNotFoundException("No value with key: " + key.ToString());
+                case 1:
+                    return table[hashKey].Last.Value;
+                default:
+                    throw new NotImplementedException("Removing with collision not implemented");
+            }
         }
     }
 
@@ -160,12 +210,27 @@ namespace DataStructures.HashTable
                 return;
             }
 
-            //Console.WriteLine("{0}Retrieving some key/values", SEP);
-            //string[] someKeys = { "jb8uhd", "93fb456" };
-            //foreach (string someKey in someKeys)
-            //{
-            //    Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map[someKey]);
-            //}
+            Console.WriteLine("{0}Retrieving some key/values", SEP);
+            string[] someKeys = { "jb8uhd", "93fb456" };
+            foreach (string someKey in someKeys)
+            {
+                Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map.Lookup(someKey));
+            }
+
+            Console.WriteLine("{0}Retrieving after reassignment and removal", SEP);
+            map.Reassign(someKeys[0], "new reassigned value not originally in data file");
+            map.Remove(someKeys[1]);
+            foreach (string someKey in someKeys)
+            {
+                try
+                {
+                    Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map.Lookup(someKey));
+                }
+                catch (KeyNotFoundException)
+                {
+                    Console.WriteLine("There is no key: {0}", someKey);
+                }
+            }
 
             //Console.WriteLine("{0}Iterating", SEP);
             //foreach (DictionaryEntry de in map)
