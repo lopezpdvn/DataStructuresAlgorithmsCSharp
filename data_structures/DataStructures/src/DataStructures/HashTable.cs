@@ -118,6 +118,19 @@ namespace DataStructures.HashTable
                     throw new NotImplementedException("Removing with collision not implemented");
             }
         }
+
+        // Indexing.
+        public TValue this[TKey key]
+        {
+            get
+            {
+                return Lookup(key);
+            }
+            set
+            {
+                Reassign(key, value);
+            }
+        }
     }
 
     public static class Program
@@ -193,7 +206,7 @@ namespace DataStructures.HashTable
                         studentName = line.Split(',')[1];
                         try
                         {
-                            map.Add(studentId, studentName);
+                            map[studentId] = studentName;
                         }
                         catch(Exception e)
                         {
@@ -214,7 +227,7 @@ namespace DataStructures.HashTable
             string[] someKeys = { "jb8uhd", "93fb456" };
             foreach (string someKey in someKeys)
             {
-                Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map.Lookup(someKey));
+                Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map[someKey]);
             }
 
             Console.WriteLine("{0}Retrieving after reassignment and removal", SEP);
@@ -224,7 +237,7 @@ namespace DataStructures.HashTable
             {
                 try
                 {
-                    Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map.Lookup(someKey));
+                    Console.WriteLine("StudentId: {0}, StudentName: {1}", someKey, map[someKey]);
                 }
                 catch (KeyNotFoundException)
                 {
