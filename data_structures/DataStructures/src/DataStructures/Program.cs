@@ -10,7 +10,7 @@ namespace DataStructures
         public void Main(string[] args)
         {
             string datafile_path = args[0];
-            HashTable.Program.Main(datafile_path);
+            LinkedList.Program.Main(datafile_path);
         }
     }
 }
