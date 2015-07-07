@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace DataStructures.LinkedList
 {
@@ -67,10 +66,36 @@ namespace DataStructures.LinkedList
             return newLastNode;
         }
 
+        public Node<T> AddBefore(Node<T> node, T value)
+        {
+            if(FirstNode == null)
+            {
+                throw new InvalidOperationException("List is empty");
+            }
+            else if (FirstNode == node)
+            {
+                // There's no previous node since it's the first one, possibly because this.Count == 1.
+                return AddFirst(value);
+            }
+            else
+            {
+                Node<T> prevNode = FindPrevious(node);
+                if (prevNode == null)
+                {
+                    throw new InvalidOperationException("node " + node.Value + "not in list");
+                }
+
+                Node<T> newNode = new Node<T>(value);
+                newNode.Next = node;
+                prevNode.Next = newNode;
+                return newNode;
+            }
+        }
+
         public Node<T> AddAfter(Node<T> node, T value)
         {
             var newNode = new Node<T>(value);
-            Node<T> nodeInList = GetNode(node);
+            Node<T> nodeInList = Find(node);
             if (nodeInList == null)
             {
                 throw new InvalidOperationException("node " + node.Value + "not in list");
@@ -82,18 +107,23 @@ namespace DataStructures.LinkedList
             return newNode;
         }
 
-        public bool Contains(Node<T> node)
+        private Node<T> FindPrevious(Node<T> node)
         {
-            var isContained = false;
-            foreach(var iNode in this)
+            Node<T> prevNode = null;
+            foreach (var iNode in this)
             {
-                if (iNode == node)
+                if (iNode.Next != null && iNode.Next == node)
                 {
-                    isContained = true;
-                    break;
+                    prevNode = iNode;
                 }
             }
-            return isContained;
+
+            return prevNode;
+        }
+
+        public bool Contains(Node<T> node)
+        {
+            return Find(node) != null ? true : false;
         }
 
         public void RemoveFirst()
@@ -104,14 +134,7 @@ namespace DataStructures.LinkedList
 
         public void Remove(Node<T> node)
         {
-            Node<T> prev2Node2Remove = null;
-            foreach(var iNode in this)
-            {
-                if(iNode.Next != null && iNode.Next == node)
-                {
-                    prev2Node2Remove = iNode;
-                }
-            }
+            Node<T> prev2Node2Remove = FindPrevious(node);
 
             if (prev2Node2Remove == null)
             {
@@ -122,27 +145,68 @@ namespace DataStructures.LinkedList
             prev2Node2Remove.Next = node.Next;
         }
 
+        public void RemoveBefore(Node<T> node)
+        {
+            Node<T> node2Remove = FindPrevious(node);
+            if(node2Remove == null)
+            {
+                if(FirstNode == node)
+                {
+                    // node is first Node
+                    throw new InvalidOperationException("node " + node + "is first in list.");
+                }
+                else 
+                {
+                    // Find(node) == null
+                    throw new InvalidOperationException("node " + node + "not in list.");
+                }
+            }
+            else if (node2Remove == FirstNode)
+            {
+                RemoveFirst();
+            }
+            else
+            {
+                Node<T> nodePrev2Remove = FindPrevious(node2Remove);
+                nodePrev2Remove.Next = node;
+                node2Remove.Next = null;
+            }
+        }
+
+        public void RemoveAfter(Node<T> node)
+        {
+            Node<T> nodeInList = Find(node);
+            if (nodeInList == null)
+            {
+                throw new InvalidOperationException("node " + node + "not in list.");
+            }
+            else if (nodeInList.Next == null)
+            {
+                throw new InvalidOperationException("node " + node + "is last in list.");
+            }
+            else if (nodeInList.Next.Next == null)
+            {
+                // Removing last node.
+                nodeInList.Next = null;
+            }
+            else
+            {
+                // Removing next node, which is not the last one.
+                nodeInList.Next = nodeInList.Next.Next;
+            }
+        }
+
         public void RemoveLast()
         {
-            //Node<T> nextToLast = null;
-            //foreach(var node in this)   
-            //{
-            //    nextToLast = node;
-            //    if(node.Next != null && node.Next.Next == null)
-            //    {
-            //        break;
-            //    }
-            //}
-
-            //// list empty
-            //if (nextToLast == null) return;
-
-            //LastNode = nextToLast;
-            //LastNode.Next = null;
             Remove(LastNode);
         }
 
-        private Node<T> GetNode(Node<T> node)
+        public void Clear()
+        {
+            FirstNode = LastNode = null;
+        }
+
+        private Node<T> Find(Node<T> node)
         {
             Node<T> nodeInList = null;
             foreach (var iNode in this)
@@ -172,6 +236,20 @@ namespace DataStructures.LinkedList
             return GetEnumerator();
         }
 
+        public override string ToString()
+        {
+            StringBuilder strBuild = new StringBuilder();
+            strBuild.AppendFormat("{0} with members: ", GetType().Name);
+            int i = 0;
+            foreach (var iNode in this)
+            {
+                strBuild.AppendFormat("{0} -> ", iNode);
+                i++;
+            }
+            strBuild.Append("NULL");
+            return strBuild.ToString();
+        }
+
         public Node<T> LastNode { get; set; }
         public Node<T> FirstNode { get; set; }
     }
@@ -195,6 +273,11 @@ namespace DataStructures.LinkedList
             set { data = value; }
         }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
         private Node<T> next;
         private T data;
     }
@@ -203,9 +286,11 @@ namespace DataStructures.LinkedList
     {
         static internal void Main(string data_fp)
         {
-            Console.WriteLine("Linked list program");
-            var linkedList0 = new SinglyLinkedList<string>("first original element");
-            linkedList0.AddFirst("new first element");
+            Console.WriteLine("{0}Linked list program", Cfg.SEP);
+            var linkedList0 = new SinglyLinkedList<string>{ "first original element", "new first element" };
+
+            Console.WriteLine("{0}Printing whole list", Cfg.SEP);
+            Console.WriteLine(linkedList0);
 
             Console.WriteLine("{0} -> {1}", linkedList0.FirstNode.Value, linkedList0.FirstNode.Next.Value);
 
@@ -225,20 +310,20 @@ namespace DataStructures.LinkedList
 
             Console.WriteLine();
             var linkedListInts = new SinglyLinkedList<int>(){ 0, 1, 2, 3, 4};
-            Console.WriteLine("All linkedListInts");
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(Cfg.SEP + "All linkedListInts");
+            Console.WriteLine(linkedListInts);
 
-            Console.WriteLine("Remove middle (2)");
+            Console.WriteLine(Cfg.SEP + "Remove middle (2)");
             linkedListInts.Remove(linkedListInts.FirstNode.Next.Next);
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(linkedListInts);
 
-            Console.WriteLine("Remove last (4)");
+            Console.WriteLine(Cfg.SEP + "Remove last (4)");
             linkedListInts.RemoveLast();
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(linkedListInts);
 
-            Console.WriteLine("Remove first (0)");
+            Console.WriteLine(Cfg.SEP + "Remove first (0)");
             linkedListInts.RemoveFirst();
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(linkedListInts);
 
             Console.Read();
         }
