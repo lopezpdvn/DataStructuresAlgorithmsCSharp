@@ -69,10 +69,36 @@ namespace DataStructures.LinkedList
             return newLastNode;
         }
 
+        public Node<T> AddBefore(Node<T> node, T value)
+        {
+            if(FirstNode == null)
+            {
+                throw new InvalidOperationException("List is empty");
+            }
+            else if (FirstNode == node)
+            {
+                // There's no previous node since it's the first one, possibly because this.Count == 1.
+                return AddFirst(value);
+            }
+            else
+            {
+                Node<T> prevNode = FindPrevious(node);
+                if (prevNode == null)
+                {
+                    throw new InvalidOperationException("node " + node.Value + "not in list");
+                }
+
+                Node<T> newNode = new Node<T>(value);
+                newNode.Next = node;
+                prevNode.Next = newNode;
+                return newNode;
+            }
+        }
+
         public Node<T> AddAfter(Node<T> node, T value)
         {
             var newNode = new Node<T>(value);
-            Node<T> nodeInList = GetNode(node);
+            Node<T> nodeInList = Find(node);
             if (nodeInList == null)
             {
                 throw new InvalidOperationException("node " + node.Value + "not in list");
@@ -82,6 +108,20 @@ namespace DataStructures.LinkedList
             nodeInList.Next = newNode;
 
             return newNode;
+        }
+
+        private Node<T> FindPrevious(Node<T> node)
+        {
+            Node<T> prevNode = null;
+            foreach (var iNode in this)
+            {
+                if (iNode.Next != null && iNode.Next == node)
+                {
+                    prevNode = iNode;
+                }
+            }
+
+            return prevNode;
         }
 
         public bool Contains(Node<T> node)
@@ -106,14 +146,7 @@ namespace DataStructures.LinkedList
 
         public void Remove(Node<T> node)
         {
-            Node<T> prev2Node2Remove = null;
-            foreach(var iNode in this)
-            {
-                if(iNode.Next != null && iNode.Next == node)
-                {
-                    prev2Node2Remove = iNode;
-                }
-            }
+            Node<T> prev2Node2Remove = FindPrevious(node);
 
             if (prev2Node2Remove == null)
             {
@@ -126,25 +159,10 @@ namespace DataStructures.LinkedList
 
         public void RemoveLast()
         {
-            //Node<T> nextToLast = null;
-            //foreach(var node in this)   
-            //{
-            //    nextToLast = node;
-            //    if(node.Next != null && node.Next.Next == null)
-            //    {
-            //        break;
-            //    }
-            //}
-
-            //// list empty
-            //if (nextToLast == null) return;
-
-            //LastNode = nextToLast;
-            //LastNode.Next = null;
             Remove(LastNode);
         }
 
-        private Node<T> GetNode(Node<T> node)
+        private Node<T> Find(Node<T> node)
         {
             Node<T> nodeInList = null;
             foreach (var iNode in this)
