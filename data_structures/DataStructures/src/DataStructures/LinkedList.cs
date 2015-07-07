@@ -123,16 +123,7 @@ namespace DataStructures.LinkedList
 
         public bool Contains(Node<T> node)
         {
-            var isContained = false;
-            foreach(var iNode in this)
-            {
-                if (iNode == node)
-                {
-                    isContained = true;
-                    break;
-                }
-            }
-            return isContained;
+            return Find(node) != null ? true : false;
         }
 
         public void RemoveFirst()
