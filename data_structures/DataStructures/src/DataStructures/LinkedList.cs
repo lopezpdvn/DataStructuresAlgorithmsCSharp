@@ -210,6 +210,11 @@ namespace DataStructures.LinkedList
             Remove(LastNode);
         }
 
+        public void Clear()
+        {
+            FirstNode = LastNode = null;
+        }
+
         private Node<T> Find(Node<T> node)
         {
             Node<T> nodeInList = null;
