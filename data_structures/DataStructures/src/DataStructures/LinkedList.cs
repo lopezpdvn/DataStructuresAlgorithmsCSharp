@@ -107,7 +107,7 @@ namespace DataStructures.LinkedList
             return newNode;
         }
 
-        private Node<T> FindPrevious(Node<T> node)
+        public Node<T> FindPrevious(Node<T> node)
         {
             Node<T> prevNode = null;
             foreach (var iNode in this)
@@ -123,13 +123,20 @@ namespace DataStructures.LinkedList
 
         public bool Contains(Node<T> node)
         {
-            return Find(node) != null ? true : false;
+            return Find(node) != null;
         }
 
         public void RemoveFirst()
         {
-            FirstNode = FirstNode.Next;
-            // destruction of old FirstNode by GC
+            try
+            {
+                FirstNode = FirstNode.Next;
+                // destruction of old FirstNode by GC
+            }
+            catch (NullReferenceException)
+            {
+                throw new InvalidOperationException("List is empty");
+            }
         }
 
         public void Remove(Node<T> node)
@@ -206,7 +213,7 @@ namespace DataStructures.LinkedList
             FirstNode = LastNode = null;
         }
 
-        private Node<T> Find(Node<T> node)
+        public Node<T> Find(Node<T> node)
         {
             Node<T> nodeInList = null;
             foreach (var iNode in this)
