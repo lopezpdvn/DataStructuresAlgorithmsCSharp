@@ -13,36 +13,67 @@ namespace DataStructures.LinkedList
             FirstNode = LastNode = new Node<T>(value);
         }
 
+        public SinglyLinkedList() { }
+
+        public void Add(T value)
+        {
+            AddLast(value);
+        }
+
+        public int Count
+        {
+            get
+            {
+                int n = 0;
+                foreach (var iNode in this)
+                {
+                    n++;
+                }
+                return n;
+            }
+        }
+
         public Node<T> AddFirst(T value) {
             var newFirstNode = new Node<T>(value);
-            newFirstNode.Next = FirstNode;
-            FirstNode = newFirstNode;
+
+            if(FirstNode == null)
+            {
+                // Empty list
+                FirstNode = LastNode = newFirstNode;
+            }
+            else
+            {
+                newFirstNode.Next = FirstNode;
+                FirstNode = newFirstNode;
+            }
+
             return newFirstNode;
         }
 
         public Node<T> AddLast(T value) {
             var newLastNode = new Node<T>(value);
-            LastNode.Next = newLastNode;
-            LastNode = newLastNode;
+
+            if(FirstNode == null)
+            {
+                // list is empty
+                FirstNode = LastNode = newLastNode;
+            }
+            else
+            {
+                LastNode.Next = newLastNode;
+                LastNode = newLastNode;
+            }
+
             return newLastNode;
         }
 
         public Node<T> AddAfter(Node<T> node, T value)
         {
             var newNode = new Node<T>(value);
-            Node<T> nodeInList = null;
-            foreach(var iNode in this)
-            {
-                if(iNode == node)
-                {
-                    nodeInList = iNode;
-                    break;
-                }
-            }
-
+            Node<T> nodeInList = GetNode(node);
             if (nodeInList == null)
             {
-                throw new InvalidOperationException("node {0} not in list");
+                throw new InvalidOperationException("node " + node.Value + "not in list");
             }
 
             newNode.Next = nodeInList.Next;
@@ -71,23 +102,59 @@ namespace DataStructures.LinkedList
             // destruction of old FirstNode by GC
         }
 
+        public void Remove(Node<T> node)
+        {
+            Node<T> prev2Node2Remove = null;
+            foreach(var iNode in this)
+            {
+                if(iNode.Next != null && iNode.Next == node)
+                {
+                    prev2Node2Remove = iNode;
+                }
+            }
+
+            if (prev2Node2Remove == null)
+            {
+                throw new InvalidOperationException("node " + node.Value + "not in list");
+            }
+
+            // prev2Node2Remove.Next == node
+            prev2Node2Remove.Next = node.Next;
+        }
+
         public void RemoveLast()
         {
-            Node<T> nextToLast = null;
-            foreach(var node in this)   
+            //Node<T> nextToLast = null;
+            //foreach(var node in this)   
+            //{
+            //    nextToLast = node;
+            //    if(node.Next != null && node.Next.Next == null)
+            //    {
+            //        break;
+            //    }
+            //}
+
+            //// list empty
+            //if (nextToLast == null) return;
+
+            //LastNode = nextToLast;
+            //LastNode.Next = null;
+            Remove(LastNode);
+        }
+
+        private Node<T> GetNode(Node<T> node)
+        {
+            Node<T> nodeInList = null;
+            foreach (var iNode in this)
             {
-                nextToLast = node;
-                if(node.Next != null && node.Next.Next == null)
+                if (iNode == node)
                 {
+                    nodeInList = iNode;
                     break;
                 }
             }
 
-            // list empty
-            if (nextToLast == null) return;
-
-            LastNode = nextToLast;
-            LastNode.Next = null;
+            return nodeInList;
         }
 
         public IEnumerator<Node<T>> GetEnumerator()
@@ -155,6 +222,23 @@ namespace DataStructures.LinkedList
             {
                 Console.WriteLine(node.Value);
             }
+
+            Console.WriteLine();
+            var linkedListInts = new SinglyLinkedList<int>(){ 0, 1, 2, 3, 4};
+            Console.WriteLine("All linkedListInts");
+            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+
+            Console.WriteLine("Remove middle (2)");
+            linkedListInts.Remove(linkedListInts.FirstNode.Next.Next);
+            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+
+            Console.WriteLine("Remove last (4)");
+            linkedListInts.RemoveLast();
+            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+
+            Console.WriteLine("Remove first (0)");
+            linkedListInts.RemoveFirst();
+            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
 
             Console.Read();
         }
