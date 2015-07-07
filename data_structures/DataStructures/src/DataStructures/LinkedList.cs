@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataStructures;
 using System.Text;
 
 namespace DataStructures.LinkedList
@@ -155,6 +152,34 @@ namespace DataStructures.LinkedList
 
             // prev2Node2Remove.Next == node
             prev2Node2Remove.Next = node.Next;
+        }
+
+        public void RemoveBefore(Node<T> node)
+        {
+            Node<T> node2Remove = FindPrevious(node);
+            if(node2Remove == null)
+            {
+                if(FirstNode == node)
+                {
+                    // node is first Node
+                    throw new InvalidOperationException("node " + node + "is first in list.");
+                }
+                else 
+                {
+                    // Find(node) == null
+                    throw new InvalidOperationException("node " + node + "not in list.");
+                }
+            }
+            else if (node2Remove == FirstNode)
+            {
+                RemoveFirst();
+            }
+            else
+            {
+                Node<T> nodePrev2Remove = FindPrevious(node2Remove);
+                nodePrev2Remove.Next = node;
+                node2Remove.Next = null;
+            }
         }
 
         public void RemoveLast()
