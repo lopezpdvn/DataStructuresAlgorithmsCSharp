@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataStructures;
+using System.Text;
 
 namespace DataStructures.LinkedList
 {
@@ -172,6 +174,20 @@ namespace DataStructures.LinkedList
             return GetEnumerator();
         }
 
+        public override string ToString()
+        {
+            StringBuilder strBuild = new StringBuilder();
+            strBuild.AppendFormat("{0} with members: ", GetType().Name);
+            int i = 0;
+            foreach (var iNode in this)
+            {
+                strBuild.AppendFormat("{0} -> ", iNode);
+                i++;
+            }
+            strBuild.Append("NULL");
+            return strBuild.ToString();
+        }
+
         public Node<T> LastNode { get; set; }
         public Node<T> FirstNode { get; set; }
     }
@@ -195,6 +211,11 @@ namespace DataStructures.LinkedList
             set { data = value; }
         }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
         private Node<T> next;
         private T data;
     }
@@ -203,9 +224,11 @@ namespace DataStructures.LinkedList
     {
         static internal void Main(string data_fp)
         {
-            Console.WriteLine("Linked list program");
-            var linkedList0 = new SinglyLinkedList<string>("first original element");
-            linkedList0.AddFirst("new first element");
+            Console.WriteLine("{0}Linked list program", Cfg.SEP);
+            var linkedList0 = new SinglyLinkedList<string>{ "first original element", "new first element" };
+
+            Console.WriteLine("{0}Printing whole list", Cfg.SEP);
+            Console.WriteLine(linkedList0);
 
             Console.WriteLine("{0} -> {1}", linkedList0.FirstNode.Value, linkedList0.FirstNode.Next.Value);
 
@@ -225,20 +248,20 @@ namespace DataStructures.LinkedList
 
             Console.WriteLine();
             var linkedListInts = new SinglyLinkedList<int>(){ 0, 1, 2, 3, 4};
-            Console.WriteLine("All linkedListInts");
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(Cfg.SEP + "All linkedListInts");
+            Console.WriteLine(linkedListInts);
 
-            Console.WriteLine("Remove middle (2)");
+            Console.WriteLine(Cfg.SEP + "Remove middle (2)");
             linkedListInts.Remove(linkedListInts.FirstNode.Next.Next);
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(linkedListInts);
 
-            Console.WriteLine("Remove last (4)");
+            Console.WriteLine(Cfg.SEP + "Remove last (4)");
             linkedListInts.RemoveLast();
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(linkedListInts);
 
-            Console.WriteLine("Remove first (0)");
+            Console.WriteLine(Cfg.SEP + "Remove first (0)");
             linkedListInts.RemoveFirst();
-            foreach (var node in linkedListInts) Console.WriteLine(node.Value);
+            Console.WriteLine(linkedListInts);
 
             Console.Read();
         }
