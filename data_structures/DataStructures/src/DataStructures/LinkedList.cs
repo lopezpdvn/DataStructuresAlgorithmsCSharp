@@ -182,6 +182,29 @@ namespace DataStructures.LinkedList
             }
         }
 
+        public void RemoveAfter(Node<T> node)
+        {
+            Node<T> nodeInList = Find(node);
+            if (nodeInList == null)
+            {
+                throw new InvalidOperationException("node " + node + "not in list.");
+            }
+            else if (nodeInList.Next == null)
+            {
+                throw new InvalidOperationException("node " + node + "is last in list.");
+            }
+            else if (nodeInList.Next.Next == null)
+            {
+                // Removing last node.
+                nodeInList.Next = null;
+            }
+            else
+            {
+                // Removing next node, which is not the last one.
+                nodeInList.Next = nodeInList.Next.Next;
+            }
+        }
+
         public void RemoveLast()
         {
             Remove(LastNode);
