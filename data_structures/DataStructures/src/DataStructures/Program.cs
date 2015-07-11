@@ -15,7 +15,7 @@ namespace DataStructures
         public void Main(string[] args)
         {
             string datafile_path = args[0];
-            LinkedList.Program.TestIsCyclic();
+            Tree.Program.TestHeight();
             Console.Read();
         }
     }
