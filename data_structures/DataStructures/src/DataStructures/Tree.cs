@@ -43,6 +43,26 @@ namespace DataStructures.Tree
                     ComputeHeight(tree.Right));
             }
         }
+
+        public static void PreOrderTraversalNoRecursion(Node<T> tree)
+        {
+            var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
+            stack.Push(tree);
+            while(stack.Count > 0)
+            {
+                Node<T> curr = stack.Pop();
+                Console.Write("{0}, ", curr);
+                if(curr.Right != null)
+                {
+                    stack.Push(curr.Right);
+                }
+                if(curr.Left != null)
+                {
+                    stack.Push(curr.Left);
+                }
+            }
+            Console.WriteLine();
+        }
     }
 
     public class Node<T>
@@ -59,6 +79,11 @@ namespace DataStructures.Tree
         }
 
         public Node(T value) : this(null, null, value) { }
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 
     public static class Program
