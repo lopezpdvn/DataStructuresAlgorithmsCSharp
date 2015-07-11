@@ -257,6 +257,30 @@ namespace DataStructures.LinkedList
             return strBuild.ToString();
         }
 
+        public Node<T> FindMToLast(int m)
+        {
+            Node<T> mBehind, current;
+            current = FirstNode;
+
+            for (int i = 0; i < m; i++)
+            {
+                if(current.Next == null)
+                {
+                    throw new InvalidOperationException("List size < " + m);
+                }
+                current = current.Next;
+            }
+
+            mBehind = FirstNode;
+            while(current.Next != null)
+            {
+                current = current.Next;
+                mBehind = mBehind.Next;
+            }
+
+            return mBehind;
+        }
+
         public Node<T> LastNode { get; set; }
         public Node<T> FirstNode { get; set; }
     }
@@ -291,7 +315,7 @@ namespace DataStructures.LinkedList
 
     public static class Program
     {
-        static internal void Main(string data_fp)
+        static internal void MiscTests(string data_fp)
         {
             Console.WriteLine("{0}Linked list program", Cfg.SEP);
             var linkedList0 = new SinglyLinkedList<string>{ "first original element", "new first element" };
@@ -333,6 +357,15 @@ namespace DataStructures.LinkedList
             Console.WriteLine(linkedListInts);
 
             Console.Read();
+        }
+
+        static internal void TestFindMToLastElement(string data_fp)
+        {
+            var list = new SinglyLinkedList<int> {0,1,2,3,4,5,6,7,8,9,10,11,12};
+            Console.WriteLine(list);
+
+            var m = list.FindMToLast(12);
+            Console.WriteLine("{0} = 5", m);
         }
     }
 }
