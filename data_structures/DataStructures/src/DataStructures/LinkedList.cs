@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace DataStructures.LinkedList
@@ -283,6 +284,29 @@ namespace DataStructures.LinkedList
 
         public Node<T> LastNode { get; set; }
         public Node<T> FirstNode { get; set; }
+
+        public static bool IsCyclic(SinglyLinkedList<T> list)
+        {
+            Node<T> fast, slow;
+            slow = list.FirstNode;
+            fast = list.FirstNode.Next;
+            while (true)
+            {
+                if(fast == null || fast.Next == null)
+                {
+                    return false;
+                }
+                else if (fast == slow || fast.Next == slow)
+                {
+                    return true;
+                }
+                else
+                {
+                    slow = slow.Next;
+                    fast = fast.Next.Next;
+                }
+            }
+        }
     }
 
     public class Node<T>
@@ -366,6 +390,27 @@ namespace DataStructures.LinkedList
 
             var m = list.FindMToLast(7);
             Console.WriteLine("{0} = 5", m);
+        }
+
+        static internal void TestIsCyclic()
+        {
+            var list = new SinglyLinkedList<int>();
+            for (int i = 0; i < 20; i++)
+            {
+                list.AddLast(i);
+            }
+            Console.WriteLine(list);
+            Debug.Assert(list.LastNode.Next == null);
+
+            Debug.Assert(!SinglyLinkedList<int>.IsCyclic(list));
+
+            // making list cyclic
+            var middleNode = list.FirstNode.Next.Next.Next;
+            list.LastNode.Next = middleNode;
+            Debug.Assert(list.LastNode.Next == list.FirstNode.Next.Next.Next);
+
+            Console.WriteLine("IsCyclic = {0}", SinglyLinkedList<int>.IsCyclic(list));
+            //Debug.Assert(SinglyLinkedList<int>.IsCyclic(list));
         }
     }
 }
