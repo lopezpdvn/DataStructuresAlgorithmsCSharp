@@ -1,8 +1,8 @@
 ﻿using Xunit;
 
-namespace MyFirstDnxUnitTests
+namespace DataStructures.Tests
 {
-    public class Class1
+    public class LinkedListsTests
     {
         [Fact]
         public void PassingTest()
