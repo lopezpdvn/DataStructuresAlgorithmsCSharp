@@ -63,6 +63,27 @@ namespace DataStructures.Tree
             }
             Console.WriteLine();
         }
+
+        internal static void InOrderTraversalNoRecursion(Node<T> tree)
+        {
+            var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
+            Node<T> curr = tree;
+            while (stack.Count > 0 || curr != null)
+            {
+                if (curr != null)
+                {
+                    stack.Push(curr);
+                    curr = curr.Left;
+                }
+                else
+                {
+                    curr = stack.Pop();
+                    Console.Write("{0}, ", curr);
+                    curr = curr.Right;
+                }
+            }
+            Console.WriteLine();
+        }
     }
 
     public class Node<T>

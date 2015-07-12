@@ -31,5 +31,13 @@ namespace DataStructures.Tests
             BinaryTree<int>.PreOrderTraversalNoRecursion(travTree0.Root);
             Assert.True(true);
         }
+
+        [Fact]
+        public void InOrderTraversalNoRecursionTest()
+        {
+            Console.WriteLine("Should print 25, 50, 75, 100, 110, 125, 150, 175");
+            BinaryTree<int>.InOrderTraversalNoRecursion(travTree0.Root);
+            Assert.True(true);
+        }
     }
 }
