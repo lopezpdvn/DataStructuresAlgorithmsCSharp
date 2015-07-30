@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3CCD02E0-74BF-4127-AD2C-8CCA3B1C94C2}"
 EndProject
@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DataStructures", "src\DataStructures\DataStructures.xproj", "{9319FAE4-96FD-41F3-BDAF-4E8398D4C934}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DataStructuresAlgorithms", "src\DataStructures\DataStructuresAlgorithms.xproj", "{9319FAE4-96FD-41F3-BDAF-4E8398D4C934}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
