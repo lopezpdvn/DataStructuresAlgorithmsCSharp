@@ -64,7 +64,7 @@ namespace DataStructures.Tree
             Console.WriteLine();
         }
 
-        internal static void PostOrderTraversalNoRecursion(Node<T> node)
+        public static void PostOrderTraversalNoRecursion(Node<T> node)
         {
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             Node<T> lastNodeVisited = null;
@@ -95,7 +95,7 @@ namespace DataStructures.Tree
             Console.WriteLine();
         }
 
-        internal static void InOrderTraversalNoRecursion(Node<T> tree)
+        public static void InOrderTraversalNoRecursion(Node<T> tree)
         {
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             Node<T> curr = tree;
@@ -116,7 +116,7 @@ namespace DataStructures.Tree
             Console.WriteLine();
         }
 
-        internal static void PostOrderTraversalRecursion(Node<int> tree)
+        public static void PostOrderTraversalRecursion(Node<int> tree)
         {
             if (tree == null) return;
             PostOrderTraversalRecursion(tree.Left);
