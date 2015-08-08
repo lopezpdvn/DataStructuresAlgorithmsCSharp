@@ -337,6 +337,11 @@ namespace DataStructures.LinkedList
         private T data;
     }
 
+    public static class Cfg
+    {
+        public const string SEP = "\n=================== ";
+    }
+
     public static class Program
     {
         static internal void MiscTests(string data_fp)
