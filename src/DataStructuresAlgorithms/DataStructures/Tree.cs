@@ -116,12 +116,15 @@ namespace DataStructures.Tree
             Console.WriteLine();
         }
 
-        public static void PostOrderTraversalRecursion(Node<int> tree)
+        public static IEnumerable<int> PostOrderTraversalIterator(Node<int> tree)
         {
-            if (tree == null) return;
-            PostOrderTraversalRecursion(tree.Left);
-            PostOrderTraversalRecursion(tree.Right);
-            Console.Write("{0}, ", tree);
+            if (tree.Left != null)
+                foreach (var val in PostOrderTraversalIterator(tree.Left))
+                    yield return val;
+            if (tree.Right != null)
+                foreach (var val in PostOrderTraversalIterator(tree.Right))
+                    yield return val;
+            yield return tree.Value;
         }
     }
 

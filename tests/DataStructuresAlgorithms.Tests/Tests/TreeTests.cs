@@ -9,6 +9,17 @@ namespace DataStructures.Tests
         BinaryTree<int> travTree0;
         public TreeTests()
         {
+            /*
+                100
+               /  \
+              /    \
+             /      \
+            50      150
+           / \      /  \
+          25  75   125  175
+                    /
+                  110
+            */
             travTree0 = new BinaryTree<int>(new Node<int>(
 
                 new Node<int>(
@@ -51,14 +62,27 @@ namespace DataStructures.Tests
             Assert.True(true);
         }
 
+        //[Fact]
+        //public void PostOrderTraversalRecursionTest()
+        //{
+        //    Console.WriteLine("\nPostOrderTraversalRecursionTest");
+        //    Console.WriteLine("Should print\n25, 75, 50, 110, 125, 175, 150, 100");
+        //    BinaryTree<int>.PostOrderTraversalRecursion(travTree0.Root);
+        //    Console.WriteLine();
+        //    Assert.True(true);
+        //}
+
         [Fact]
-        public void PostOrderTraversalRecursionTest()
+        public void PostOrderTraversalIteratorTest()
         {
-            Console.WriteLine("\nPostOrderTraversalRecursionTest");
-            Console.WriteLine("Should print\n25, 75, 50, 110, 125, 175, 150, 100");
-            BinaryTree<int>.PostOrderTraversalRecursion(travTree0.Root);
+            Console.WriteLine("\nPostOrderTraversalRecursionTest1");
+            var orderedVals = new int[] { 25, 75, 50, 110, 125, 175, 150, 100 };
+            int i = 0;
+            foreach(var nodeVal in BinaryTree<int>.PostOrderTraversalIterator(travTree0.Root))
+            {
+                Assert.True(nodeVal == orderedVals[i++]);
+            }
             Console.WriteLine();
-            Assert.True(true);
         }
     }
 }
