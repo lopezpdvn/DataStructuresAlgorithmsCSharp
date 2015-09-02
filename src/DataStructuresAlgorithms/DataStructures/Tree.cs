@@ -7,18 +7,11 @@ namespace DataStructures.Tree
 {
     public class BinaryTree<T>
     {
-        private Node<T> root;
-        public Node<T> Root
-        {
-            get
-            {
-                return root;
-            }
-        }
+        public Node<T> Root { get; private set; }
 
         public BinaryTree(Node<T> root)
         {
-            this.root = root;
+            Root = root;
         }
 
         public BinaryTree() : this(null) { }
@@ -27,7 +20,7 @@ namespace DataStructures.Tree
         {
             get
             {
-                return ComputeHeight(this.root);
+                return ComputeHeight(Root);
             }
         }
 
