@@ -9,9 +9,6 @@ namespace DataStructures
     {
         public void Main(string[] args)
         {
-            string datafile_path = args[0];
-            Tree.Program.TestHeight();
-            //Console.Read();
         }
     }
 }

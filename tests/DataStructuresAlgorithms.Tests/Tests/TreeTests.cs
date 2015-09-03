@@ -106,6 +106,27 @@ namespace DataStructures.Tests
         {
             Console.WriteLine("\nHeightTest");
             Assert.True(travTree0.Height == 3);
+
+            var nodeI = new Node<char>(null, null, 'I');
+            var nodeF = new Node<char>(null, null, 'F');
+            var nodeG = new Node<char>(null, null, 'G');
+            var nodeH = new Node<char>(null, nodeI, 'H');
+            var nodeD = new Node<char>(nodeF, nodeG, 'D');
+            var nodeE = new Node<char>(null, nodeH, 'E');
+            var nodeC = new Node<char>(nodeD, nodeE, 'C');
+            var nodeB = new Node<char>(null, null, 'B');
+            var nodeA = new Node<char>(nodeB, nodeC, 'A');
+            BinaryTree<char> tree = new BinaryTree<char>(nodeA);
+            Assert.True(tree.Height == 4);
+
+            BinaryTree<int> tree1 = new BinaryTree<int>(new Node<int>(new Node<int>(1), null, 0));
+            Assert.True(tree1.Height == 1);
+
+            var emptyTree = new BinaryTree<int>();
+            Assert.True(emptyTree.Height == -1);
+
+            var oneNodeTree = new BinaryTree<int>(new Node<int>(15));
+            Assert.True(oneNodeTree.Height == 0);
         }
     }
 }

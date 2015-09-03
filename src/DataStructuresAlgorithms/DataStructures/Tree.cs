@@ -163,27 +163,4 @@ namespace DataStructures.Tree
             return Value.ToString();
         }
     }
-
-    public static class Program
-    {
-        public static void TestHeight()
-        {
-            // Create tree
-            var nodeI = new Node<char>(null, null, 'I');
-            var nodeF = new Node<char>(null, null, 'F');
-            var nodeG = new Node<char>(null, null, 'G');
-            var nodeH = new Node<char>(null, nodeI, 'H');
-            var nodeD = new Node<char>(nodeF, nodeG, 'D');
-            var nodeE = new Node<char>(null, nodeH, 'E');
-            var nodeC = new Node<char>(nodeD, nodeE, 'C');
-            var nodeB = new Node<char>(null, null, 'B');
-            var nodeA = new Node<char>(nodeB, nodeC, 'A');
-            BinaryTree<char> tree = new BinaryTree<char>(nodeA);
-
-            Console.WriteLine("Tree height: " + tree.Height);
-
-            BinaryTree<int> tree1 = new BinaryTree<int>(new Node<int>(new Node<int>(1), null, 0));
-            Console.WriteLine("Tree height: " + tree1.Height);
-        }
-    }
 }
