@@ -119,6 +119,28 @@ namespace DataStructures.Tree
                     yield return val;
             yield return tree.Value;
         }
+
+        public static IEnumerable<int> PreOrderTraversalIterator(Node<int> tree)
+        {
+            yield return tree.Value;
+            if (tree.Left != null)
+                foreach (var val in PreOrderTraversalIterator(tree.Left))
+                    yield return val;
+            if (tree.Right != null)
+                foreach (var val in PreOrderTraversalIterator(tree.Right))
+                    yield return val;
+        }
+
+        public static IEnumerable<int> InOrderTraversalIterator(Node<int> tree)
+        {
+            if (tree.Left != null)
+                foreach (var val in InOrderTraversalIterator(tree.Left))
+                    yield return val;
+            yield return tree.Value;
+            if (tree.Right != null)
+                foreach (var val in InOrderTraversalIterator(tree.Right))
+                    yield return val;
+        }
     }
 
     public class Node<T>
