@@ -37,28 +37,31 @@ namespace DataStructures.Tree
             }
         }
 
-        public static void PreOrderTraversalNoRecursion(Node<T> tree)
+        public static IEnumerable<T> PreOrderTraversalIterativeIterator(Node<T> tree)
         {
+            if (tree == null) yield break;
+
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             stack.Push(tree);
-            while(stack.Count > 0)
+            while (stack.Count > 0)
             {
                 Node<T> curr = stack.Pop();
-                Console.Write("{0}, ", curr);
-                if(curr.Right != null)
+                yield return curr.Value;
+                if (curr.Right != null)
                 {
                     stack.Push(curr.Right);
                 }
-                if(curr.Left != null)
+                if (curr.Left != null)
                 {
                     stack.Push(curr.Left);
                 }
             }
-            Console.WriteLine();
         }
 
-        public static void PostOrderTraversalNoRecursion(Node<T> node)
+        public static IEnumerable<T> PostOrderTraversalIterativeIterator(Node<T> node)
         {
+            if (node == null) yield break;
+
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             Node<T> lastNodeVisited = null;
             Node<T> curr = node;
@@ -79,17 +82,18 @@ namespace DataStructures.Tree
                     }
                     else
                     {
-                        Console.Write("{0}, ", peekNode);
+                        yield return peekNode.Value;
                         lastNodeVisited = stack.Pop();
                         node = null;
                     }
                 }
             }
-            Console.WriteLine();
         }
 
-        public static void InOrderTraversalNoRecursion(Node<T> tree)
+        public static IEnumerable<T> InOrderTraversalIterativeIterator(Node<T> tree)
         {
+            if (tree == null) yield break;
+
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             Node<T> curr = tree;
             while (stack.Count > 0 || curr != null)
@@ -102,43 +106,47 @@ namespace DataStructures.Tree
                 else
                 {
                     curr = stack.Pop();
-                    Console.Write("{0}, ", curr);
+                    yield return curr.Value;
                     curr = curr.Right;
                 }
             }
-            Console.WriteLine();
         }
 
-        public static IEnumerable<int> PostOrderTraversalIterator(Node<int> tree)
+        public static IEnumerable<T> PostOrderTraversalRecursiveIterator(Node<T> tree)
         {
+            if (tree == null) yield break;
+
             if (tree.Left != null)
-                foreach (var val in PostOrderTraversalIterator(tree.Left))
+                foreach (var val in PostOrderTraversalRecursiveIterator(tree.Left))
                     yield return val;
             if (tree.Right != null)
-                foreach (var val in PostOrderTraversalIterator(tree.Right))
+                foreach (var val in PostOrderTraversalRecursiveIterator(tree.Right))
                     yield return val;
             yield return tree.Value;
         }
 
-        public static IEnumerable<int> PreOrderTraversalIterator(Node<int> tree)
+        public static IEnumerable<T> PreOrderTraversalRecursiveIterator(Node<T> tree)
         {
+            if (tree == null) yield break;
+
             yield return tree.Value;
             if (tree.Left != null)
-                foreach (var val in PreOrderTraversalIterator(tree.Left))
+                foreach (var val in PreOrderTraversalRecursiveIterator(tree.Left))
                     yield return val;
             if (tree.Right != null)
-                foreach (var val in PreOrderTraversalIterator(tree.Right))
+                foreach (var val in PreOrderTraversalRecursiveIterator(tree.Right))
                     yield return val;
         }
 
-        public static IEnumerable<int> InOrderTraversalIterator(Node<int> tree)
+        public static IEnumerable<T> InOrderTraversalRecursiveIterator(Node<T> tree)
         {
+            if (tree == null) yield break;
             if (tree.Left != null)
-                foreach (var val in InOrderTraversalIterator(tree.Left))
+                foreach (var val in InOrderTraversalRecursiveIterator(tree.Left))
                     yield return val;
             yield return tree.Value;
             if (tree.Right != null)
-                foreach (var val in InOrderTraversalIterator(tree.Right))
+                foreach (var val in InOrderTraversalRecursiveIterator(tree.Right))
                     yield return val;
         }
     }

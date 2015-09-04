@@ -36,69 +36,51 @@ namespace DataStructures.Tests
         }
 
         [Fact]
-        public void PreOrderTraversalNoRecursionTest()
-        {
-            Console.WriteLine("\nPreOrderTraversalNoRecursionTest");
-            Console.WriteLine("Should print\n100, 50, 25, 75, 150, 125, 110, and 175");
-            BinaryTree<int>.PreOrderTraversalNoRecursion(travTree0.Root);
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void InOrderTraversalNoRecursionTest()
-        {
-            Console.WriteLine("\nInOrderTraversalNoRecursionTest");
-            Console.WriteLine("Should print\n25, 50, 75, 100, 110, 125, 150, 175");
-            BinaryTree<int>.InOrderTraversalNoRecursion(travTree0.Root);
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void PostOrderTraversalNoRecursionTest()
-        {
-            Console.WriteLine("\nPostOrderTraversalNoRecursionTest");
-            Console.WriteLine("Should print\n25, 75, 50, 110, 125, 175, 150, 100");
-            BinaryTree<int>.PostOrderTraversalNoRecursion(travTree0.Root);
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void PostOrderTraversalIteratorTest()
+        public void PostOrderTraversalRecursiveIteratorTest()
         {
             Console.WriteLine("\nPostOrderTraversalRecursionTest1");
             var orderedVals = new int[] { 25, 75, 50, 110, 125, 175, 150, 100 };
             int i = 0;
-            foreach(var nodeVal in BinaryTree<int>.PostOrderTraversalIterator(travTree0.Root))
+            foreach(var nodeVal in BinaryTree<int>.PostOrderTraversalRecursiveIterator(travTree0.Root))
             {
                 Assert.True(nodeVal == orderedVals[i++]);
             }
-            Console.WriteLine();
+            foreach (var nodeVal in BinaryTree<int>.PostOrderTraversalRecursiveIterator(null))
+            {
+                Assert.True(false);
+            }
         }
 
         [Fact]
-        public void PreOrderTraversalIteratorTest()
+        public void PreOrderTraversalRecursiveIteratorTest()
         {
             Console.WriteLine("\nPreOrderTraversalRecursionTest1");
             var orderedVals = new int[] { 100, 50, 25, 75, 150, 125, 110, 175 };
             int i = 0;
-            foreach (var nodeVal in BinaryTree<int>.PreOrderTraversalIterator(travTree0.Root))
+            foreach (var nodeVal in BinaryTree<int>.PreOrderTraversalRecursiveIterator(travTree0.Root))
             {
                 Assert.True(nodeVal == orderedVals[i++]);
             }
-            Console.WriteLine();
+            foreach (var nodeVal in BinaryTree<int>.PreOrderTraversalRecursiveIterator(null))
+            {
+                Assert.True(false);
+            }
         }
 
         [Fact]
-        public void InOrderTraversalIteratorTest()
+        public void InOrderTraversalRecursiveIteratorTest()
         {
             Console.WriteLine("\nInOrderTraversalRecursionTest1");
             var orderedVals = new int[] { 25, 50, 75, 100, 110, 125, 150, 175 };
             int i = 0;
-            foreach (var nodeVal in BinaryTree<int>.InOrderTraversalIterator(travTree0.Root))
+            foreach (var nodeVal in BinaryTree<int>.InOrderTraversalRecursiveIterator(travTree0.Root))
             {
                 Assert.True(nodeVal == orderedVals[i++]);
             }
-            Console.WriteLine();
+            foreach(var nodeVal in BinaryTree<int>.InOrderTraversalRecursiveIterator(null))
+            {
+                Assert.True(false);
+            }
         }
 
         [Fact]
@@ -127,6 +109,54 @@ namespace DataStructures.Tests
 
             var oneNodeTree = new BinaryTree<int>(new Node<int>(15));
             Assert.True(oneNodeTree.Height == 0);
+        }
+
+        [Fact]
+        public void PreOrderTraversalIterativeIteratorTest()
+        {
+            Console.WriteLine("\nPreOrderTraversalIterativeIteratorTest");
+            var orderedVals = new int[] { 100, 50, 25, 75, 150, 125, 110, 175 };
+            int i = 0;
+            foreach (var nodeVal in BinaryTree<int>.PreOrderTraversalIterativeIterator(travTree0.Root))
+            {
+                Assert.True(nodeVal == orderedVals[i++]);
+            }
+            foreach (var nodeVal in BinaryTree<int>.PreOrderTraversalIterativeIterator(null))
+            {
+                Assert.True(false);
+            }
+        }
+
+        [Fact]
+        public void InOrderTraversalIterativeIteratorTest()
+        {
+            Console.WriteLine("\nInOrderTraversalIterativeIteratorTest");
+            var orderedVals = new int[] { 25, 50, 75, 100, 110, 125, 150, 175 };
+            int i = 0;
+            foreach (var nodeVal in BinaryTree<int>.InOrderTraversalIterativeIterator(travTree0.Root))
+            {
+                Assert.True(nodeVal == orderedVals[i++]);
+            }
+            foreach (var nodeVal in BinaryTree<int>.InOrderTraversalIterativeIterator(null))
+            {
+                Assert.True(false);
+            }
+        }
+
+        [Fact]
+        public void PostOrderTraversalIterativeIteratorTest()
+        {
+            Console.WriteLine("\nPostOrderTraversalIterativeIteratorTest");
+            var orderedVals = new int[] { 25, 75, 50, 110, 125, 175, 150, 100 };
+            int i = 0;
+            foreach (var nodeVal in BinaryTree<int>.PostOrderTraversalIterativeIterator(travTree0.Root))
+            {
+                Assert.True(nodeVal == orderedVals[i++]);
+            }
+            foreach (var nodeVal in BinaryTree<int>.PostOrderTraversalIterativeIterator(null))
+            {
+                Assert.True(false);
+            }
         }
     }
 }
