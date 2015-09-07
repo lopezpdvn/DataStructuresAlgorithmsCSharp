@@ -1,4 +1,5 @@
 ﻿using DataStructures.Tree;
+using System.Collections;
 using Xunit;
 using System;
 
@@ -8,6 +9,7 @@ namespace DataStructures.Tests
     {
         BinaryTree<int> travTree0;
         BinaryTree<char> treeLetters;
+        IDictionary treeLetter = new Hashtable();
         public TreeTests()
         {
             /*
@@ -55,6 +57,9 @@ namespace DataStructures.Tests
             var _C = new Node<char>(_F, _G, 'C');
             var _A = new Node<char>(_B, _C, 'A');
             treeLetters = new BinaryTree<char>(_A);
+            treeLetter["tree"] = treeLetters;
+            treeLetter["bf_traversal_char_array"] =
+                "ABCDEFGHKNOILRPJMSQ".ToCharArray();
         }
 
         [Fact]
@@ -247,6 +252,22 @@ namespace DataStructures.Tests
                 Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
             foreach (var nodeLetter in BinaryTree<char>.PostOrderTraversalIterativeIterator(null))
+            {
+                Assert.True(false);
+            }
+        }
+
+        [Fact]
+        public void BreadthFirstTraversalQueue()
+        {
+            var treeLetters = (BinaryTree<char>)treeLetter["tree"];
+            var orderedLetters = (char[])treeLetter["bf_traversal_char_array"];
+            int i = 0;
+            foreach (var nodeLetter in BinaryTree<char>.BreadthFirstTraversalQueue(treeLetters.Root))
+            {
+                Assert.True(nodeLetter.Value == orderedLetters[i++]);
+            }
+            foreach (var nodeLetter in BinaryTree<char>.BreadthFirstTraversalQueue(null))
             {
                 Assert.True(false);
             }

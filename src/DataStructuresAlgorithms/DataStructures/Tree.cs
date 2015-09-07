@@ -60,31 +60,29 @@ namespace DataStructures.Tree
 
         public static IEnumerable<Node<T>> PostOrderTraversalIterativeIterator(Node<T> node)
         {
-            if (node == null) yield break;
-
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             Node<T> lastNodeVisited = null;
-            Node<T> curr = node;
+            var curr = node;
             Node<T> peekNode = null;
-            while(stack.Count > 0 || node != null)
+            while(stack.Count > 0 || curr != null)
             {
-                if(node != null)
+                if(curr != null)
                 {
-                    stack.Push(node);
-                    node = node.Left;
+                    stack.Push(curr);
+                    curr = curr.Left;
                 }
                 else
                 {
                     peekNode = stack.FirstNode.Value;
-                    if(peekNode.Right != null && lastNodeVisited != peekNode.Right)
+                    if(peekNode.Right != null && peekNode.Right != lastNodeVisited)
                     {
-                        node = peekNode.Right;
+                        curr = peekNode.Right;
                     }
                     else
                     {
-                        yield return peekNode;
                         lastNodeVisited = stack.Pop();
-                        node = null;
+                        yield return lastNodeVisited;
+                        curr = null;
                     }
                 }
             }
@@ -92,8 +90,6 @@ namespace DataStructures.Tree
 
         public static IEnumerable<Node<T>> InOrderTraversalIterativeIterator(Node<T> tree)
         {
-            if (tree == null) yield break;
-
             var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
             Node<T> curr = tree;
             while (stack.Count > 0 || curr != null)
@@ -148,6 +144,11 @@ namespace DataStructures.Tree
             if (tree.Right != null)
                 foreach (var val in InOrderTraversalRecursiveIterator(tree.Right))
                     yield return val;
+        }
+
+        public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(Node<T> root)
+        {
+            throw new NotImplementedException();
         }
     }
 
