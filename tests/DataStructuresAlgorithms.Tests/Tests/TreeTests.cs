@@ -260,6 +260,11 @@ namespace DataStructures.Tests
         [Fact]
         public void BreadthFirstTraversalQueue()
         {
+            foreach (var nodeLetter in BinaryTree<char>.BreadthFirstTraversalQueue(null))
+            {
+                Assert.True(false);
+            }
+
             var treeLetters = (BinaryTree<char>)treeLetter["tree"];
             var orderedLetters = (char[])treeLetter["bf_traversal_char_array"];
             int i = 0;
@@ -267,9 +272,20 @@ namespace DataStructures.Tests
             {
                 Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
-            foreach (var nodeLetter in BinaryTree<char>.BreadthFirstTraversalQueue(null))
+        }
+
+        [Fact]
+        public void NodeIteratorTest()
+        {
+            var B = new Node<char>('B');
+            var C = new Node<char>('C');
+            var orderedNodes = new Node<char>[] { B, C };
+            var tree = new BinaryTree<char>(
+                new Node<char>(B, C, 'A'));
+            int i = 0;
+            foreach(var node in tree.Root)
             {
-                Assert.True(false);
+                Assert.True(node == orderedNodes[i]);
             }
         }
     }

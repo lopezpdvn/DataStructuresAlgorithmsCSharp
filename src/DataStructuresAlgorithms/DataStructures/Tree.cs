@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -146,13 +147,23 @@ namespace DataStructures.Tree
                     yield return val;
         }
 
-        public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(Node<T> root)
+        public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(Node<T> node)
         {
+            ////if (node == null) yield break;
+
+            ////yield return node;
+            ////var queue = new AbstractDataType.QueueSinglyLinkedList<Node<T>>();
+            ////queue.Enqueue(node);
+            ////while (!queue.IsEmpty)
+            ////{
+            ////    var parent = 
+            ////}
             throw new NotImplementedException();
+
         }
     }
 
-    public class Node<T>
+    public class Node<T> : IEnumerable<Node<T>>
     {
         public Node<T> Left { get; set; }
         public Node<T> Right { get; set; }
@@ -170,6 +181,28 @@ namespace DataStructures.Tree
         public override string ToString()
         {
             return Value.ToString();
+        }
+
+        public IEnumerable<Node<T>> EnumerateLR()
+        {
+            yield return Left;
+            yield return Right;
+        }
+
+        public IEnumerable<Node<T>> EnumerateRL()
+        {
+            yield return Right;
+            yield return Left;
+        }
+
+        public IEnumerator<Node<T>> GetEnumerator()
+        {
+            return (IEnumerator<Node<T>> )EnumerateLR();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

@@ -20,6 +20,14 @@ namespace DataStructures.LinkedList
             AddLast(value);
         }
 
+        public bool IsEmpty
+        {
+            get
+            {
+                return Count == 0;
+            }
+        }
+
         public int Count
         {
             get
