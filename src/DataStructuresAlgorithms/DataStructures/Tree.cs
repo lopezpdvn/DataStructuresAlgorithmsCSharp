@@ -149,17 +149,20 @@ namespace DataStructures.Tree
 
         public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(Node<T> node)
         {
-            ////if (node == null) yield break;
+            if (node == null) yield break;
 
-            ////yield return node;
-            ////var queue = new AbstractDataType.QueueSinglyLinkedList<Node<T>>();
-            ////queue.Enqueue(node);
-            ////while (!queue.IsEmpty)
-            ////{
-            ////    var parent = 
-            ////}
-            throw new NotImplementedException();
-
+            yield return node;
+            var queue = new AbstractDataType.QueueSinglyLinkedList<Node<T>>();
+            queue.Enqueue(node);
+            while (!queue.IsEmpty)
+            {
+                var parent = queue.Dequeue();
+                foreach(var child in parent)
+                {
+                    yield return child;
+                    queue.Enqueue(child);
+                }
+            }
         }
     }
 
