@@ -10,24 +10,54 @@ namespace DataStructures.Graph
     public class DirectedGraphAdjacencyList<T> :
         IEnumerable<DirectedGraphAdjacencyList<T>.Node>
     {
-        private SinglyLinkedList<Node> nodes = new SinglyLinkedList<Node>();
+        public SinglyLinkedList<Node> Nodes { get; private set; }
         public int Count { get; private set; }
+        private string str = "";
+
+        public DirectedGraphAdjacencyList()
+        {
+            Nodes = new SinglyLinkedList<Node>();
+        }
+
+        public void FlagNodes(State state = State.Unvisited)
+        {
+            foreach(var node in this)
+                node.State = state;
+        }
 
         public void Add(Node node)
         {
-            nodes.Add(node);
+            Nodes.Add(node);
             Count++;
         }
 
         public IEnumerator<Node> GetEnumerator()
         {
-            foreach(var node in nodes)
+            foreach(var node in Nodes)
                 yield return node.Value;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public string DepthFirstTraversal(Node startNode, bool flagUnvisited = false)
+        {
+            if (flagUnvisited)
+                foreach (var node in this)
+                    node.State = State.Unvisited;
+
+            if (startNode == null) return str;
+
+            str += startNode.Vertex.ToString();
+            startNode.State = State.Visited;
+
+            foreach(var n in startNode)
+                if (n.State == State.Unvisited)
+                    DepthFirstTraversal(n);
+
+            return str;
         }
 
         public enum State
@@ -48,10 +78,13 @@ namespace DataStructures.Graph
                 Vertex = vertex;
             }
 
-            public void AddAdjacent(Node node)
+            public void AddAdjacent(params Node[] nodes)
             {
-                adjacent.Add(node);
-                Count++;
+                foreach(var node in nodes)
+                {
+                    adjacent.Add(node);
+                    Count++;
+                }
             }
 
             public IEnumerator<Node> GetEnumerator()
