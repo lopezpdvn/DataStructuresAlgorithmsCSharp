@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DataStructures.LinkedList;
+using AbstractDataType;
 
 namespace DataStructures.Graph
 {
@@ -59,6 +61,28 @@ namespace DataStructures.Graph
                     foreach(var adjacentNodeChild in
                         PreOrderDepthFirstTraversalRecursiveIterator(adjacentNode))
                         yield return adjacentNodeChild;
+        }
+
+        public IEnumerable<Node>
+            PreOrderDepthFirstTraversalIterativeIterator(Node node)
+        {
+            if (node == null) yield break;
+
+            Node curr = null;
+            var stack = new StackSinglyLinkedList<Node>();
+
+            stack.Push(node);
+            while (stack.Count > 0)
+            {
+                curr = stack.Pop();
+                if(curr.State == State.Unvisited)
+                {
+                    yield return curr;
+                    curr.State = State.Visited;
+                    foreach (var adjacentNode in curr.Reverse())
+                        stack.Push(adjacentNode);
+                }
+            }
         }
 
         public enum State
