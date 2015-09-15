@@ -46,7 +46,8 @@ namespace DataStructures.Graph
             return GetEnumerator();
         }
 
-        public IEnumerable<Node> DepthFirstTraversalRecursiveIterator(Node node)
+        public IEnumerable<Node>
+            PreOrderDepthFirstTraversalRecursiveIterator(Node node)
         {
             if (node == null) yield break;
 
@@ -55,7 +56,8 @@ namespace DataStructures.Graph
 
             foreach (var adjacentNode in node)
                 if(adjacentNode.State == State.Unvisited)
-                    foreach(var adjacentNodeChild in DepthFirstTraversalRecursiveIterator(adjacentNode))
+                    foreach(var adjacentNodeChild in
+                        PreOrderDepthFirstTraversalRecursiveIterator(adjacentNode))
                         yield return adjacentNodeChild;
         }
 

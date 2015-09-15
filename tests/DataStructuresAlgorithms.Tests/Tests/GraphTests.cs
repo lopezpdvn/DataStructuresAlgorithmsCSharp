@@ -54,7 +54,7 @@ namespace DataStructures.Tests
         }
 
         [Fact]
-        public void DepthFirstTraversalRecursiveIteratorTest0()
+        public void PreOrderDepthFirstTraversalRecursiveIteratorTest0()
         {
             Console.WriteLine("Depth First Traversal");
             var graph = (DirectedGraphAdjacencyList<char>)graph0["graph"];
@@ -69,7 +69,7 @@ namespace DataStructures.Tests
                 str = "";
                 startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
                 traversalSequence = (string)((Hashtable)graph0[nodeKey])["dft-string"];
-                foreach (var node in graph.DepthFirstTraversalRecursiveIterator(startNode))
+                foreach (var node in graph.PreOrderDepthFirstTraversalRecursiveIterator(startNode))
                 {
                     str += node.Vertex;
                 }
