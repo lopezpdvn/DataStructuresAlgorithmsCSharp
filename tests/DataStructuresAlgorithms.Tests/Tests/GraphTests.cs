@@ -1,5 +1,6 @@
 ﻿using DataStructures.Graph;
 using System.Collections;
+using System.Collections.Generic;
 using Xunit;
 using System;
 
@@ -40,20 +41,16 @@ namespace DataStructures.Tests
             foreach(var node in nodes)
             {
                 graph0Graph.Add(node);
-                graph0[node.Vertex.ToString()] = node;
+                var nodeKey = node.Vertex.ToString();
+                graph0[nodeKey] = new Hashtable();
+                ((Hashtable)graph0[nodeKey])["node"] = node;
             }
 
             graph0["graph"] = graph0Graph;
-            //graph0["A"] = _A;
-            //graph0["J"] = _J;
-            //graph0["K"] = _K;
-            //graph0["G"] = _G;
-            //graph0["B"] = _B;
-            graph0["dft-str-start-A"] = "ABCDHEKFJI";
-            graph0["dft-str-start-B"] = "";
-            graph0["dft-str-start-J"] = "JIF";
-            graph0["dft-str-start-K"] = "K";
-            graph0["dft-str-start-G"] = "GDHEABCFJIK";
+            ((Hashtable)graph0["A"])["dft-string"] = "ABCDHEKFJI";
+            ((Hashtable)graph0["J"])["dft-string"] = "JIF";
+            ((Hashtable)graph0["K"])["dft-string"] = "K";
+            ((Hashtable)graph0["G"])["dft-string"] = "GDHEABCFJIK";
         }
 
         [Fact]
@@ -64,57 +61,23 @@ namespace DataStructures.Tests
             DirectedGraphAdjacencyList<char>.Node startNode = null;
             string traversalSequence = null;
             string str = null;
-            int i = 0;
+            var nodeKeys = new string[]{ "A", "J", "K", "G"};
 
-            graph.FlagNodesUnvisited();
-            startNode = (DirectedGraphAdjacencyList<char>.Node)graph0["A"];
-            traversalSequence = (string)graph0["dft-str-start-A"];
-            i = 0;
-            str = "";
-            foreach(var node in graph.DepthFirstTraversalRecursiveIterator(startNode))
+            foreach(var nodeKey in nodeKeys)
             {
-                str += node.Vertex;
+                graph.FlagNodesUnvisited();
+                str = "";
+                startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
+                traversalSequence = (string)((Hashtable)graph0[nodeKey])["dft-string"];
+                foreach (var node in graph.DepthFirstTraversalRecursiveIterator(startNode))
+                {
+                    str += node.Vertex;
+                }
+                Console.WriteLine(str);
+                Assert.True(str.Equals(traversalSequence));
             }
-            Console.WriteLine(str);
-            Assert.True(str.Equals(traversalSequence));
-
-            graph.FlagNodesUnvisited();
-            startNode = (DirectedGraphAdjacencyList<char>.Node)graph0["J"];
-            traversalSequence = (string)graph0["dft-str-start-J"];
-            i = 0;
-            str = "";
-            foreach (var node in graph.DepthFirstTraversalRecursiveIterator(startNode))
-            {
-                str += node.Vertex;
-            }
-            Console.WriteLine(str);
-            Assert.True(str.Equals(traversalSequence));
-
-            graph.FlagNodesUnvisited();
-            startNode = (DirectedGraphAdjacencyList<char>.Node)graph0["K"];
-            traversalSequence = (string)graph0["dft-str-start-K"];
-            i = 0;
-            str = "";
-            foreach (var node in graph.DepthFirstTraversalRecursiveIterator(startNode))
-            {
-                str += node.Vertex;
-            }
-            Console.WriteLine(str);
-            Assert.True(str.Equals(traversalSequence));
-
-            graph.FlagNodesUnvisited();
-            startNode = (DirectedGraphAdjacencyList<char>.Node)graph0["G"];
-            traversalSequence = (string)graph0["dft-str-start-G"];
-            i = 0;
-            str = "";
-            foreach (var node in graph.DepthFirstTraversalRecursiveIterator(startNode))
-            {
-                str += node.Vertex;
-            }
-            Console.WriteLine(str);
-            Assert.True(str.Equals(traversalSequence));
         }
-        
+
         [Fact]
         public void NodeToStringTest()
         {
@@ -122,11 +85,11 @@ namespace DataStructures.Tests
             DirectedGraphAdjacencyList<char>.Node node = null;
             string strCheck = null;
 
-            node = (DirectedGraphAdjacencyList<char>.Node)graph0["A"];
+            node = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0["A"])["node"];
             strCheck = String.Format(strCheckTmpl, 'A', 1);
             Assert.True(strCheck.Equals(node.ToString()));
 
-            node = (DirectedGraphAdjacencyList<char>.Node)graph0["B"];
+            node = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0["B"])["node"];
             strCheck = String.Format(strCheckTmpl, 'B', 3);
             Assert.True(strCheck.Equals(node.ToString()));
         }
