@@ -57,7 +57,7 @@ namespace DataStructures.Tests
         }
 
         [Fact]
-        public void DepthFirstTraversalTest0()
+        public void DepthFirstTraversalRecursiveIteratorTest0()
         {
             Console.WriteLine("Depth First Traversal");
             var graph = (DirectedGraphAdjacencyList<char>)graph0["graph"];
