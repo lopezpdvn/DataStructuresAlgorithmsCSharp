@@ -12,7 +12,6 @@ namespace DataStructures.Graph
     {
         public SinglyLinkedList<Node> Nodes { get; private set; }
         public int Count { get; private set; }
-        private string str = "";
 
         public DirectedGraphAdjacencyList()
         {
@@ -23,6 +22,11 @@ namespace DataStructures.Graph
         {
             foreach(var node in this)
                 node.State = state;
+        }
+
+        public void FlagNodesUnvisited()
+        {
+            FlagNodes(State.Unvisited);
         }
 
         public void Add(Node node)
@@ -42,22 +46,17 @@ namespace DataStructures.Graph
             return GetEnumerator();
         }
 
-        public string DepthFirstTraversal(Node startNode, bool flagUnvisited = false)
+        public IEnumerable<Node> DepthFirstTraversalRecursiveIterator(Node node)
         {
-            if (flagUnvisited)
-                foreach (var node in this)
-                    node.State = State.Unvisited;
+            if (node == null) yield break;
 
-            if (startNode == null) return str;
+            yield return node;
+            node.State = State.Visited;
 
-            str += startNode.Vertex.ToString();
-            startNode.State = State.Visited;
-
-            foreach(var n in startNode)
-                if (n.State == State.Unvisited)
-                    DepthFirstTraversal(n);
-
-            return str;
+            foreach (var adjacentNode in node)
+                if(adjacentNode.State == State.Unvisited)
+                    foreach(var adjacentNodeChild in DepthFirstTraversalRecursiveIterator(adjacentNode))
+                        yield return adjacentNodeChild;
         }
 
         public enum State
@@ -97,8 +96,12 @@ namespace DataStructures.Graph
             {
                 return GetEnumerator();
             }
+
+            public override string ToString()
+            {
+                return String.Format("Vertex {0} with {1} adjacent nodes",
+                    Vertex, Count);
+            }
         }
-
-
     }
 }
