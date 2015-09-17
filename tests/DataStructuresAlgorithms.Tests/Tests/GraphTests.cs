@@ -51,6 +51,18 @@ namespace DataStructures.Tests
             ((Hashtable)graph0["J"])["dft-string"] = "JIF";
             ((Hashtable)graph0["K"])["dft-string"] = "K";
             ((Hashtable)graph0["G"])["dft-string"] = "GDHEABCFJIK";
+
+            ((Hashtable)graph0["A"])["bft-string"] = "ABCJDFIHEK";
+            ((Hashtable)graph0["B"])["bft-string"] = "BACJDFIHEK";
+            ((Hashtable)graph0["C"])["bft-string"] = "CDFHEKABJI";
+            ((Hashtable)graph0["D"])["bft-string"] = "DHEKABCJFI";
+            ((Hashtable)graph0["E"])["bft-string"] = "EADBHCJKFI";
+            ((Hashtable)graph0["F"])["bft-string"] = "F";
+            ((Hashtable)graph0["G"])["bft-string"] = "GDIHFEKABCJ";
+            ((Hashtable)graph0["H"])["bft-string"] = "HDEKABCJFI";
+            ((Hashtable)graph0["I"])["bft-string"] = "IF";
+            ((Hashtable)graph0["J"])["bft-string"] = "JIF";
+            ((Hashtable)graph0["K"])["bft-string"] = "K";
         }
 
         [Fact]
@@ -95,6 +107,31 @@ namespace DataStructures.Tests
                 startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
                 traversalSequence = (string)((Hashtable)graph0[nodeKey])["dft-string"];
                 foreach (var node in graph.PreOrderDepthFirstTraversalIterativeIterator(startNode))
+                {
+                    str += node.Vertex;
+                }
+                Console.WriteLine(str);
+                Assert.True(str.Equals(traversalSequence));
+            }
+        }
+
+        [Fact]
+        public void BreadthFirstTraversalIterativeIteratorTest()
+        {
+            Console.WriteLine("Breadth First Traversal Iterative");
+            var graph = (DirectedGraphAdjacencyList<char>)graph0["graph"];
+            DirectedGraphAdjacencyList<char>.Node startNode = null;
+            string traversalSequence = null;
+            string str = null;
+            var nodeKeys = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+
+            foreach (var nodeKey in nodeKeys)
+            {
+                graph.FlagNodesUnvisited();
+                str = "";
+                startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
+                traversalSequence = (string)((Hashtable)graph0[nodeKey])["bft-string"];
+                foreach (var node in graph.BreadthFirstTraversalIterativeIterator(startNode))
                 {
                     str += node.Vertex;
                 }

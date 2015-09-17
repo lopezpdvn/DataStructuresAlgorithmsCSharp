@@ -57,8 +57,8 @@ namespace DataStructures.Graph
             node.State = State.Visited;
 
             foreach (var adjacentNode in node)
-                if(adjacentNode.State == State.Unvisited)
-                    foreach(var adjacentNodeChild in
+                if (adjacentNode.State == State.Unvisited)
+                    foreach (var adjacentNodeChild in
                         PreOrderDepthFirstTraversalRecursiveIterator(adjacentNode))
                         yield return adjacentNodeChild;
         }
@@ -81,6 +81,31 @@ namespace DataStructures.Graph
                     curr.State = State.Visited;
                     foreach (var adjacentNode in curr.Reverse())
                         stack.Push(adjacentNode);
+                }
+            }
+        }
+
+        public IEnumerable<Node>
+            BreadthFirstTraversalIterativeIterator(Node node)
+        {
+            if (node == null) yield break;
+
+            yield return node;
+            node.State = State.Visited;
+            var queue = new QueueSinglyLinkedList<Node>();
+            queue.Enqueue(node);
+
+            while (!queue.IsEmpty)
+            {
+                var parent = queue.Dequeue();
+                foreach (var child in parent)
+                {
+                    if(child.State == State.Unvisited)
+                    {
+                        yield return child;
+                        child.State = State.Visited;
+                        queue.Enqueue(child);
+                    }
                 }
             }
         }
