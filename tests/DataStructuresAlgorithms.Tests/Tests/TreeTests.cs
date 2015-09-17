@@ -283,9 +283,9 @@ namespace DataStructures.Tests
             var tree = new BinaryTree<char>(
                 new Node<char>(B, C, 'A'));
             int i = 0;
-            foreach(var node in tree.Root)
+            foreach(var node in tree.Root.EnumerateLR())
             {
-                Assert.True(node == orderedNodes[i]);
+                Assert.True(node == orderedNodes[i++]);
             }
         }
     }

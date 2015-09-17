@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AbstractDataType;
 
 namespace DataStructures.Tree
 {
@@ -75,26 +73,22 @@ namespace DataStructures.Tree
         {
             if (node == null) yield break;
 
-            var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
+            var stack = new StackSinglyLinkedList<Node<T>>();
             stack.Push(node);
             while (stack.Count > 0)
             {
                 Node<T> curr = stack.Pop();
                 yield return curr;
-                if (curr.Right != null)
+                foreach (var child in curr.EnumerateRL())
                 {
-                    stack.Push(curr.Right);
-                }
-                if (curr.Left != null)
-                {
-                    stack.Push(curr.Left);
+                    stack.Push(child);
                 }
             }
         }
 
         public static IEnumerable<Node<T>> InOrderTraversalIterativeIterator(Node<T> node)
         {
-            var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
+            var stack = new StackSinglyLinkedList<Node<T>>();
             Node<T> curr = node;
             while (stack.Count > 0 || curr != null)
             {
@@ -114,7 +108,7 @@ namespace DataStructures.Tree
 
         public static IEnumerable<Node<T>> PostOrderTraversalIterativeIterator(Node<T> node)
         {
-            var stack = new AbstractDataType.StackSinglyLinkedList<Node<T>>();
+            var stack = new StackSinglyLinkedList<Node<T>>();
             Node<T> lastNodeVisited = null;
             var curr = node;
             Node<T> peekNode = null;
@@ -147,12 +141,12 @@ namespace DataStructures.Tree
             if (node == null) yield break;
 
             yield return node;
-            var queue = new AbstractDataType.QueueSinglyLinkedList<Node<T>>();
+            var queue = new QueueSinglyLinkedList<Node<T>>();
             queue.Enqueue(node);
             while (!queue.IsEmpty)
             {
                 var parent = queue.Dequeue();
-                foreach(var child in parent)
+                foreach(var child in parent.EnumerateLR())
                 {
                     yield return child;
                     queue.Enqueue(child);
@@ -161,7 +155,7 @@ namespace DataStructures.Tree
         }
     }
 
-    public class Node<T> : IEnumerable<Node<T>>
+    public class Node<T>
     {
         public Node<T> Left { get; set; }
         public Node<T> Right { get; set; }
@@ -183,24 +177,14 @@ namespace DataStructures.Tree
 
         public IEnumerable<Node<T>> EnumerateLR()
         {
-            yield return Left;
-            yield return Right;
+            if(Left != null) yield return Left;
+            if(Right != null) yield return Right;
         }
 
         public IEnumerable<Node<T>> EnumerateRL()
         {
-            yield return Right;
-            yield return Left;
-        }
-
-        public IEnumerator<Node<T>> GetEnumerator()
-        {
-            return (IEnumerator<Node<T>> )EnumerateLR();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
+            if (Right != null) yield return Right;
+            if (Left != null) yield return Left;
         }
     }
 }

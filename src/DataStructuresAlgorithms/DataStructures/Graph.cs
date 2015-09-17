@@ -58,9 +58,9 @@ namespace DataStructures.Graph
 
             foreach (var adjacentNode in node)
                 if (adjacentNode.State == State.Unvisited)
-                    foreach (var adjacentNodeChild in
+                    foreach (var iAdjacentNode in
                         PreOrderDepthFirstTraversalRecursiveIterator(adjacentNode))
-                        yield return adjacentNodeChild;
+                        yield return iAdjacentNode;
         }
 
         public IEnumerable<Node>
@@ -97,14 +97,14 @@ namespace DataStructures.Graph
 
             while (!queue.IsEmpty)
             {
-                var parent = queue.Dequeue();
-                foreach (var child in parent)
+                node = queue.Dequeue();
+                foreach (var adjacentNode in node)
                 {
-                    if(child.State == State.Unvisited)
+                    if(adjacentNode.State == State.Unvisited)
                     {
-                        yield return child;
-                        child.State = State.Visited;
-                        queue.Enqueue(child);
+                        yield return adjacentNode;
+                        adjacentNode.State = State.Visited;
+                        queue.Enqueue(adjacentNode);
                     }
                 }
             }
@@ -150,7 +150,7 @@ namespace DataStructures.Graph
 
             public override string ToString()
             {
-                return String.Format("Vertex {0} with {1} adjacent nodes",
+                return string.Format("Vertex {0} with {1} adjacent nodes",
                     Vertex, Count);
             }
         }
