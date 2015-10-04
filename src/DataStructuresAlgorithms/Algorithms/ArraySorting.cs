@@ -9,17 +9,20 @@ namespace DataStructuresAlgorithms.Algorithms
     {
         public static void BubbleSortInt32(int[] arr)
         {
-            int jOut, jIn;
-            for(jOut = arr.Length - 1; jOut > 1; jOut--)
+            int jOut = arr.Length - 1, jIn;
+            bool swapped;
+            do
             {
-                for(jIn = 0; jIn < jOut; jIn++)
-                {
-                    if(arr[jIn] > arr[jIn + 1])
+                swapped = false;
+                for (jIn = 0; jIn < jOut; jIn++)
+                    if (arr[jIn] > arr[jIn + 1])
                     {
                         SwapArrayElements(arr, jIn, jIn + 1);
+                        swapped = true;
                     }
-                }
+                jOut--;
             }
+            while (swapped);
         }
 
         public static void SwapArrayElements<V>(V[] arr, int i, int j)
