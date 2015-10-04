@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using System;
+using DataStructuresAlgorithms.Algorithms;
 
 namespace DataStructures.Tests
 {
@@ -36,7 +37,7 @@ namespace DataStructures.Tests
             foreach(var unorderedArr in intUnordered)
             {
                 var j = 0;
-                ArraySorting.BubbleSort(arr);
+                ArraySorting.BubbleSortInt32(unorderedArr);
                 foreach(var value in unorderedArr)
                 {
                     Assert.True(value == intOrdered[i][j++]);
