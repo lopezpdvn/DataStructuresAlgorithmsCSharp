@@ -31,5 +31,24 @@ namespace DataStructuresAlgorithms.Algorithms
             i = j;
             j = tmp;
         }
+
+        public static void SelectionSort(int[] arr)
+        {
+            int jOut, jIn, min;
+            for(jOut = 0; jOut < arr.Length - 1; jOut++)
+            {
+                min = jOut;
+                for(jIn = jOut + 1; jIn < arr.Length; jIn++)
+                {
+                    if(arr[jIn] < arr[min])
+                    {
+                        min = jIn;
+                    }
+                }
+                // Invariant: arr[min] smallest of arr[jOut:]
+                Swap(ref arr[jOut], ref arr[min]);
+                // Invariant: arr[:jOut] in final position
+            }
+        }
     }
 }

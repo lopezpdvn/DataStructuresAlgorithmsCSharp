@@ -7,7 +7,8 @@ namespace DataStructures.Tests
     public class ArraySortingTests
     {
         int[] unorderedBig, orderedBig, unorderedTwo, orderedTwo, unorderedOne,
-            orderedOne, unorderedThree, orderedThree, unorderedFour, orderedFour;
+            orderedOne, unorderedThree, orderedThree, unorderedFour, orderedFour,
+            unorderedEmpty, orderedEmpty;
         int[][] intOrdered, intUnordered;
 
         public void InitializeIntArrays()
@@ -22,10 +23,12 @@ namespace DataStructures.Tests
             orderedThree = new int[] { 000, 333, 999 };
             unorderedFour = new int[] { 555, 111, 666, 444 };
             orderedFour = new int[] {111, 444, 555, 666};
+            unorderedEmpty = new int[] { };
+            orderedEmpty = new int[] { };
             intOrdered = new int[][] { orderedOne, orderedTwo, orderedThree,
-                orderedFour, orderedBig};
+                orderedFour, orderedBig, orderedEmpty};
             intUnordered = new int[][] { unorderedOne, unorderedTwo, unorderedThree,
-                unorderedFour, unorderedBig };
+                unorderedFour, unorderedBig, unorderedEmpty };
         }
 
         [Fact]
@@ -38,6 +41,23 @@ namespace DataStructures.Tests
                 var j = 0;
                 ArraySorting.BubbleSort(unorderedArr);
                 foreach(var value in unorderedArr)
+                {
+                    Assert.True(value == intOrdered[i][j++]);
+                }
+                i++;
+            }
+        }
+
+        [Fact]
+        public void SelectionSortTestInts0()
+        {
+            InitializeIntArrays();
+            var i = 0;
+            foreach (var unorderedArr in intUnordered)
+            {
+                var j = 0;
+                ArraySorting.SelectionSort(unorderedArr);
+                foreach (var value in unorderedArr)
                 {
                     Assert.True(value == intOrdered[i][j++]);
                 }
