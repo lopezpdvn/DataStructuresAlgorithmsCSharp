@@ -50,5 +50,18 @@ namespace DataStructuresAlgorithms.Algorithms
                 // Invariant: arr[:jOut] in final position
             }
         }
+
+        public static void InsertionSort(int[] arr)
+        {
+            int jIn, jOut;
+            for(jOut = 1; jOut < arr.Length; jOut++)
+            {
+                for(jIn = jOut; jIn > 0 && arr[jIn] < arr[jIn - 1]; jIn--)
+                {
+                    Swap(ref arr[jIn], ref arr[jIn - 1]);
+                }
+                // Invariant: arr[:jOut] is sorted
+            }
+        }
     }
 }

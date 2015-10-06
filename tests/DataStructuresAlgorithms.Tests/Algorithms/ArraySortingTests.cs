@@ -64,5 +64,22 @@ namespace DataStructures.Tests
                 i++;
             }
         }
+
+        [Fact]
+        public void InsertionSortTestInts0()
+        {
+            InitializeIntArrays();
+            var i = 0;
+            foreach (var unorderedArr in intUnordered)
+            {
+                var j = 0;
+                ArraySorting.InsertionSort(unorderedArr);
+                foreach (var value in unorderedArr)
+                {
+                    Assert.True(value == intOrdered[i][j++]);
+                }
+                i++;
+            }
+        }
     }
 }
