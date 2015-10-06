@@ -32,12 +32,11 @@ namespace DataStructures.Tests
         public void BubbleSortTestInts0()
         {
             InitializeIntArrays();
-
             var i = 0;
             foreach(var unorderedArr in intUnordered)
             {
                 var j = 0;
-                ArraySorting.BubbleSortInt32(unorderedArr);
+                ArraySorting.BubbleSort(unorderedArr);
                 foreach(var value in unorderedArr)
                 {
                     Assert.True(value == intOrdered[i][j++]);
