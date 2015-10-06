@@ -9,18 +9,18 @@ namespace DataStructuresAlgorithms.Algorithms
     {
         public static void BubbleSort(int[] arr)
         {
-            int jOut = arr.Length - 1, jIn;
+            int o = arr.Length - 1, i;
             bool swapped;
             do
             {
                 swapped = false;
-                for (jIn = 0; jIn < jOut; jIn++)
-                    if (arr[jIn] > arr[jIn + 1])
+                for (i = 0; i < o; i++)
+                    if (arr[i] > arr[i + 1])
                     {
-                        Swap(ref arr[jIn], ref arr[jIn + 1]);
+                        Swap(ref arr[i], ref arr[i + 1]);
                         swapped = true;
                     }
-                jOut--;
+                o--;
             }
             while (swapped);
         }
@@ -34,33 +34,33 @@ namespace DataStructuresAlgorithms.Algorithms
 
         public static void SelectionSort(int[] arr)
         {
-            int jOut, jIn, min;
-            for(jOut = 0; jOut < arr.Length - 1; jOut++)
+            int o, i, min;
+            for(o = 0; o < arr.Length - 1; o++)
             {
-                min = jOut;
-                for(jIn = jOut + 1; jIn < arr.Length; jIn++)
+                min = o;
+                for(i = o + 1; i < arr.Length; i++)
                 {
-                    if(arr[jIn] < arr[min])
+                    if(arr[i] < arr[min])
                     {
-                        min = jIn;
+                        min = i;
                     }
                 }
-                // Invariant: arr[min] smallest of arr[jOut:]
-                Swap(ref arr[jOut], ref arr[min]);
-                // Invariant: arr[:jOut] in final position
+                // Invariant: arr[min] smallest of arr[o:]
+                Swap(ref arr[o], ref arr[min]);
+                // Invariant: arr[:o] in final position
             }
         }
 
         public static void InsertionSort(int[] arr)
         {
-            int jIn, jOut;
-            for(jOut = 1; jOut < arr.Length; jOut++)
+            int i, o;
+            for(o = 1; o < arr.Length; o++)
             {
-                for(jIn = jOut; jIn > 0 && arr[jIn] < arr[jIn - 1]; jIn--)
+                for(i = o; i > 0 && arr[i] < arr[i - 1]; i--)
                 {
-                    Swap(ref arr[jIn], ref arr[jIn - 1]);
+                    Swap(ref arr[i], ref arr[i - 1]);
                 }
-                // Invariant: arr[:jOut] is sorted
+                // Invariant: arr[:o] is sorted
             }
         }
     }
