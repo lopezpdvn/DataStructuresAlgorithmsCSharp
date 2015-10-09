@@ -7,11 +7,12 @@ namespace DataStructuresAlgorithms.Algorithms
 {
     public class ArraySorting
     {
+        // Greater elements bubble up to the top end of the array.
         public static void BubbleSort(int[] arr)
         {
             int o, i;
             bool swapped = true;
-            for (o = arr.Length - 1; swapped && o >= 0; o--)
+            for (o = arr.Length - 1; swapped && o > 0; o--)
             {
                 for (i = 0, swapped = false; i < o; i++)
                 {
@@ -21,7 +22,7 @@ namespace DataStructuresAlgorithms.Algorithms
                         swapped = true;
                     }
                 }
-                // Invariant: arr[:i] in final position
+                // Invariant: arr[o:] in final position
             }
         }
 
