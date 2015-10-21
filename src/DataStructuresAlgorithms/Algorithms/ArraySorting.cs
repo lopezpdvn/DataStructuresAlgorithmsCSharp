@@ -36,9 +36,8 @@ namespace DataStructuresAlgorithms.Algorithms
         public static void SelectionSort(int[] arr)
         {
             int o, i, min;
-            for(o = 0; o < arr.Length - 1; o++)
+            for(min = o = 0; o < arr.Length - 1; min = ++o)
             {
-                min = o;
                 for(i = o + 1; i < arr.Length; i++)
                 {
                     if(arr[i] < arr[min])
