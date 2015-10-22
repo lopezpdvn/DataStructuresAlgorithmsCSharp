@@ -88,7 +88,10 @@ namespace DataStructures.Graph
         public IEnumerable<Node>
             BreadthFirstTraversalIterativeIterator(Node node)
         {
-            if (node == null) yield break;
+            if (node == null || node.State == State.Visited)
+            {
+                yield break;
+            }
 
             yield return node;
             node.State = State.Visited;
