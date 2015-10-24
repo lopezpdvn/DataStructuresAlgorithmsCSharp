@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DataStructuresAlgorithms.Algorithms
 {
-    public class ArraySorting
+    public static class ArraySorting
     {
         // Greater elements bubble up to the top end of the array.
         public static void BubbleSort(int[] arr)
