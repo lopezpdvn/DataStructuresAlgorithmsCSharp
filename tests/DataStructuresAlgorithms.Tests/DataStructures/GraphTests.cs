@@ -51,6 +51,7 @@ namespace DataStructures.Tests
             ((Hashtable)graph0["B"])["dft-string"] = "BACDHEKFJI";
             ((Hashtable)graph0["C"])["dft-string"] = "CDHEABJIFK";
             ((Hashtable)graph0["D"])["dft-string"] = "DHEABCFJIK";
+            ((Hashtable)graph0["E"])["dft-string"] = "EABCDHKFJI";
             ((Hashtable)graph0["J"])["dft-string"] = "JIF";
             ((Hashtable)graph0["K"])["dft-string"] = "K";
             ((Hashtable)graph0["G"])["dft-string"] = "GDHEABCFJIK";
