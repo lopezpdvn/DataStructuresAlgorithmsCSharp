@@ -52,10 +52,9 @@ namespace DataStructuresAlgorithms.Algorithms
 
         public static void InsertionSort(int[] arr)
         {
-            int i, o;
-            for(o = 1; o < arr.Length; o++)
+            for(int o = 1; o < arr.Length; o++)
             {
-                for(i = o; i > 0 && arr[i] < arr[i - 1]; i--)
+                for(int i = o; i > 0 && arr[i] < arr[i - 1]; i--)
                 {
                     Swap(ref arr[i], ref arr[i - 1]);
                 }
