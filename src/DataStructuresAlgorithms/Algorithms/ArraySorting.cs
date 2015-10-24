@@ -11,8 +11,8 @@ namespace DataStructuresAlgorithms.Algorithms
         public static void BubbleSort(int[] arr)
         {
             int o, i;
-            bool swapped = true;
-            for (o = arr.Length - 1; swapped && o > 0; o--)
+            bool swapped;
+            for (swapped = true, o = arr.Length - 1; swapped && o > 0; o--)
             {
                 for (i = 0, swapped = false; i < o; i++)
                 {
