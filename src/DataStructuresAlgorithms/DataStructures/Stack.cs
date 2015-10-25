@@ -14,18 +14,23 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 
     public class StackSinglyLinkedList<T> : SinglyLinkedList<T>, Stack<T>
     {
-        public T Pop()
+        public T Peek()
         {
             try
             {
-                T value = FirstNode.Value;
-                RemoveFirst();
-                return value;
+                return FirstNode.Value;
             }
             catch (NullReferenceException)
             {
-                throw new InvalidOperationException("Stack is Empty, Pop failed.");
+                throw new InvalidOperationException("Stack is Empty.");
             }
+        }
+
+        public T Pop()
+        {
+            T value = Peek();
+            RemoveFirst();
+            return value;
         }
 
         public void Push(T value)
