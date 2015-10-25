@@ -8,6 +8,8 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
     {
         void Push(T value);
         T Pop();
+        T Peek();
+        bool IsEmpty { get; }
     }
 
     public class StackSinglyLinkedList<T> : SinglyLinkedList<T>, Stack<T>
