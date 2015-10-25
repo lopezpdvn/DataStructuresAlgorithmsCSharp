@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AbstractDataType
+namespace DataStructuresAlgorithms.AbstractDataTypes
 {
     public interface Queue<T>
     {

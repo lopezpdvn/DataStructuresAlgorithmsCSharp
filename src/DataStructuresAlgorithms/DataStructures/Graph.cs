@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DataStructures.LinkedList;
-using AbstractDataType;
+using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructures.Graph
 {

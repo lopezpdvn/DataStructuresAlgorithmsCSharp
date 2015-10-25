@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using AbstractDataType;
+using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructures.Tree
 {
