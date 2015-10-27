@@ -26,8 +26,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         {
             try
             {
-                T value = FirstNode.Value;
-                return value;
+                return FirstNode.Value;
             }
             catch (NullReferenceException)
             {
