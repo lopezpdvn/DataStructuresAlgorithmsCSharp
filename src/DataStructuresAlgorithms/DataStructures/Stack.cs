@@ -10,6 +10,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         T Pop();
         T Peek();
         bool IsEmpty { get; }
+        int Length { get; }
     }
 
     public class StackSinglyLinkedList<T> : SinglyLinkedList<T>, Stack<T>
