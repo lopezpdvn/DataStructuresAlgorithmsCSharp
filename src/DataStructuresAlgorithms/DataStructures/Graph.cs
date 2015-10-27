@@ -51,16 +51,25 @@ namespace DataStructures.Graph
         public IEnumerable<Node>
             PreOrderDepthFirstTraversalRecursiveIterator(Node node)
         {
-            if (node == null) yield break;
+            if (node == null || node.State == State.Visited)
+            {
+                yield break;
+            }
 
             yield return node;
             node.State = State.Visited;
 
-            foreach (var adjacentNode in node)
-                if (adjacentNode.State == State.Unvisited)
-                    foreach (var iAdjacentNode in
-                        PreOrderDepthFirstTraversalRecursiveIterator(adjacentNode))
-                        yield return iAdjacentNode;
+            foreach (var adjNode in node)
+            {
+                if (adjNode.State == State.Unvisited)
+                {
+                    foreach (var iAdjNode in
+                        PreOrderDepthFirstTraversalRecursiveIterator(adjNode))
+                    {
+                        yield return iAdjNode;
+                    }
+                }
+            }
         }
 
         public IEnumerable<Node>
