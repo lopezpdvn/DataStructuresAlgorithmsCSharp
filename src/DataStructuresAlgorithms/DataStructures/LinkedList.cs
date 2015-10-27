@@ -28,6 +28,14 @@ namespace DataStructures.LinkedList
             }
         }
 
+        public int Length
+        {
+            get
+            {
+                return Count;
+            }
+        }
+
         public int Count
         {
             get
