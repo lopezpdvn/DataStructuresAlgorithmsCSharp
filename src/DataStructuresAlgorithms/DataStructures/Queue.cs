@@ -8,6 +8,9 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
     {
         T Dequeue();
         void Enqueue(T value);
+        T Peek();
+        bool IsEmpty { get; }
+        int Length { get; }
     }
 
     public class QueueSinglyLinkedList<T> : SinglyLinkedList<T>, Queue<T>
