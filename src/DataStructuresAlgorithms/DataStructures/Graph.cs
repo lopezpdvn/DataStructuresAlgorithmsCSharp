@@ -75,12 +75,15 @@ namespace DataStructures.Graph
         public IEnumerable<Node>
             PreOrderDepthFirstTraversalIterativeIterator(Node node)
         {
-            if (node == null) yield break;
+            if (node == null || node.State == State.Visited)
+            {
+                yield break;
+            }
 
             Node curr = null;
             var stack = new StackSinglyLinkedList<Node>();
-
             stack.Push(node);
+
             while (stack.Count > 0)
             {
                 curr = stack.Pop();
@@ -89,7 +92,9 @@ namespace DataStructures.Graph
                     yield return curr;
                     curr.State = State.Visited;
                     foreach (var adjacentNode in curr.Reverse())
+                    {
                         stack.Push(adjacentNode);
+                    }
                 }
             }
         }
