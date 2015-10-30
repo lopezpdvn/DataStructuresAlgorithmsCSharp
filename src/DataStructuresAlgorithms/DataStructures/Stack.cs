@@ -1,4 +1,4 @@
-﻿using DataStructures.LinkedList;
+﻿using DataStructuresAlgorithms.DataStructures.LinkedList;
 using System;
 using System.Collections.Generic;
 

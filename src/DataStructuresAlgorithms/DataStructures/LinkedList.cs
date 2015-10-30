@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace DataStructures.LinkedList
+namespace DataStructuresAlgorithms.DataStructures.LinkedList
 {
     public class SinglyLinkedList<T> : IEnumerable<Node<T>>
     {

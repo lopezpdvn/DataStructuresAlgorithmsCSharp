@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DataStructures.AssociativeArray
+namespace DataStructuresAlgorithms.AbstractDataTypes
 {
     internal interface IAssociativeArray<TKey, TValue>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
-namespace DataStructures.Tree
+namespace DataStructuresAlgorithms.DataStructures.Tree
 {
     public class BinaryTree<T>
     {

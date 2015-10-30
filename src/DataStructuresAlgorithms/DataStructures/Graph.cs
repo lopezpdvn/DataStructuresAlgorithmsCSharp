@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DataStructures.LinkedList;
+using DataStructuresAlgorithms.DataStructures.LinkedList;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
-namespace DataStructures.Graph
+namespace DataStructuresAlgorithms.DataStructures.Graph
 {
     // Based in code from
     // https://github.com/gaylemcd/ctci/blob/master/c-sharp/Chapter04/Q04_2.cs

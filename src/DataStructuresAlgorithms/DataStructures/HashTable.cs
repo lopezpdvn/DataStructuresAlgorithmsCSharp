@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using DataStructures.AssociativeArray;
+using DataStructuresAlgorithms.AbstractDataTypes;
 
-namespace DataStructures.HashTable
+namespace DataStructuresAlgorithms.DataStructures.HashTable
 {
     internal interface IHashTable<TKey, TValue> : IAssociativeArray<TKey, TValue>
     {

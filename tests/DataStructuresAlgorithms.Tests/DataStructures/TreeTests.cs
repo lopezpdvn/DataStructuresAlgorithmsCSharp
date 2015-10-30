@@ -1,4 +1,4 @@
-﻿using DataStructures.Tree;
+﻿using DataStructuresAlgorithms.DataStructures.Tree;
 using System.Collections;
 using Xunit;
 using System;
