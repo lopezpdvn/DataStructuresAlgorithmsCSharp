@@ -3,7 +3,7 @@ using System.Collections;
 using Xunit;
 using System;
 
-namespace DataStructures.Tests
+namespace DataStructuresAlgorithms.Tests.DataStructures
 {
     public class TreeTests
     {

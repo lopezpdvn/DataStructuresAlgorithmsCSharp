@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Xunit;
 using System;
 
-namespace DataStructures.Tests
+namespace DataStructuresAlgorithms.Tests.DataStructures
 {
     public class GraphTests
     {

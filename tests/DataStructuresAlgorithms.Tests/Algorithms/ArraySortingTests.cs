@@ -2,7 +2,7 @@
 using System;
 using DataStructuresAlgorithms.Algorithms;
 
-namespace DataStructures.Tests
+namespace DataStructuresAlgorithms.Tests.Algorithms
 {
     public class ArraySortingTests
     {
