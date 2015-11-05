@@ -53,9 +53,11 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             ((Hashtable)graph0["D"])["dft-string"] = "DHEABCFJIK";
             ((Hashtable)graph0["E"])["dft-string"] = "EABCDHKFJI";
             ((Hashtable)graph0["F"])["dft-string"] = "F";
+            ((Hashtable)graph0["G"])["dft-string"] = "GDHEABCFJIK";
+            ((Hashtable)graph0["H"])["dft-string"] = "HDEABCFJIK";
             ((Hashtable)graph0["J"])["dft-string"] = "JIF";
             ((Hashtable)graph0["K"])["dft-string"] = "K";
-            ((Hashtable)graph0["G"])["dft-string"] = "GDHEABCFJIK";
+
 
             ((Hashtable)graph0["A"])["bft-string"] = "ABCJDFIHEK";
             ((Hashtable)graph0["B"])["bft-string"] = "BACJDFIHEK";
@@ -78,7 +80,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             DirectedGraphAdjacencyList<char>.Node startNode = null;
             string traversalSequence = null;
             string str = null;
-            var nodeKeys = new string[]{ "A", "B", "C", "D", "E", "F", "J", "K", "G"};
+            var nodeKeys = new string[]{ "A", "B", "C", "D", "E", "F", "G", "H", "J", "K"};
 
             foreach(var nodeKey in nodeKeys)
             {
@@ -103,7 +105,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             DirectedGraphAdjacencyList<char>.Node startNode = null;
             string traversalSequence = null;
             string str = null;
-            var nodeKeys = new string[] { "A", "B", "C", "D", "E", "F", "J", "K", "G" };
+            var nodeKeys = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "J", "K" };
 
             foreach (var nodeKey in nodeKeys)
             {
