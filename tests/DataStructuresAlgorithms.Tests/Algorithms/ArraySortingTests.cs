@@ -11,7 +11,7 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
             unorderedEmpty, orderedEmpty;
         int[][] intOrdered, intUnordered;
 
-        public void InitializeIntArrays()
+        public ArraySortingTests()
         {
             unorderedBig = new int[] { 888, 222, 333, 000, 999, 777, 555, 111, 666, 444 };
             orderedBig = new int[] { 000, 111, 222, 333, 444, 555, 666, 777, 888, 999 };
@@ -34,7 +34,6 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         [Fact]
         public void BubbleSortTestInts0()
         {
-            InitializeIntArrays();
             var i = 0;
             foreach(var unorderedArr in intUnordered)
             {
@@ -51,7 +50,6 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         [Fact]
         public void SelectionSortTestInts0()
         {
-            InitializeIntArrays();
             var i = 0;
             foreach (var unorderedArr in intUnordered)
             {
@@ -68,7 +66,6 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         [Fact]
         public void InsertionSortTestInts0()
         {
-            InitializeIntArrays();
             var i = 0;
             foreach (var unorderedArr in intUnordered)
             {
