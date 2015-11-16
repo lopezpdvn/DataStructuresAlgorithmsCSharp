@@ -1,15 +1,16 @@
 ﻿using Xunit;
 using DataStructuresAlgorithms.Algorithms;
+using System;
 
 namespace DataStructuresAlgorithms.Tests.Algorithms
 {
-    public class SortedArraysFixture
+    public class SortedIntArraysFixture
     {
         public int[][] intSorted;
 
-        public SortedArraysFixture()
+        public SortedIntArraysFixture()
         {
-            var sortedBig = new int[] 
+            var sortedBig = new int[]
                 { 000, 111, 222, 333, 444, 555, 666,777, 888, 999 };
             var sortedTwo = new int[] { 222, 888 };
             var sortedOne = new int[] { 999 };
@@ -21,14 +22,14 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         }
     }
 
-    public class ArraySortingTests : IClassFixture<SortedArraysFixture>
+    public abstract class IntArraySortingTests
     {
-        int[][] intUnsorted;
-        SortedArraysFixture sortedArrays;
+        protected int[][] intSorted, intUnsorted;
+        protected SortedIntArraysFixture sortedArrays;
+        protected Action<int[]> ArraySortingAlgorithm;
 
-        public ArraySortingTests(SortedArraysFixture fixture)
+        public IntArraySortingTests()
         {
-            sortedArrays = fixture;
             var unsortedBig =
                 new int[] { 888, 222, 333, 000, 999, 777, 555, 111, 666, 444 };
             var unsortedTwo = new int[] { 888, 222 };
@@ -43,29 +44,13 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         }
 
         [Fact]
-        public void BubbleSortTestInts0()
-        {
-            var i = 0;
-            foreach(var unsortedArr in intUnsorted)
-            {
-                var j = 0;
-                ArraySorting.BubbleSort(unsortedArr);
-                foreach(var value in unsortedArr)
-                {
-                    Assert.True(value == sortedArrays.intSorted[i][j++]);
-                }
-                i++;
-            }
-        }
-
-        [Fact]
-        public void SelectionSortTestInts0()
+        public void IntArraySortingTest0()
         {
             var i = 0;
             foreach (var unsortedArr in intUnsorted)
             {
                 var j = 0;
-                ArraySorting.SelectionSort(unsortedArr);
+                ArraySortingAlgorithm(unsortedArr);
                 foreach (var value in unsortedArr)
                 {
                     Assert.True(value == sortedArrays.intSorted[i][j++]);
@@ -73,21 +58,35 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
                 i++;
             }
         }
+    }
 
-        [Fact]
-        public void InsertionSortTestInts0()
+    public class BubbleSortTests :
+        IntArraySortingTests, IClassFixture<SortedIntArraysFixture>
+    {
+        public BubbleSortTests(SortedIntArraysFixture fixture)
         {
-            var i = 0;
-            foreach (var unsortedArr in intUnsorted)
-            {
-                var j = 0;
-                ArraySorting.InsertionSort(unsortedArr);
-                foreach (var value in unsortedArr)
-                {
-                    Assert.True(value == sortedArrays.intSorted[i][j++]);
-                }
-                i++;
-            }
+            sortedArrays = fixture;
+            ArraySortingAlgorithm = ArraySorting.BubbleSort;
+        }
+    }
+
+    public class SelectionSortTests :
+        IntArraySortingTests, IClassFixture<SortedIntArraysFixture>
+    {
+        public SelectionSortTests(SortedIntArraysFixture fixture)
+        {
+            sortedArrays = fixture;
+            ArraySortingAlgorithm = ArraySorting.SelectionSort;
+        }
+    }
+
+    public class InsertionSortTests :
+        IntArraySortingTests, IClassFixture<SortedIntArraysFixture>
+    {
+        public InsertionSortTests(SortedIntArraysFixture fixture)
+        {
+            sortedArrays = fixture;
+            ArraySortingAlgorithm = ArraySorting.InsertionSort;
         }
     }
 }
