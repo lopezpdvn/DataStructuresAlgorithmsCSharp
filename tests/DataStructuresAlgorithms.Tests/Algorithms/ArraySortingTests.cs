@@ -22,6 +22,9 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         }
     }
 
+    [CollectionDefinition("Int Array Sorting Collection")]
+    public class IntArraySortingCollection : ICollectionFixture<SortedIntArraysFixture> { }
+
     public abstract class IntArraySortingTests
     {
         protected int[][] intSorted, intUnsorted;
@@ -60,8 +63,8 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         }
     }
 
-    public class BubbleSortTests :
-        IntArraySortingTests, IClassFixture<SortedIntArraysFixture>
+    [Collection("Int Array Sorting Collection")]
+    public class BubbleSortTests : IntArraySortingTests
     {
         public BubbleSortTests(SortedIntArraysFixture fixture)
         {
@@ -70,8 +73,8 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         }
     }
 
-    public class SelectionSortTests :
-        IntArraySortingTests, IClassFixture<SortedIntArraysFixture>
+    [Collection("Int Array Sorting Collection")]
+    public class SelectionSortTests : IntArraySortingTests
     {
         public SelectionSortTests(SortedIntArraysFixture fixture)
         {
@@ -80,8 +83,8 @@ namespace DataStructuresAlgorithms.Tests.Algorithms
         }
     }
 
-    public class InsertionSortTests :
-        IntArraySortingTests, IClassFixture<SortedIntArraysFixture>
+    [Collection("Int Array Sorting Collection")]
+    public class InsertionSortTests : IntArraySortingTests
     {
         public InsertionSortTests(SortedIntArraysFixture fixture)
         {
