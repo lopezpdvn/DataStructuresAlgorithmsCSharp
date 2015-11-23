@@ -1,16 +1,16 @@
-﻿using DataStructuresAlgorithms.DataStructures.Graph;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Xunit;
-using System;
+using DataStructuresAlgorithms.DataStructures.Graph;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
 {
-    public class GraphTests
+    public class GraphTraversalFixture
     {
-        IDictionary graph0 = new Hashtable();
+        public IDictionary graph0 = new Hashtable();
 
-        public GraphTests()
+        public GraphTraversalFixture()
         {
             var graph0Graph = new DirectedGraphAdjacencyList<char>();
             var _A = new DirectedGraphAdjacencyList<char>.Node('A');
@@ -38,7 +38,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             _J.AddAdjacent(_I);
             //_K.AddAdjacent();
 
-            foreach(var node in nodes)
+            foreach (var node in nodes)
             {
                 graph0Graph.Add(node);
                 var nodeKey = node.Vertex.ToString();
@@ -72,24 +72,36 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             ((Hashtable)graph0["J"])["bft-string"] = "JIF";
             ((Hashtable)graph0["K"])["bft-string"] = "K";
         }
+    }
+
+    public abstract class GraphTraversalTests
+    {
+        protected GraphTraversalFixture fixture;
+        protected Func<DirectedGraphAdjacencyList<char>.Node,
+            IEnumerable<DirectedGraphAdjacencyList<char>.Node>>
+            TraversalAlgorithm;
+        protected string traversalType;
+        protected DirectedGraphAdjacencyList<char> graph;
 
         [Fact]
-        public void PreOrderDepthFirstTraversalRecursiveIteratorTest0()
+        public void TraversalTest0()
         {
-            Console.WriteLine("Depth First Traversal Recursive");
-            var graph = (DirectedGraphAdjacencyList<char>)graph0["graph"];
+            graph = (DirectedGraphAdjacencyList<char>)fixture.graph0["graph"];
             DirectedGraphAdjacencyList<char>.Node startNode = null;
             string traversalSequence = null;
             string str = null;
-            var nodeKeys = new string[]{ "A", "B", "C", "D", "E", "F", "G", "H", "J", "K"};
+            var nodeKeys = new string[]
+                { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
 
-            foreach(var nodeKey in nodeKeys)
+            foreach (var nodeKey in nodeKeys)
             {
                 graph.FlagNodesUnvisited();
                 str = "";
-                startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
-                traversalSequence = (string)((Hashtable)graph0[nodeKey])["dft-string"];
-                foreach (var node in graph.PreOrderDepthFirstTraversalRecursiveIterator(startNode))
+                startNode = (DirectedGraphAdjacencyList<char>.Node)
+                    ((Hashtable)fixture.graph0[nodeKey])["node"];
+                traversalSequence = (string)
+                    ((Hashtable)fixture.graph0[nodeKey])[traversalType];
+                foreach (var node in TraversalAlgorithm(startNode))
                 {
                     str += node.Vertex;
                 }
@@ -97,55 +109,65 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 Assert.True(str.Equals(traversalSequence));
             }
         }
+    }
 
-        [Fact]
-        public void PreOrderDepthFirstTraversalIterativeIteratorTest0()
+    [CollectionDefinition("Graph Traversal Collection")]
+    public class GraphTraversalCollection :
+        ICollectionFixture<GraphTraversalFixture> { }
+
+    [Collection("Graph Traversal Collection")]
+    public class DirectedGraphAdjacencyListPreOrderDFTraversalRecursiveIterator
+        : GraphTraversalTests
+    {
+        public DirectedGraphAdjacencyListPreOrderDFTraversalRecursiveIterator(
+            GraphTraversalFixture fixture)
         {
-            Console.WriteLine("Depth First Traversal Iterative");
-            var graph = (DirectedGraphAdjacencyList<char>)graph0["graph"];
-            DirectedGraphAdjacencyList<char>.Node startNode = null;
-            string traversalSequence = null;
-            string str = null;
-            var nodeKeys = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
-
-            foreach (var nodeKey in nodeKeys)
-            {
-                graph.FlagNodesUnvisited();
-                str = "";
-                startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
-                traversalSequence = (string)((Hashtable)graph0[nodeKey])["dft-string"];
-                foreach (var node in graph.PreOrderDepthFirstTraversalIterativeIterator(startNode))
-                {
-                    str += node.Vertex;
-                }
-                Console.WriteLine(str);
-                Assert.True(str.Equals(traversalSequence));
-            }
+            this.fixture = fixture;
+            traversalType = "dft-string";
+            TraversalAlgorithm =
+                ((DirectedGraphAdjacencyList<char>)fixture.graph0["graph"])
+                .PreOrderDepthFirstTraversalRecursiveIterator;
         }
+    }
 
-        [Fact]
-        public void BreadthFirstTraversalIterativeIteratorTest()
+    [Collection("Graph Traversal Collection")]
+    public class DirectedGraphAdjacencyListPreOrderDFTraversalIterativeIterator
+    : GraphTraversalTests
+    {
+        public DirectedGraphAdjacencyListPreOrderDFTraversalIterativeIterator(
+            GraphTraversalFixture fixture)
         {
-            Console.WriteLine("Breadth First Traversal Iterative");
-            var graph = (DirectedGraphAdjacencyList<char>)graph0["graph"];
-            DirectedGraphAdjacencyList<char>.Node startNode = null;
-            string traversalSequence = null;
-            string str = null;
-            var nodeKeys = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+            this.fixture = fixture;
+            traversalType = "dft-string";
+            TraversalAlgorithm =
+                ((DirectedGraphAdjacencyList<char>)fixture.graph0["graph"])
+                .PreOrderDepthFirstTraversalIterativeIterator;
+        }
+    }
 
-            foreach (var nodeKey in nodeKeys)
-            {
-                graph.FlagNodesUnvisited();
-                str = "";
-                startNode = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0[nodeKey])["node"];
-                traversalSequence = (string)((Hashtable)graph0[nodeKey])["bft-string"];
-                foreach (var node in graph.BreadthFirstTraversalIterativeIterator(startNode))
-                {
-                    str += node.Vertex;
-                }
-                Console.WriteLine(str);
-                Assert.True(str.Equals(traversalSequence));
-            }
+    [Collection("Graph Traversal Collection")]
+    public class DirectedGraphAdjacencyListBFTraversalIterator
+        : GraphTraversalTests
+    {
+        public DirectedGraphAdjacencyListBFTraversalIterator(
+            GraphTraversalFixture fixture)
+        {
+            this.fixture = fixture;
+            traversalType = "bft-string";
+            TraversalAlgorithm =
+                ((DirectedGraphAdjacencyList<char>)fixture.graph0["graph"])
+                .BreadthFirstTraversalIterativeIterator;
+        }
+    }
+
+    [Collection("Graph Traversal Collection")]
+    public class GraphTests0
+    {
+        GraphTraversalFixture fixture;
+
+        public GraphTests0(GraphTraversalFixture fixture)
+        {
+            this.fixture = fixture;
         }
 
         [Fact]
@@ -155,11 +177,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             DirectedGraphAdjacencyList<char>.Node node = null;
             string strCheck = null;
 
-            node = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0["A"])["node"];
+            node = (DirectedGraphAdjacencyList<char>.Node)
+                ((Hashtable)fixture.graph0["A"])["node"];
             strCheck = String.Format(strCheckTmpl, 'A', 1);
             Assert.True(strCheck.Equals(node.ToString()));
 
-            node = (DirectedGraphAdjacencyList<char>.Node)((Hashtable)graph0["B"])["node"];
+            node = (DirectedGraphAdjacencyList<char>.Node)
+                ((Hashtable)fixture.graph0["B"])["node"];
             strCheck = String.Format(strCheckTmpl, 'B', 3);
             Assert.True(strCheck.Equals(node.ToString()));
         }
