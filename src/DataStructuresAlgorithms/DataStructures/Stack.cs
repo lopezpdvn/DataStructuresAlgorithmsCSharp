@@ -42,7 +42,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 
     public class StackArray<T> : Stack<T>
     {
-        public int MaxSize { get; private set; }
+        public readonly int MaxSize;
         private T[] arr;
         private int top;
 
@@ -80,7 +80,8 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         {
             try
             {
-                arr[++top] = value;
+                arr[top+1] = value;
+                top++;
             }
             catch(IndexOutOfRangeException)
             {

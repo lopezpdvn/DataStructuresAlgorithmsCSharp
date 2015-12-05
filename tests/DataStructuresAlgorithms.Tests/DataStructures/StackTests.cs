@@ -56,5 +56,33 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             // Instantiate a big enough array.
             return new StackArray<T>(99);
         }
+
+        [Fact]
+        public void FullStackArrayTests0()
+        {
+            var stackArray = new StackArray<int>(5);
+            for(var i = 0; i < 5; i++)
+            {
+                Assert.True(stackArray.Length == i);
+                stackArray.Push(i * 2);
+            }
+            Assert.True(stackArray.IsFull);
+            Assert.False(stackArray.IsEmpty);
+            Assert.Throws<InvalidOperationException>(() => stackArray.Push(10));
+            Assert.Throws<InvalidOperationException>(() => stackArray.Push(12));
+            Assert.True(stackArray.Peek() == 8);
+            Assert.True(stackArray.Pop() == 8);
+            Assert.True(stackArray.Length == 4);
+            Assert.True(stackArray.MaxSize == 5);
+            Assert.False(stackArray.IsFull);
+            Assert.False(stackArray.IsEmpty);
+            stackArray.Push(8);
+            Assert.True(stackArray.Peek() == 8);
+            Assert.Throws<InvalidOperationException>(() => stackArray.Push(10));
+            Assert.True(stackArray.IsFull);
+            Assert.False(stackArray.IsEmpty);
+            Assert.True(stackArray.MaxSize == 5);
+            Assert.True(stackArray.Length == 5);
+        }
     }
 }
