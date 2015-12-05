@@ -48,4 +48,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             return new StackSinglyLinkedList<T>();
         }
     }
+
+    public class StackArrayTests : StackTests
+    {
+        protected override Stack<T> GetStackImplementation<T>()
+        {
+            // Instantiate a big enough array.
+            return new StackArray<T>(99);
+        }
+    }
 }

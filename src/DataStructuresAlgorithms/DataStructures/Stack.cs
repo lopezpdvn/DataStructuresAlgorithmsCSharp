@@ -39,4 +39,53 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
             AddFirst(value);
         }
     }
+
+    public class StackArray<T> : Stack<T>
+    {
+        public int MaxSize { get; private set; }
+        private T[] arr;
+        private int top;
+
+        public StackArray(int maxSize)
+        {
+            MaxSize = maxSize;
+            arr = new T[MaxSize];
+            top = -1;
+        }
+
+        public bool IsEmpty => top == -1;
+        public bool IsFull => top == MaxSize - 1;
+        public int Length => top + 1;
+
+        public T Peek()
+        {
+            try
+            {
+                return arr[top];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new InvalidOperationException("Stack is Empty.");
+            }
+        }
+
+        public T Pop()
+        {
+            T rt = Peek();
+            top--;
+            return rt;
+        }
+
+        public void Push(T value)
+        {
+            try
+            {
+                arr[++top] = value;
+            }
+            catch(IndexOutOfRangeException)
+            {
+                throw new InvalidOperationException("Stack is full");
+            }
+        }
+    }
 }
