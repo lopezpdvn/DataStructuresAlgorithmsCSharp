@@ -48,4 +48,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             return new QueueSinglyLinkedList<T>();
         }
     }
+
+    public class CircularArrayQueueTests : QueueTests
+    {
+        protected override Queue<T> GetQueueImplementation<T>()
+        {
+            // Instantiate a big enough array.
+            return new CircularArrayQueue<T>(99);
+        }
+    }
 }
