@@ -1,6 +1,5 @@
 ﻿using DataStructuresAlgorithms.DataStructures.LinkedList;
 using System;
-using System.Collections.Generic;
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {

@@ -56,5 +56,47 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             // Instantiate a big enough array.
             return new CircularArrayQueue<T>(99);
         }
+
+        [Fact]
+        public void FullQueueAndWrapAroundTest()
+        {
+            var maxSize = 5;
+            var queue = new CircularArrayQueue<int>(maxSize);
+
+            for(var j = 0; j < 2; j++)
+            {
+                Assert.True(queue.IsEmpty);
+                Assert.False(queue.IsFull);
+                Assert.True(queue.Length == 0);
+                Assert.True(queue.MaxSize == maxSize);
+                Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
+                Assert.Throws<InvalidOperationException>(() => queue.Peek());
+
+                for (var i = 0; i < maxSize; i++)
+                {
+                    Assert.False(queue.IsFull);
+                    queue.Enqueue(i * 2);
+                    Assert.True(queue.Peek() == 0);
+                    Assert.False(queue.IsEmpty);
+                    Assert.True(queue.Length == i + 1);
+                }
+
+                Assert.True(queue.IsFull);
+                Assert.Throws<InvalidOperationException>(() => queue.Enqueue(1));
+
+                for (var i = 0; i < maxSize; i++)
+                {
+                    Assert.True(queue.Length == maxSize - i);
+                    Assert.False(queue.IsEmpty);
+                    Assert.True(queue.Peek() == i * 2);
+                    Assert.True(queue.Dequeue() == i * 2);
+                    Assert.True(queue.Length == maxSize - i - 1);
+                    Assert.False(queue.IsFull);
+                }
+
+                Assert.True(queue.IsEmpty);
+                Assert.False(queue.IsFull);
+            }
+        }
     }
 }
