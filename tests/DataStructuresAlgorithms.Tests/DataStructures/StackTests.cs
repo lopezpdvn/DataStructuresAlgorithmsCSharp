@@ -14,13 +14,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Stack<int> stack = GetStackImplementation<int>();
             var fixture = new { TestArray0 = new int[] { 3, 6, 9, 12 } };
             Assert.True(stack.IsEmpty);
-            Assert.True(stack.Length == 0);
+            Assert.True(stack.Count == 0);
             Assert.Throws<InvalidOperationException>(() => stack.Pop());
             Assert.Throws<InvalidOperationException>(() => stack.Peek());
 
             for (var i = 0; i < fixture.TestArray0.Length; i++)
             {
-                Assert.True(stack.Length == i);
+                Assert.True(stack.Count == i);
                 stack.Push(fixture.TestArray0[i]);
                 Assert.False(stack.IsEmpty);
                 Assert.True(stack.Peek() == fixture.TestArray0[i]);
@@ -29,13 +29,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             for (var i = fixture.TestArray0.Length - 1; i >= 0; i--)
             {
                 Assert.False(stack.IsEmpty);
-                Assert.True(stack.Length == i + 1);
+                Assert.True(stack.Count == i + 1);
                 Assert.True(fixture.TestArray0[i] == stack.Peek());
                 Assert.True(fixture.TestArray0[i] == stack.Pop());
             }
 
             Assert.True(stack.IsEmpty);
-            Assert.True(stack.Length == 0);
+            Assert.True(stack.Count == 0);
             Assert.Throws<InvalidOperationException>(() => stack.Pop());
             Assert.Throws<InvalidOperationException>(() => stack.Peek());
         }
@@ -63,7 +63,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             var stackArray = new StackArray<int>(5);
             for(var i = 0; i < 5; i++)
             {
-                Assert.True(stackArray.Length == i);
+                Assert.True(stackArray.Count == i);
                 stackArray.Push(i * 2);
             }
             Assert.True(stackArray.IsFull);
@@ -72,8 +72,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.Throws<InvalidOperationException>(() => stackArray.Push(12));
             Assert.True(stackArray.Peek() == 8);
             Assert.True(stackArray.Pop() == 8);
-            Assert.True(stackArray.Length == 4);
-            Assert.True(stackArray.MaxSize == 5);
+            Assert.True(stackArray.Count == 4);
+            Assert.True(stackArray.Length == 5);
             Assert.False(stackArray.IsFull);
             Assert.False(stackArray.IsEmpty);
             stackArray.Push(8);
@@ -81,8 +81,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.Throws<InvalidOperationException>(() => stackArray.Push(10));
             Assert.True(stackArray.IsFull);
             Assert.False(stackArray.IsEmpty);
-            Assert.True(stackArray.MaxSize == 5);
             Assert.True(stackArray.Length == 5);
+            Assert.True(stackArray.Count == 5);
         }
     }
 }

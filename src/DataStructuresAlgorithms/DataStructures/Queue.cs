@@ -9,6 +9,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         void Enqueue(T value);
         T Peek();
         bool IsEmpty { get; }
+        int Count { get; }
         int Length { get; }
     }
 
@@ -41,27 +42,27 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 
     public class CircularArrayQueue<T> : Queue<T>
     {
-        public readonly int MaxSize;
+        public int Length { get; private set; }
         private T[] arr;
         private int head, tail, nItems;
 
-        public CircularArrayQueue(int maxSize)
+        public CircularArrayQueue(int length)
         {
-            MaxSize = maxSize;
-            arr = new T[MaxSize];
+            Length = length;
+            arr = new T[length];
             head = 0;
             tail = -1;
             nItems = 0;
         }
 
         public bool IsEmpty => nItems == 0;
-        public int Length => nItems;
-        public bool IsFull => nItems == MaxSize;
+        public int Count => nItems;
+        public bool IsFull => nItems == Length;
 
         public T Dequeue()
         {
             T tmp = Peek();
-            if(++head == MaxSize)
+            if(++head == Length)
             {
                 head = 0;
             }
@@ -75,7 +76,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
             {
                 throw new InvalidOperationException("Queue is full");
             }
-            if(tail == MaxSize - 1)
+            if(tail == Length - 1)
             {
                 tail = -1;
             }

@@ -1,6 +1,5 @@
 ﻿using DataStructuresAlgorithms.DataStructures.LinkedList;
 using System;
-using System.Collections.Generic;
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {
@@ -10,6 +9,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         T Pop();
         T Peek();
         bool IsEmpty { get; }
+        int Count { get; }
         int Length { get; }
     }
 
@@ -42,20 +42,21 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 
     public class StackArray<T> : Stack<T>
     {
-        public readonly int MaxSize;
+        private readonly int MaxSize;
+        public int Length { get; private set; }
         private T[] arr;
         private int top;
 
-        public StackArray(int maxSize)
+        public StackArray(int length)
         {
-            MaxSize = maxSize;
-            arr = new T[MaxSize];
+            Length = length;
+            arr = new T[length];
             top = -1;
         }
 
         public bool IsEmpty => top == -1;
-        public bool IsFull => top == MaxSize - 1;
-        public int Length => top + 1;
+        public bool IsFull => top == Length - 1;
+        public int Count => top + 1;
 
         public T Peek()
         {
