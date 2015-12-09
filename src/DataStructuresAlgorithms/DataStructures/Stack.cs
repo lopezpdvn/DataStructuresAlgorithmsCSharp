@@ -46,7 +46,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         private T[] arr;
         private int top;
 
-        public StackArray(int length)
+        public StackArray(int length = 64)
         {
             Length = length;
             arr = new T[length];

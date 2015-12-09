@@ -47,7 +47,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         private int head, tail;
         public int Count { get; private set; }
 
-        public CircularArrayQueue(int length)
+        public CircularArrayQueue(int length = 64)
         {
             Length = length;
             arr = new T[length];

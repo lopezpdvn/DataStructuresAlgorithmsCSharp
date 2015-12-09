@@ -4,90 +4,81 @@ using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
 {
-    public abstract class PriorityQueueTests
+    public class PriorityQueueIntArrayTests
     {
-        protected abstract Queue<T> GetQueueImplementation<T>();
-
         [Fact]
-        public void QueueGeneralTest0()
+        public void PriorityQueueGeneralTest0()
         {
-            Queue<int> queue = GetQueueImplementation<int>();
-            var fixture = new { TestArray0 = new int[] { 3, 6, 9, 12 } };
-            Assert.True(queue.IsEmpty);
-            Assert.True(queue.Count == 0);
-            Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
-            Assert.Throws<InvalidOperationException>(() => queue.Peek());
+            Queue<int> pqueue = new PriorityQueueIntArray();
+            var fixture = new { TestArray0 = new int[] { 9, 6, 3, 15, 12, 0, 18 },
+                TestSortedArray0 = new int[] { 0, 3, 6, 9, 12, 15, 18 }
+            };
+            Assert.True(pqueue.IsEmpty);
+            Assert.True(pqueue.Count == 0);
+            Assert.Throws<InvalidOperationException>(() => pqueue.Dequeue());
+            Assert.Throws<InvalidOperationException>(() => pqueue.Peek());
 
             for (var i = 0; i < fixture.TestArray0.Length; i++)
             {
-                Assert.True(queue.Count == i);
-                queue.Enqueue(fixture.TestArray0[i]);
-                Assert.False(queue.IsEmpty);
-                Assert.True(queue.Peek() == fixture.TestArray0[0]);
+                Assert.True(pqueue.Count == i);
+                pqueue.Enqueue(fixture.TestArray0[i]);
+                Assert.False(pqueue.IsEmpty);
+                //Assert.True(pqueue.Peek() == fixture.TestArray0[0]);
             }
 
             for (var i = 0; i < fixture.TestArray0.Length; i++)
             {
-                Assert.False(queue.IsEmpty);
-                Assert.True(queue.Count == fixture.TestArray0.Length - i);
-                Assert.True(fixture.TestArray0[i] == queue.Peek());
-                Assert.True(fixture.TestArray0[i] == queue.Dequeue());
+                Assert.False(pqueue.IsEmpty);
+                Assert.True(pqueue.Count == fixture.TestArray0.Length - i);
+                Assert.True(fixture.TestSortedArray0[i] == pqueue.Peek());
+                Assert.True(fixture.TestSortedArray0[i] == pqueue.Dequeue());
             }
 
-            Assert.True(queue.IsEmpty);
-            Assert.True(queue.Count == 0);
-            Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
-            Assert.Throws<InvalidOperationException>(() => queue.Peek());
-        }
-    }
-
-    public class PriorityQueueIntArrayTests : PriorityQueueTests
-    {
-        protected override Queue<T> GetQueueImplementation<T>()
-        {
-            // Instantiate a big enough array.
-            return new CircularArrayQueue<T>(99);
+            Assert.True(pqueue.IsEmpty);
+            Assert.True(pqueue.Count == 0);
+            Assert.Throws<InvalidOperationException>(() => pqueue.Dequeue());
+            Assert.Throws<InvalidOperationException>(() => pqueue.Peek());
         }
 
         [Fact]
-        public void FullQueueAndWrapAroundTest()
+        public void FullPriorityQueueTest()
         {
-            var maxSize = 5;
-            var queue = new CircularArrayQueue<int>(maxSize);
+            var length = 5;
+            var pqueue = new PriorityQueueIntArray(length);
 
             for(var j = 0; j < 2; j++)
             {
-                Assert.True(queue.IsEmpty);
-                Assert.False(queue.IsFull);
-                Assert.True(queue.Count == 0);
-                Assert.True(queue.Length == maxSize);
-                Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
-                Assert.Throws<InvalidOperationException>(() => queue.Peek());
+                Assert.True(pqueue.IsEmpty);
+                Assert.False(pqueue.IsFull);
+                Assert.True(pqueue.Count == 0);
+                Assert.True(pqueue.Length == length);
+                Assert.Throws<InvalidOperationException>(() => pqueue.Dequeue());
+                Assert.Throws<InvalidOperationException>(() => pqueue.Peek());
 
-                for (var i = 0; i < maxSize; i++)
+                for (var i = 0; i < length; i++)
                 {
-                    Assert.False(queue.IsFull);
-                    queue.Enqueue(i * 2);
-                    Assert.True(queue.Peek() == 0);
-                    Assert.False(queue.IsEmpty);
-                    Assert.True(queue.Count == i + 1);
+                    Assert.False(pqueue.IsFull);
+                    pqueue.Enqueue(i * 2);
+                    Assert.True(pqueue.Peek() == 0);
+                    Assert.False(pqueue.IsEmpty);
+                    Assert.True(pqueue.Count == i + 1);
                 }
 
-                Assert.True(queue.IsFull);
-                Assert.Throws<InvalidOperationException>(() => queue.Enqueue(1));
+                Assert.True(pqueue.IsFull);
+                Assert.Throws<InvalidOperationException>(() => pqueue.Enqueue(1));
 
-                for (var i = 0; i < maxSize; i++)
+                for (var i = 0; i < length; i++)
                 {
-                    Assert.True(queue.Count == maxSize - i);
-                    Assert.False(queue.IsEmpty);
-                    Assert.True(queue.Peek() == i * 2);
-                    Assert.True(queue.Dequeue() == i * 2);
-                    Assert.True(queue.Count == maxSize - i - 1);
-                    Assert.False(queue.IsFull);
+                    Assert.True(pqueue.Count == length - i);
+                    Assert.False(pqueue.IsEmpty);
+                    Assert.True(pqueue.Peek() == i * 2);
+                    Assert.True(pqueue.Dequeue() == i * 2);
+                    Assert.True(pqueue.Count == length - i - 1);
+                    Assert.False(pqueue.IsFull);
                 }
 
-                Assert.True(queue.IsEmpty);
-                Assert.False(queue.IsFull);
+                Assert.True(pqueue.IsEmpty);
+                Assert.False(pqueue.IsFull);
             }
         }
     }

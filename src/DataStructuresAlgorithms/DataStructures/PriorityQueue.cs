@@ -2,17 +2,7 @@
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {
-    public interface PriorityQueue<T>
-    {
-        T Dequeue();
-        void Enqueue(T item);
-        T Peek();
-        bool IsEmpty { get; }
-        int Count { get; }
-        int Length { get; }
-    }
-
-    public class PriorityQueueIntArray : PriorityQueue<int>
+    public class PriorityQueueIntArray : Queue<int>
     {
         private int[] arr;
         public int Count { get; private set; } = 0;
@@ -21,7 +11,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         public bool IsEmpty => Count == 0;
         public bool IsFull => Length == Count;
 
-        public PriorityQueueIntArray(int length)
+        public PriorityQueueIntArray(int length = 64)
         {
             Length = length;
             arr = new int[Length];
@@ -44,18 +34,12 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
                     return;
                 }
 
-                for (var i = Count - 1; i >= 0; i--)
+                var i = Count - 1;
+                for (; i >= 0 && item > arr[i]; i--)
                 {
-                    if (item > arr[i])
-                    {
-                        arr[i + 1] = arr[i];
-                    }
-                    else
-                    {
-                        arr[i + 1] = item;
-                    }
+                    arr[i + 1] = arr[i];
                 }
-
+                arr[i + 1] = item;
                 Count++;
             }
             catch(IndexOutOfRangeException)
