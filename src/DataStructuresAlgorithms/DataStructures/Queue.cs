@@ -6,7 +6,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
     public interface Queue<T>
     {
         T Dequeue();
-        void Enqueue(T value);
+        void Enqueue(T item);
         T Peek();
         bool IsEmpty { get; }
         int Count { get; }
@@ -44,7 +44,8 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
     {
         public int Length { get; private set; }
         private T[] arr;
-        private int head, tail, nItems;
+        private int head, tail;
+        public int Count { get; private set; }
 
         public CircularArrayQueue(int length)
         {
@@ -52,12 +53,11 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
             arr = new T[length];
             head = 0;
             tail = -1;
-            nItems = 0;
+            Count = 0;
         }
 
-        public bool IsEmpty => nItems == 0;
-        public int Count => nItems;
-        public bool IsFull => nItems == Length;
+        public bool IsEmpty => Count == 0;
+        public bool IsFull => Count == Length;
 
         public T Dequeue()
         {
@@ -66,7 +66,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
             {
                 head = 0;
             }
-            nItems--;
+            Count--;
             return tmp;
         }
 
@@ -81,7 +81,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
                 tail = -1;
             }
             arr[++tail] = value;
-            nItems++;
+            Count++;
         }
 
         public T Peek()

@@ -5,7 +5,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 {
     public interface Stack<T>
     {
-        void Push(T value);
+        void Push(T item);
         T Pop();
         T Peek();
         bool IsEmpty { get; }
@@ -42,7 +42,6 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 
     public class StackArray<T> : Stack<T>
     {
-        private readonly int MaxSize;
         public int Length { get; private set; }
         private T[] arr;
         private int top;
