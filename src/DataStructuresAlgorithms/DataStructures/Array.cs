@@ -20,7 +20,7 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             get { return arr[index]; }
         }
 
-        public void Delete(int v)
+        public bool Delete(int v)
         {
             throw new NotImplementedException();
         }
@@ -31,6 +31,21 @@ namespace DataStructuresAlgorithms.DataStructures.Array
         }
 
         IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int BinarySearchIterative(int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int BinarySearchRecursive(int v)
         {
             throw new NotImplementedException();
         }
