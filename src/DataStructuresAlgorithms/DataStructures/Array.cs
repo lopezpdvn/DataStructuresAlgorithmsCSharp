@@ -8,6 +8,7 @@ namespace DataStructuresAlgorithms.DataStructures.Array
     {
         private int[] arr;
         public int Length { get; private set; }
+        public int Count { get; private set; } = 0;
 
         public SortedArrayInt(int length)
         {
@@ -17,12 +18,23 @@ namespace DataStructuresAlgorithms.DataStructures.Array
 
         public int this[int index]
         {
-            get { return arr[index]; }
+            get
+            {
+                if (index >= Count)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                else
+                {
+                    return arr[index];
+                }
+            }
         }
 
-        public bool Delete(int v)
+        public bool Delete(int key)
         {
-            throw new NotImplementedException();
+            var index = BinarySearchIterative(key);
+            return index > 0;
         }
 
         public IEnumerator<int> GetEnumerator()
@@ -35,17 +47,31 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             throw new NotImplementedException();
         }
 
-        public void Insert(int i)
+        public void Insert(int item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var i = Count - 1;
+                for (; i >= 0 && item < arr[i]; i--)
+                {
+                    arr[i + 1] = arr[i];
+                }
+                arr[i + 1] = item;
+                Count++;
+            }
+            catch(IndexOutOfRangeException)
+            {
+                throw new InvalidOperationException("Array is full");
+            }
+
         }
 
-        public int BinarySearchIterative(int v)
+        public int BinarySearchIterative(int key)
         {
-            throw new NotImplementedException();
+            return -1;
         }
 
-        public int BinarySearchRecursive(int v)
+        public int BinarySearchRecursive(int key)
         {
             throw new NotImplementedException();
         }

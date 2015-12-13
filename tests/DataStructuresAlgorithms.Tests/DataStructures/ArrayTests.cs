@@ -18,24 +18,20 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             };
             var maxArrLength = fixture.sortedArray.Length;
             var arr = new SortedArrayInt(maxArrLength);
-            foreach(var item in arr)
-            {
-                Assert.True(item == default(int));
-            }
             Assert.Throws<IndexOutOfRangeException>(() => arr[maxArrLength]);
             // Indexer is read only
             //arr[0] = default(int);
 
-            Assert.True(arr.Length == 0);
+            Assert.True(arr.Count == 0);
             Assert.False(arr.Delete(5));
             Assert.False(arr.Delete(0));
-            Assert.True(arr.Length == 0);
-            Assert.True(arr.Length == 0);
+            Assert.True(arr.Count == 0);
+            Assert.True(arr.Count == 0);
 
             for(var i = 0; i < fixture.unsortedArray.Length; i++)
             {
                 arr.Insert(fixture.unsortedArray[i]);
-                Assert.True(arr.Length == i + 1);
+                Assert.True(arr.Count == i + 1);
             }
 
             for(var i = 0; i < fixture.sortedArray.Length; i++)
@@ -62,10 +58,11 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             for(var i = 0; i < fixture.sortedArray.Length; i++)
             {
                 Assert.True(arr.Delete(fixture.sortedArray[i]));
-                Assert.True(arr.Length == maxArrLength - i - 1);
+                Assert.True(arr.Count == maxArrLength - i - 1);
             }
 
-            Assert.True(arr.Length == 0);
+            Assert.True(arr.Count == 0);
+            Assert.True(arr.Length == maxArrLength);
         }
     }
 }
