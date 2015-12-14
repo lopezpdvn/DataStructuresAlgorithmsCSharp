@@ -65,15 +65,64 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             }
 
         }
-
+        
         public int BinarySearchIterative(int key)
         {
-            return -1;
+            return BinarySearchIterative(arr, key, 0, Count - 1);
+        }
+
+        public static int BinarySearchIterative(int[] arr, int key, int min, int max)
+        {
+            int mid;
+            while(min < max)
+            {
+                mid = min + ((max - min) / 2);
+                if(arr[mid] < key)
+                {
+                    min = mid + 1;
+                }
+                else
+                {
+                    max = mid;
+                }
+            }
+            
+            if((max == min) && (arr[min] == key))
+            {
+                return min;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public int BinarySearchRecursive(int key)
         {
-            throw new NotImplementedException();
+            return BinarySearchRecursive(arr, key, 0, Count - 1);
+        }
+        
+        public static int BinarySearchRecursive(int[] arr, int key, int min, int max)
+        {
+            if(max < min)
+            {
+                return -1;
+            }
+
+            int mid = min + ((max - min) / 2);
+
+            if(arr[mid] > key)
+            {
+                return BinarySearchRecursive(arr, key, min, mid - 1);
+            }
+            else if(arr[mid] < key)
+            {
+                return BinarySearchRecursive(arr, key, mid + 1, max);
+            }
+            else
+            {
+                return mid;
+            }
         }
     }
 }
