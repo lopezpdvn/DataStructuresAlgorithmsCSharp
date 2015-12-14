@@ -24,8 +24,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             //arr[0] = default(int);
 
             Assert.True(arr.Count == 0);
-            Assert.False(arr.Delete(5));
-            Assert.False(arr.Delete(0));
+            Assert.True(-1 == arr.Delete(5));
+            Assert.True(-1 == arr.Delete(0));
             Assert.True(arr.Count == 0);
             Assert.True(arr.Count == 0);
 
@@ -63,10 +63,11 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.True(arr.BinarySearchRecursive(-88888) == -1);
 
             // Delete all
-            for(i = 0; i < fixture.sortedArray.Length; i++)
+            for(i = fixture.sortedArray.Length - 1; i >= 0 ; i--)
             {
-                Assert.True(arr.Delete(fixture.sortedArray[i]));
-                Assert.True(arr.Count == maxArrLength - i - 1);
+                Assert.True(arr.Count == i + 1);
+                Assert.True(i == arr.Delete(fixture.sortedArray[i]));
+                Assert.True(arr.Count == i);
             }
 
             Assert.True(arr.Count == 0);

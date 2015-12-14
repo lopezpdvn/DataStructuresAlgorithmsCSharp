@@ -31,12 +31,12 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             }
         }
 
-        public bool Delete(int key)
+        public int Delete(int key)
         {
             var index = BinarySearchIterative(key);
             if(index < 0)
             {
-                return false;
+                return index;
             }
 
             for(var i = index; i < Count - 1; i++)
@@ -44,7 +44,7 @@ namespace DataStructuresAlgorithms.DataStructures.Array
                 arr[i] = arr[i + 1];
             }
             Count--;
-            return true;
+            return index;
         }
 
         public IEnumerator<int> GetEnumerator()
