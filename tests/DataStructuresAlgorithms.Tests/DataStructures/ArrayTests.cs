@@ -18,6 +18,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             };
             var maxArrLength = fixture.sortedArray.Length;
             var arr = new SortedArrayInt(maxArrLength);
+            var i = 0;
             Assert.Throws<IndexOutOfRangeException>(() => arr[maxArrLength]);
             // Indexer is read only
             //arr[0] = default(int);
@@ -28,21 +29,28 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.True(arr.Count == 0);
             Assert.True(arr.Count == 0);
 
-            for(var i = 0; i < fixture.unsortedArray.Length; i++)
+            for(i = 0; i < fixture.unsortedArray.Length; i++)
             {
                 arr.Insert(fixture.unsortedArray[i]);
+                var j = 0;
+                foreach (var item in arr)
+                {
+                    j++;
+                }
+                Assert.True(j == i + 1);
                 Assert.True(arr.Count == i + 1);
             }
 
-            for(var i = 0; i < fixture.sortedArray.Length; i++)
+            i = 0;
+            foreach(var item in arr)
             {
-                Assert.True(arr[i] == fixture.sortedArray[i]);
+                Assert.True(item == fixture.sortedArray[i++]);
             }
 
             // Array is full.
             Assert.Throws<InvalidOperationException>(() => arr.Insert(99));
 
-            for(var i = 0; i < fixture.sortedArray.Length; i++)
+            for(i = 0; i < fixture.sortedArray.Length; i++)
             {
                 Assert.True(
                     arr.BinarySearchIterative(fixture.sortedArray[i]) == i);
@@ -55,7 +63,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.True(arr.BinarySearchRecursive(-88888) == -1);
 
             // Delete all
-            for(var i = 0; i < fixture.sortedArray.Length; i++)
+            for(i = 0; i < fixture.sortedArray.Length; i++)
             {
                 Assert.True(arr.Delete(fixture.sortedArray[i]));
                 Assert.True(arr.Count == maxArrLength - i - 1);

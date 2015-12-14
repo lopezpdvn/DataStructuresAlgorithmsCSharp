@@ -34,17 +34,30 @@ namespace DataStructuresAlgorithms.DataStructures.Array
         public bool Delete(int key)
         {
             var index = BinarySearchIterative(key);
-            return index > 0;
+            if(index < 0)
+            {
+                return false;
+            }
+
+            for(var i = index; i < Count - 1; i++)
+            {
+                arr[i] = arr[i + 1];
+            }
+            Count--;
+            return true;
         }
 
         public IEnumerator<int> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for(var i = 0; i < Count; i++)
+            {
+                yield return arr[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public void Insert(int item)
@@ -71,7 +84,8 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             return BinarySearchIterative(arr, key, 0, Count - 1);
         }
 
-        public static int BinarySearchIterative(int[] arr, int key, int min, int max)
+        public static int BinarySearchIterative(int[] arr, int key, int min,
+            int max)
         {
             int mid;
             while(min < max)
@@ -102,7 +116,8 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             return BinarySearchRecursive(arr, key, 0, Count - 1);
         }
         
-        public static int BinarySearchRecursive(int[] arr, int key, int min, int max)
+        public static int BinarySearchRecursive(int[] arr, int key, int min,
+            int max)
         {
             if(max < min)
             {
