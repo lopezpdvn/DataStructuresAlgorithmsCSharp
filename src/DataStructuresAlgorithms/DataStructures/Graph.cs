@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresAlgorithms.DataStructures.LinkedList;
@@ -55,7 +54,16 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             {
                 yield break;
             }
+            foreach(var adjNode in
+                _PreOrderDepthFirstTraversalRecursiveIterator(node))
+            {
+                yield return adjNode;
+            }
+        }
 
+        private IEnumerable<Node>
+            _PreOrderDepthFirstTraversalRecursiveIterator(Node node)
+        {
             yield return node;
             node.State = State.Visited;
 
@@ -75,7 +83,7 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
         public IEnumerable<Node>
             PreOrderDepthFirstTraversalIterativeIterator(Node node)
         {
-            if (node == null || node.State == State.Visited)
+            if (node == null)
             {
                 yield break;
             }

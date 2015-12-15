@@ -9,6 +9,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
     public class GraphTraversalFixture
     {
         public IDictionary graph0 = new Hashtable();
+        public IDictionary graph1 = new Hashtable();
 
         public GraphTraversalFixture()
         {
@@ -71,6 +72,9 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             ((Hashtable)graph0["I"])["bft-string"] = "IF";
             ((Hashtable)graph0["J"])["bft-string"] = "JIF";
             ((Hashtable)graph0["K"])["bft-string"] = "K";
+
+            var graph1Graph = new DirectedGraphAdjacencyList<char>();
+            graph1["graph"] = graph1Graph;
         }
     }
 
@@ -108,6 +112,20 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 Console.WriteLine(str);
                 Assert.True(str.Equals(traversalSequence));
             }
+        }
+
+        [Fact]
+        public void NullGraphTraversalTest()
+        {
+            graph = (DirectedGraphAdjacencyList<char>)fixture.graph1["graph"];
+            DirectedGraphAdjacencyList<char>.Node startNode = null;
+            string traversalSequence = "", str = "";
+            graph.FlagNodesUnvisited();
+            foreach (var node in TraversalAlgorithm(startNode))
+            {
+                str += node.Vertex;
+            }
+            Assert.True(str.Equals(traversalSequence));
         }
     }
 
