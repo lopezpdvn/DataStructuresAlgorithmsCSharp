@@ -63,11 +63,12 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.True(arr.BinarySearchRecursive(-88888) == -1);
 
             // Delete all
-            for(i = fixture.sortedArray.Length - 1; i >= 0 ; i--)
+            for (i = 0; i < fixture.unsortedArray.Length; i++)
             {
-                Assert.True(arr.Count == i + 1);
-                Assert.True(i == arr.Delete(fixture.sortedArray[i]));
-                Assert.True(arr.Count == i);
+                Assert.True(arr.Count == maxArrLength - i);
+                Assert.True(arr.BinarySearchRecursive(fixture.unsortedArray[i])
+                    == arr.Delete(fixture.unsortedArray[i]));
+                Assert.True(arr.Count == maxArrLength - i - 1);
             }
 
             Assert.True(arr.Count == 0);

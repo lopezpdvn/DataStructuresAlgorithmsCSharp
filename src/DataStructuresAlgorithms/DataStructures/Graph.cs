@@ -72,7 +72,7 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
                 if (adjNode.State == State.Unvisited)
                 {
                     foreach (var iAdjNode in
-                        PreOrderDepthFirstTraversalRecursiveIterator(adjNode))
+                        _PreOrderDepthFirstTraversalRecursiveIterator(adjNode))
                     {
                         yield return iAdjNode;
                     }

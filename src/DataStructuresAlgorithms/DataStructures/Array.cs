@@ -34,16 +34,14 @@ namespace DataStructuresAlgorithms.DataStructures.Array
         public int Delete(int key)
         {
             var index = BinarySearchIterative(key);
-            if(index < 0)
+            if(index >= 0)
             {
-                return index;
+                for (var i = index; i < Count - 1; i++)
+                {
+                    arr[i] = arr[i + 1];
+                }
+                Count--;
             }
-
-            for(var i = index; i < Count - 1; i++)
-            {
-                arr[i] = arr[i + 1];
-            }
-            Count--;
             return index;
         }
 
@@ -64,19 +62,18 @@ namespace DataStructuresAlgorithms.DataStructures.Array
         {
             try
             {
-                var i = Count - 1;
-                for (; i >= 0 && item < arr[i]; i--)
+                var i = Count;
+                for (; i > 0 && item < arr[i - 1]; i--)
                 {
-                    arr[i + 1] = arr[i];
+                    arr[i] = arr[i - 1];
                 }
-                arr[i + 1] = item;
+                arr[i] = item;
                 Count++;
             }
             catch(IndexOutOfRangeException)
             {
                 throw new InvalidOperationException("Array is full");
             }
-
         }
         
         public int BinarySearchIterative(int key)
