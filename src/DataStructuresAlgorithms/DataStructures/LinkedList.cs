@@ -14,22 +14,12 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
         }
 
         public SinglyLinkedList() { }
-
+        public Node<T> LastNode { get; set; }
+        public Node<T> FirstNode { get; set; }
         public void Add(T value) => AddLast(value);
         public bool IsEmpty => Count == 0;
         public int Length => Count;
-        public int Count
-        {
-            get
-            {
-                var n = 0;
-                foreach(var iNode in this)
-                {
-                    n++;
-                }
-                return n;
-            }
-        }
+        public int Count { get; private set; }
 
         public Node<T> AddFirst(T value) {
             var newFirstNode = new Node<T>(value);
@@ -45,6 +35,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
                 FirstNode = newFirstNode;
             }
 
+            Count++;
             return newFirstNode;
         }
 
@@ -62,6 +53,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
                 LastNode = newLastNode;
             }
 
+            Count++;
             return newLastNode;
         }
 
@@ -87,6 +79,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
                 Node<T> newNode = new Node<T>(value);
                 newNode.Next = node;
                 prevNode.Next = newNode;
+                Count++;
                 return newNode;
             }
         }
@@ -102,6 +95,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
 
             newNode.Next = nodeInList.Next;
             nodeInList.Next = newNode;
+            Count++;
 
             return newNode;
         }
@@ -113,6 +107,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             try
             {
                 FirstNode = FirstNode.Next;
+                Count--;
                 // destruction of old FirstNode by GC
             }
             catch (NullReferenceException)
@@ -129,6 +124,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             {
                 // prev2Node2Remove.Next == node
                 prev2Node2Remove.Next = node.Next;
+                Count--;
             }
             catch(NullReferenceException)
             {
@@ -145,6 +141,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
                 Node<int> prev2Node = FindPrevious(key, list);
                 node = prev2Node.Next;
                 prev2Node.Next = node.Next;
+                list.Count--;
             }
             catch (NullReferenceException)
             {
@@ -180,6 +177,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
                 Node<T> nodePrev2Remove = FindPrevious(node2Remove);
                 nodePrev2Remove.Next = node;
                 node2Remove.Next = null;
+                Count--;
             }
         }
 
@@ -198,11 +196,13 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             {
                 // Removing last node.
                 nodeInList.Next = null;
+                Count--;
             }
             else
             {
                 // Removing next node, which is not the last one.
                 nodeInList.Next = nodeInList.Next.Next;
+                Count--;
             }
         }
 
@@ -308,9 +308,6 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
 
             return mBehind;
         }
-
-        public Node<T> LastNode { get; set; }
-        public Node<T> FirstNode { get; set; }
 
         public static bool IsCyclic(SinglyLinkedList<T> list)
         {
