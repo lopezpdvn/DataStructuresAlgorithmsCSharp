@@ -15,33 +15,15 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
 
         public SinglyLinkedList() { }
 
-        public void Add(T value)
-        {
-            AddLast(value);
-        }
-
-        public bool IsEmpty
-        {
-            get
-            {
-                return Count == 0;
-            }
-        }
-
-        public int Length
-        {
-            get
-            {
-                return Count;
-            }
-        }
-
+        public void Add(T value) => AddLast(value);
+        public bool IsEmpty => Count == 0;
+        public int Length => Count;
         public int Count
         {
             get
             {
-                int n = 0;
-                foreach (var iNode in this)
+                var n = 0;
+                foreach(var iNode in this)
                 {
                     n++;
                 }
@@ -138,10 +120,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             return prevNode;
         }
 
-        public bool Contains(Node<T> node)
-        {
-            return Find(node) != null;
-        }
+        public bool Contains(Node<T> node) => Find(node) != null;
 
         public void RemoveFirst()
         {
@@ -220,15 +199,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             }
         }
 
-        public void RemoveLast()
-        {
-            Remove(LastNode);
-        }
+        public void RemoveLast() => Remove(LastNode);
 
-        public void Clear()
-        {
-            FirstNode = LastNode = null;
-        }
+        public void Clear() => FirstNode = LastNode = null;
 
         public Node<T> Find(Node<T> node)
         {
@@ -255,10 +228,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public override string ToString()
         {
@@ -344,10 +314,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             set { data = value; }
         }
 
-        public override string ToString()
-        {
-            return Value.ToString();
-        }
+        public override string ToString() => Value.ToString();
 
         private Node<T> next;
         private T data;
