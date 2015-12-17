@@ -53,10 +53,7 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public void Insert(int item)
         {
@@ -97,15 +94,8 @@ namespace DataStructuresAlgorithms.DataStructures.Array
                     max = mid;
                 }
             }
-            
-            if((max == min) && (arr[min] == key))
-            {
-                return min;
-            }
-            else
-            {
-                return -1;
-            }
+
+            return (max == min) && (arr[min] == key) ? min : -1;
         }
 
         public int BinarySearchRecursive(int key)

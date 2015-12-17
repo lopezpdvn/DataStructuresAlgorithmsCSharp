@@ -108,16 +108,15 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
 
         public Node<T> FindPrevious(Node<T> node)
         {
-            Node<T> prevNode = null;
-            foreach (var iNode in this)
+            Node<T> prevNode = null, iNode = FirstNode;
+
+            while(iNode != null && iNode != node)
             {
-                if (iNode.Next != null && iNode.Next == node)
-                {
-                    prevNode = iNode;
-                }
+                prevNode = iNode;
+                iNode = prevNode.Next;
             }
 
-            return prevNode;
+            return iNode == null ? null : prevNode;
         }
 
         public bool Contains(Node<T> node) => Find(node) != null;
@@ -139,13 +138,16 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
         {
             Node<T> prev2Node2Remove = FindPrevious(node);
 
-            if (prev2Node2Remove == null)
+            try
             {
-                throw new InvalidOperationException("node " + node.Value + "not in list");
+                // prev2Node2Remove.Next == node
+                prev2Node2Remove.Next = node.Next;
             }
-
-            // prev2Node2Remove.Next == node
-            prev2Node2Remove.Next = node.Next;
+            catch(NullReferenceException)
+            {
+                throw new InvalidOperationException("node " + node.Value +
+                    "not in list");
+            }
         }
 
         public void RemoveBefore(Node<T> node)
@@ -205,17 +207,24 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
 
         public Node<T> Find(Node<T> node)
         {
-            Node<T> nodeInList = null;
-            foreach (var iNode in this)
+            Node<T> iNode = FirstNode;
+            while(iNode != null && iNode != node)
             {
-                if (iNode == node)
-                {
-                    nodeInList = iNode;
-                    break;
-                }
+                iNode = iNode.Next;
             }
 
-            return nodeInList;
+            return iNode;
+        }
+
+        public static int Find(int key, SinglyLinkedList<int> list)
+        {
+            var iNode = list.FirstNode;
+            while(iNode != null && iNode.Value != key)
+            {
+                iNode = iNode.Next;
+            }
+
+            return iNode.Value;
         }
 
         public IEnumerator<Node<T>> GetEnumerator()
@@ -373,7 +382,8 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
 
         static internal void TestFindMToLastElement(string data_fp)
         {
-            var list = new SinglyLinkedList<int> {0,1,2,3,4,5,6,7,8,9,10,11,12};
+            var list =
+                new SinglyLinkedList<int> {0,1,2,3,4,5,6,7,8,9,10,11,12};
             Console.WriteLine(list);
 
             var m = list.FindMToLast(7);
