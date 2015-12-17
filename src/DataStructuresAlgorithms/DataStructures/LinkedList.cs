@@ -106,19 +106,6 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             return newNode;
         }
 
-        public Node<T> FindPrevious(Node<T> node)
-        {
-            Node<T> prevNode = null, iNode = FirstNode;
-
-            while(iNode != null && iNode != node)
-            {
-                prevNode = iNode;
-                iNode = prevNode.Next;
-            }
-
-            return iNode == null ? null : prevNode;
-        }
-
         public bool Contains(Node<T> node) => Find(node) != null;
 
         public void RemoveFirst()
@@ -148,6 +135,24 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
                 throw new InvalidOperationException("node " + node.Value +
                     "not in list");
             }
+        }
+
+        public static Node<int> Remove(int key, SinglyLinkedList<int> list)
+        {
+            Node<int> node = null;
+            try
+            {
+                Node<int> prev2Node = FindPrevious(key, list);
+                node = prev2Node.Next;
+                prev2Node.Next = node.Next;
+            }
+            catch (NullReferenceException)
+            {
+                throw new InvalidOperationException("node with" + key +
+                    "not in list");
+            }
+
+            return node;
         }
 
         public void RemoveBefore(Node<T> node)
@@ -225,6 +230,33 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
             }
 
             return iNode.Value;
+        }
+
+        public Node<T> FindPrevious(Node<T> node)
+        {
+            Node<T> prevNode = null, iNode = FirstNode;
+
+            while (iNode != null && iNode != node)
+            {
+                prevNode = iNode;
+                iNode = prevNode.Next;
+            }
+
+            return iNode == null ? null : prevNode;
+        }
+
+        private static Node<int> FindPrevious(int key,
+            SinglyLinkedList<int> list)
+        {
+            Node<int> prevNode = null, iNode = list.FirstNode;
+
+            while (iNode != null && iNode.Value != key)
+            {
+                prevNode = iNode;
+                iNode = prevNode.Next;
+            }
+
+            return iNode == null ? null : prevNode;
         }
 
         public IEnumerator<Node<T>> GetEnumerator()
