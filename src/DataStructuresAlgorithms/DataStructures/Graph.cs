@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DataStructuresAlgorithms.DataStructures.LinkedList;
+using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.DataStructures.Graph

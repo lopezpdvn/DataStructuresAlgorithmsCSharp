@@ -1,4 +1,4 @@
-﻿using DataStructuresAlgorithms.DataStructures.LinkedList;
+﻿using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 using System;
 
 namespace DataStructuresAlgorithms.AbstractDataTypes

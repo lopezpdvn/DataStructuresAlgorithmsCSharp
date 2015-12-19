@@ -2,8 +2,8 @@
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
 {
-    public class LinkedListsTests
-    {
-
-    }
+    //public abstract class LinkedListsTests
+    //{
+    //    protected abstract Queue<T> GetQueueImplementation<T>();
+    //}
 }
