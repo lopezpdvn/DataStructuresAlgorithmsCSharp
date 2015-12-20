@@ -27,8 +27,8 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
         //int Find(int key);
         Node<T> FindPrevious(Node<T> node);
         //Node<int> FindPrevious(int key);
-        //Node<T> FindMToLast(int m);
-        bool IsCyclic();
+        Node<T> FindMToLast(int m);
+        bool IsCyclic { get; }
     }
 
     public interface Node<T>

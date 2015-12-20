@@ -309,30 +309,31 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return mBehind;
         }
 
-        public static bool IsCyclic(SinglyLinkedList<T> list)
+        public bool IsCyclic
         {
-            Node<T> fast, slow;
-            slow = list.FirstNode;
-            fast = list.FirstNode.Next;
-            while (true)
+            get
             {
-                if(fast == null || fast.Next == null)
+                Node<T> fast, slow;
+                slow = FirstNode;
+                fast = FirstNode.Next;
+                while (true)
                 {
-                    return false;
-                }
-                else if (fast == slow || fast.Next == slow)
-                {
-                    return true;
-                }
-                else
-                {
-                    slow = slow.Next;
-                    fast = fast.Next.Next;
+                    if (fast == null || fast.Next == null)
+                    {
+                        return false;
+                    }
+                    else if (fast == slow || fast.Next == slow)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        slow = slow.Next;
+                        fast = fast.Next.Next;
+                    }
                 }
             }
         }
-
-        public bool IsCyclic() => IsCyclic(this);
     }
 
     public class SinglyLinkedNode<T> : Node<T>
@@ -411,37 +412,6 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             Console.WriteLine(linkedListInts);
 
             Console.Read();
-        }
-
-        static internal void TestFindMToLastElement(string data_fp)
-        {
-            var list =
-                new SinglyLinkedList<int> {0,1,2,3,4,5,6,7,8,9,10,11,12};
-            Console.WriteLine(list);
-
-            var m = list.FindMToLast(7);
-            Console.WriteLine("{0} = 5", m);
-        }
-
-        static internal void TestIsCyclic()
-        {
-            var list = new SinglyLinkedList<int>();
-            for (int i = 0; i < 20; i++)
-            {
-                list.AddLast(i);
-            }
-            Console.WriteLine(list);
-            Debug.Assert(list.LastNode.Next == null);
-
-            Debug.Assert(!SinglyLinkedList<int>.IsCyclic(list));
-
-            // making list cyclic
-            var middleNode = list.FirstNode.Next.Next.Next;
-            list.LastNode.Next = middleNode;
-            Debug.Assert(list.LastNode.Next == list.FirstNode.Next.Next.Next);
-
-            Console.WriteLine("IsCyclic = {0}", SinglyLinkedList<int>.IsCyclic(list));
-            //Debug.Assert(SinglyLinkedList<int>.IsCyclic(list));
         }
     }
 }
