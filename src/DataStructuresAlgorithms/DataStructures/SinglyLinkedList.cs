@@ -6,11 +6,11 @@ using System.Text;
 
 namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
 {
-    public class SinglyLinkedList<T> : IEnumerable<Node<T>>
+    public class SinglyLinkedList<T> : LinkedList<T>
     {
         public SinglyLinkedList(T value)
         {
-            FirstNode = LastNode = new Node<T>(value);
+            FirstNode = LastNode = new SinglyLinkedNode<T>(value);
         }
 
         public SinglyLinkedList() { }
@@ -22,7 +22,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         public int Count { get; private set; }
 
         public Node<T> AddFirst(T value) {
-            var newFirstNode = new Node<T>(value);
+            var newFirstNode = new SinglyLinkedNode<T>(value);
 
             if(FirstNode == null)
             {
@@ -40,7 +40,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         }
 
         public Node<T> AddLast(T value) {
-            var newLastNode = new Node<T>(value);
+            var newLastNode = new SinglyLinkedNode<T>(value);
 
             if(FirstNode == null)
             {
@@ -76,7 +76,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                     throw new InvalidOperationException("node " + node.Value + "not in list");
                 }
 
-                Node<T> newNode = new Node<T>(value);
+                Node<T> newNode = new SinglyLinkedNode<T>(value);
                 newNode.Next = node;
                 prevNode.Next = newNode;
                 Count++;
@@ -86,7 +86,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
 
         public Node<T> AddAfter(Node<T> node, T value)
         {
-            var newNode = new Node<T>(value);
+            var newNode = new SinglyLinkedNode<T>(value);
             Node<T> nodeInList = Find(node);
             if (nodeInList == null)
             {
@@ -221,7 +221,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return iNode;
         }
 
-        public static int Find(int key, SinglyLinkedList<int> list)
+        public static int? Find(int key, SinglyLinkedList<int> list)
         {
             var iNode = list.FirstNode;
             while(iNode != null && iNode.Value != key)
@@ -229,7 +229,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                 iNode = iNode.Next;
             }
 
-            return iNode.Value;
+            return iNode?.Value;
         }
 
         public Node<T> FindPrevious(Node<T> node)
@@ -331,31 +331,35 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                 }
             }
         }
+
+        public bool IsCyclic() => IsCyclic(this);
     }
 
-    public class Node<T>
+    public class SinglyLinkedNode<T> : Node<T>
     {
-        public Node(T value)
+        public SinglyLinkedNode() { }
+
+        public SinglyLinkedNode(T value)
         {
-            data = value;
+            Value = value;
         }
 
-        public Node<T> Next
+        public Node<T> Next { get; set; }
+
+        public Node<T> Prev
         {
-            get { return next; }
-            set { next = value;  }
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public T Value
-        {
-            get { return data; }
-            set { data = value; }
-        }
-
+        public T Value { get; set; }
         public override string ToString() => Value.ToString();
-
-        private Node<T> next;
-        private T data;
     }
 
     public static class Cfg

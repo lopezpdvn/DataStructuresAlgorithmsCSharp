@@ -18,23 +18,23 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
         bool Contains(Node<T> node);
         void RemoveFirst();
         void Remove(Node<T> node);
-        Node<int> Remove(int key);
+        //Node<int> Remove(int key);
         void RemoveBefore(Node<T> node);
         void RemoveAfter(Node<T> node);
         void RemoveLast();
         void Clear();
         Node<T> Find(Node<T> node);
-        int Find(int key);
+        //int Find(int key);
         Node<T> FindPrevious(Node<T> node);
-        Node<int> FindPrevious(int key);
-        Node<T> FindMToLast(int m);
+        //Node<int> FindPrevious(int key);
+        //Node<T> FindMToLast(int m);
         bool IsCyclic();
     }
 
     public interface Node<T>
     {
-        Node<T> Next { get; }
-        Node<T> Prev { get; }
+        Node<T> Next { get; set; }
+        Node<T> Prev { get; set; }
         T Value { get; }
     }
 }
