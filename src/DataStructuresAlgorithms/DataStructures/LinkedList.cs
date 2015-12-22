@@ -6,7 +6,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
     {
         Node<T> LastNode { get; }
         Node<T> FirstNode { get; }
-        void Add(T value);
+        Node<T> Add(T value);
         bool IsEmpty { get; }
         int Length { get; }
         int Count { get; }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
@@ -16,7 +15,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         public SinglyLinkedList() { }
         public Node<T> LastNode { get; set; }
         public Node<T> FirstNode { get; set; }
-        public void Add(T value) => AddLast(value);
+        public Node<T> Add(T value) => AddLast(value);
         public bool IsEmpty => Count == 0;
         public int Length => Count;
         public int Count { get; private set; }
@@ -313,24 +312,31 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         {
             get
             {
-                Node<T> fast, slow;
-                slow = FirstNode;
-                fast = FirstNode.Next;
-                while (true)
+                try
                 {
-                    if (fast == null || fast.Next == null)
+                    Node<T> fast, slow;
+                    slow = FirstNode;
+                    fast = FirstNode.Next;
+                    while (true)
                     {
-                        return false;
+                        if (fast == null || fast.Next == null)
+                        {
+                            return false;
+                        }
+                        else if (fast == slow || fast.Next == slow)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            slow = slow.Next;
+                            fast = fast.Next.Next;
+                        }
                     }
-                    else if (fast == slow || fast.Next == slow)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        slow = slow.Next;
-                        fast = fast.Next.Next;
-                    }
+                }
+                catch(NullReferenceException)
+                {
+                    return false;
                 }
             }
         }

@@ -47,6 +47,34 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 
             Assert.True(list.IsCyclic);
         }
+
+        [Fact]
+        public void MiscTests0()
+        {
+            LinkedList<char> list = new SinglyLinkedList<char>();
+            Node<char> A, B, C, D, E, F, G, H, I, J, K, L;
+
+            Assert.True(list.Count == 0);
+            Assert.True(list.Length == 0);
+            Assert.True(list.FirstNode == null);
+            Assert.False(list.IsCyclic);
+            Assert.True(list.IsEmpty);
+            Assert.True(list.LastNode == null);
+
+            A = list.Add('A');
+            Assert.True(list.FirstNode == A);
+            Assert.True(list.LastNode == A);
+            B = list.AddFirst('B');
+            C = list.AddLast('C');
+            D = list.AddAfter(A, 'D');
+            E = list.AddAfter(C, 'E');
+            F = list.AddBefore(A, 'F');
+            G = list.AddBefore(B, 'G');
+            foreach(var value in new char[] { 'H', 'I', 'J', 'K', 'L'})
+            {
+                list.AddLast(value);
+            }
+        }
     }
 
     [CollectionDefinition("Linked List Collection")]
