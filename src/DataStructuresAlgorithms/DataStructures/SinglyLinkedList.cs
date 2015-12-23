@@ -86,17 +86,23 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         public Node<T> AddAfter(Node<T> node, T value)
         {
             var newNode = new SinglyLinkedNode<T>(value);
-            Node<T> nodeInList = Find(node);
-            if (nodeInList == null)
+            node = Find(node);
+            try
             {
-                throw new InvalidOperationException("node " + node.Value + "not in list");
+                newNode.Next = node.Next;
+                if(LastNode == node)
+                {
+                    LastNode = newNode;
+                }
+                node.Next = newNode;
+                Count++;
+                return newNode;
             }
-
-            newNode.Next = nodeInList.Next;
-            nodeInList.Next = newNode;
-            Count++;
-
-            return newNode;
+            catch(NullReferenceException)
+            {
+                throw new InvalidOperationException(
+                    "node " + node.Value + "not in list");
+            }
         }
 
         public bool Contains(Node<T> node) => Find(node) != null;

@@ -70,12 +70,17 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             E = list.AddAfter(C, 'E');
             F = list.AddBefore(A, 'F');
             G = list.AddBefore(B, 'G');
+            var i = 7;
             foreach(var value in new char[] { 'H', 'I', 'J', 'K', 'L'})
             {
+                Assert.False(list.IsEmpty);
+                Assert.True(list.Count == i);
                 list.AddLast(value);
+                Assert.True(list.Count == i + 1);
+                i++;
             }
 
-            string toStrTest = "GBFADCE", toStr = "";
+            string toStrTest = "GBFADCEHIJKL", toStr = "";
             foreach(var node in list)
             {
                 toStr += node.Value;
