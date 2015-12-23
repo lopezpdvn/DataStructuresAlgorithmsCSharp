@@ -74,6 +74,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             {
                 list.AddLast(value);
             }
+
+            string toStrTest = "GBFADCE", toStr = "";
+            foreach(var node in list)
+            {
+                toStr += node.Value;
+            }
+            Assert.True(toStrTest.Equals(toStr));
         }
     }
 
