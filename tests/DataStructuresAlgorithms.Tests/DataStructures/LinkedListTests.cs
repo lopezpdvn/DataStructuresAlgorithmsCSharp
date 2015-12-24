@@ -14,12 +14,12 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
     public abstract class LinkedListsTests
     {
         protected LinkedListTestFixture fixture;
-        protected abstract LinkedList<int> GetLinkedListImpl();
+        protected abstract LinkedList<T> GetLinkedListImpl<T>();
 
         [Fact]
         public void TestFindMToLastElement()
         {
-            LinkedList<int> list = GetLinkedListImpl();
+            var list = GetLinkedListImpl<int>();
             foreach (var val in fixture.FindMToLastElementArray)
             {
                 list.AddLast(val);
@@ -30,7 +30,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         [Fact]
         public void TestIsCyclic()
         {
-            var list = GetLinkedListImpl();
+            var list = GetLinkedListImpl<int>();
             for (int i = 0; i < 20; i++)
             {
                 list.AddLast(i);
@@ -51,9 +51,10 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         [Fact]
         public void MiscTests0()
         {
-            LinkedList<char> list = new SinglyLinkedList<char>();
+            var list = GetLinkedListImpl<char>();
             Node<char> A, B, C, D, E, F, G, H, I, J, K, L;
 
+            list.Clear();
             Assert.True(list.Count == 0);
             Assert.True(list.Length == 0);
             Assert.True(list.FirstNode == null);
@@ -86,6 +87,14 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 toStr += node.Value;
             }
             Assert.True(toStrTest.Equals(toStr));
+
+            list.Clear();
+            Assert.True(list.Count == 0);
+            Assert.True(list.Length == 0);
+            Assert.True(list.FirstNode == null);
+            Assert.False(list.IsCyclic);
+            Assert.True(list.IsEmpty);
+            Assert.True(list.LastNode == null);
         }
     }
 
@@ -101,9 +110,9 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             this.fixture = fixture;
         }
 
-        protected override LinkedList<int> GetLinkedListImpl()
+        protected override LinkedList<T> GetLinkedListImpl<T>()
         {
-            return new SinglyLinkedList<int>();
+            return new SinglyLinkedList<T>();
         }
     }
 }

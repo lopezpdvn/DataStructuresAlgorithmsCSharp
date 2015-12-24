@@ -213,7 +213,11 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
 
         public void RemoveLast() => Remove(LastNode);
 
-        public void Clear() => FirstNode = LastNode = null;
+        public void Clear()
+        {
+            FirstNode = LastNode = null;
+            Count = 0;
+        }
 
         public Node<T> Find(Node<T> node)
         {
