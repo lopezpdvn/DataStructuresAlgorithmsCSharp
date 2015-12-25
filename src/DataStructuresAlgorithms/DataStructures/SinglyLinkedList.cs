@@ -107,12 +107,14 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
 
         public bool Contains(Node<T> node) => Find(node) != null;
 
-        public void RemoveFirst()
+        public Node<T> RemoveFirst()
         {
             try
             {
+                var rtNode = FirstNode;
                 FirstNode = FirstNode.Next;
                 Count--;
+                return rtNode;
                 // destruction of old FirstNode by GC
             }
             catch (NullReferenceException)
@@ -121,7 +123,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
         }
 
-        public void Remove(Node<T> node)
+        public Node<T> Remove(Node<T> node)
         {
             Node<T> prev2Node2Remove = FindPrevious(node);
 
@@ -130,6 +132,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                 // prev2Node2Remove.Next == node
                 prev2Node2Remove.Next = node.Next;
                 Count--;
+                return node;
             }
             catch(NullReferenceException)
             {
@@ -157,7 +160,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return node;
         }
 
-        public void RemoveBefore(Node<T> node)
+        public Node<T> RemoveBefore(Node<T> node)
         {
             Node<T> node2Remove = FindPrevious(node);
             if(node2Remove == null)
@@ -175,7 +178,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
             else if (node2Remove == FirstNode)
             {
-                RemoveFirst();
+                return RemoveFirst();
             }
             else
             {
@@ -183,35 +186,41 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                 nodePrev2Remove.Next = node;
                 node2Remove.Next = null;
                 Count--;
+                return node2Remove;
             }
         }
 
-        public void RemoveAfter(Node<T> node)
+        public Node<T> RemoveAfter(Node<T> node)
         {
-            Node<T> nodeInList = Find(node);
-            if (nodeInList == null)
+            Node<T> removedNode = null;
+            node = Find(node);
+            try
             {
-                throw new InvalidOperationException("node " + node + "not in list.");
-            }
-            else if (nodeInList.Next == null)
-            {
-                throw new InvalidOperationException("node " + node + "is last in list.");
-            }
-            else if (nodeInList.Next.Next == null)
-            {
-                // Removing last node.
-                nodeInList.Next = null;
+                removedNode = node.Next;
+                node.Next = node.Next.Next;
                 Count--;
+                if(removedNode == LastNode)
+                {
+                    LastNode = node;
+                }
             }
-            else
+            catch(NullReferenceException)
             {
-                // Removing next node, which is not the last one.
-                nodeInList.Next = nodeInList.Next.Next;
-                Count--;
+                if (node == null)
+                {
+                    throw new InvalidOperationException(
+                        "node " + node + "not in list.");
+                }
+                else if (node.Next == null)
+                {
+                    throw new InvalidOperationException(
+                        "node " + node + "is last in list.");
+                }
             }
+            return removedNode;
         }
 
-        public void RemoveLast() => Remove(LastNode);
+        public Node<T> RemoveLast() => Remove(LastNode);
 
         public void Clear()
         {

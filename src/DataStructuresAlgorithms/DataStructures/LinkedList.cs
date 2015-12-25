@@ -16,12 +16,12 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList
         Node<T> AddBefore(Node<T> node, T value);
         Node<T> AddAfter(Node<T> node, T value);
         bool Contains(Node<T> node);
-        void RemoveFirst();
-        void Remove(Node<T> node);
+        Node<T> RemoveFirst();
+        Node<T> Remove(Node<T> node);
         //Node<int> Remove(int key);
-        void RemoveBefore(Node<T> node);
-        void RemoveAfter(Node<T> node);
-        void RemoveLast();
+        Node<T> RemoveBefore(Node<T> node);
+        Node<T> RemoveAfter(Node<T> node);
+        Node<T> RemoveLast();
         void Clear();
         Node<T> Find(Node<T> node);
         //int Find(int key);

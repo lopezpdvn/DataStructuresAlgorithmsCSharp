@@ -72,21 +72,38 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             F = list.AddBefore(A, 'F');
             G = list.AddBefore(B, 'G');
             var i = 7;
-            foreach(var value in new char[] { 'H', 'I', 'J', 'K', 'L'})
+            foreach(var value in new char[] { 'H', 'I', 'J'})
             {
                 Assert.False(list.IsEmpty);
                 Assert.True(list.Count == i);
-                list.AddLast(value);
+                var node = list.AddLast(value);
+                Assert.True(node == list.Find(node));
                 Assert.True(list.Count == i + 1);
                 i++;
             }
+            K = list.AddLast('K');
+            L = list.AddLast('L');
 
             string toStrTest = "GBFADCEHIJKL", toStr = "";
+            Assert.True(null == list.FindPrevious(G));
+            Assert.True(F == list.FindPrevious(A));
             foreach(var node in list)
             {
                 toStr += node.Value;
             }
             Assert.True(toStrTest.Equals(toStr));
+
+            Assert.True(G == list.RemoveFirst());
+            Assert.True(L == list.RemoveLast());
+            Assert.True(E == list.Remove(E));
+            Assert.True(D == list.RemoveAfter(A));
+            Assert.True(C == list.RemoveBefore(E));
+            Assert.True(list.Count == 7);
+            Assert.True(list.Length == 7);
+            Assert.True(list.FirstNode == B);
+            Assert.False(list.IsCyclic);
+            Assert.False(list.IsEmpty);
+            Assert.True(list.LastNode == K);
 
             list.Clear();
             Assert.True(list.Count == 0);
