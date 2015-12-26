@@ -14,7 +14,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
     public abstract class LinkedListsTests
     {
         protected LinkedListTestFixture fixture;
-        protected abstract LinkedList<T> GetLinkedListImpl<T>();
+        protected abstract ILinkedList<T> GetLinkedListImpl<T>();
 
         [Fact]
         public void TestFindMToLastElement()
@@ -52,7 +52,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public void MiscTests0()
         {
             var list = GetLinkedListImpl<char>();
-            Node<char> A, B, C, D, E, F, G, H, I, J, K, L;
+            INode<char> A, B, C, D, E, F, G, H, I, J, K, L;
 
             list.Clear();
             Assert.True(list.Count == 0);
@@ -127,7 +127,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             this.fixture = fixture;
         }
 
-        protected override LinkedList<T> GetLinkedListImpl<T>()
+        protected override ILinkedList<T> GetLinkedListImpl<T>()
         {
             return new SinglyLinkedList<T>();
         }

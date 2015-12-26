@@ -3,7 +3,7 @@ using System;
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {
-    public interface Stack<T>
+    public interface IStack<T>
     {
         void Push(T item);
         T Pop();
@@ -13,7 +13,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         int Length { get; }
     }
 
-    public class StackSinglyLinkedList<T> : SinglyLinkedList<T>, Stack<T>
+    public class StackSinglyLinkedList<T> : SinglyLinkedList<T>, IStack<T>
     {
         public T Peek()
         {
@@ -40,7 +40,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         }
     }
 
-    public class StackArray<T> : Stack<T>
+    public class StackArray<T> : IStack<T>
     {
         public int Length { get; private set; }
         private T[] arr;

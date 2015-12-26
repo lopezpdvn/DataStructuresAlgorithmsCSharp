@@ -9,7 +9,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         [Fact]
         public void PriorityQueueGeneralTest0()
         {
-            Queue<int> pqueue = new PriorityQueueIntArray();
+            IQueue<int> pqueue = new PriorityQueueIntArray();
             var fixture = new { TestArray0 = new int[] { 9, 6, 3, 15, 12, 0, 18 },
                 TestSortedArray0 = new int[] { 0, 3, 6, 9, 12, 15, 18 }
             };

@@ -2,39 +2,39 @@
 
 namespace DataStructuresAlgorithms.DataStructures.LinkedList
 {
-    public interface LinkedList<T> : IEnumerable<Node<T>>
+    public interface ILinkedList<T> : IEnumerable<INode<T>>
     {
-        Node<T> LastNode { get; }
-        Node<T> FirstNode { get; }
-        Node<T> Add(T value);
+        INode<T> LastNode { get; }
+        INode<T> FirstNode { get; }
+        INode<T> Add(T value);
         bool IsEmpty { get; }
         int Length { get; }
         int Count { get; }
 
-        Node<T> AddFirst(T value);
-        Node<T> AddLast(T value);
-        Node<T> AddBefore(Node<T> node, T value);
-        Node<T> AddAfter(Node<T> node, T value);
-        bool Contains(Node<T> node);
-        Node<T> RemoveFirst();
-        Node<T> Remove(Node<T> node);
+        INode<T> AddFirst(T value);
+        INode<T> AddLast(T value);
+        INode<T> AddBefore(INode<T> node, T value);
+        INode<T> AddAfter(INode<T> node, T value);
+        bool Contains(INode<T> node);
+        INode<T> RemoveFirst();
+        INode<T> Remove(INode<T> node);
         //Node<int> Remove(int key);
-        Node<T> RemoveBefore(Node<T> node);
-        Node<T> RemoveAfter(Node<T> node);
-        Node<T> RemoveLast();
+        INode<T> RemoveBefore(INode<T> node);
+        INode<T> RemoveAfter(INode<T> node);
+        INode<T> RemoveLast();
         void Clear();
-        Node<T> Find(Node<T> node);
+        INode<T> Find(INode<T> node);
         //int Find(int key);
-        Node<T> FindPrevious(Node<T> node);
+        INode<T> FindPrevious(INode<T> node);
         //Node<int> FindPrevious(int key);
-        Node<T> FindMToLast(int m);
+        INode<T> FindMToLast(int m);
         bool IsCyclic { get; }
     }
 
-    public interface Node<T>
+    public interface INode<T>
     {
-        Node<T> Next { get; set; }
-        Node<T> Prev { get; set; }
+        INode<T> Next { get; set; }
+        INode<T> Prev { get; set; }
         T Value { get; }
     }
 }

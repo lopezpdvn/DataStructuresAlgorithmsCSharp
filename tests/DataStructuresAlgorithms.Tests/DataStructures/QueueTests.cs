@@ -6,12 +6,12 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 {
     public abstract class QueueTests
     {
-        protected abstract Queue<T> GetQueueImplementation<T>();
+        protected abstract IQueue<T> GetQueueImplementation<T>();
 
         [Fact]
         public void QueueGeneralTest0()
         {
-            Queue<int> queue = GetQueueImplementation<int>();
+            IQueue<int> queue = GetQueueImplementation<int>();
             var fixture = new { TestArray0 = new int[] { 3, 6, 9, 12 } };
             Assert.True(queue.IsEmpty);
             Assert.True(queue.Count == 0);
@@ -43,7 +43,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 
     public class QueueSinglyLinkedListTests : QueueTests
     {
-        protected override Queue<T> GetQueueImplementation<T>()
+        protected override IQueue<T> GetQueueImplementation<T>()
         {
             return new QueueSinglyLinkedList<T>();
         }
@@ -51,7 +51,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 
     public class CircularArrayQueueTests : QueueTests
     {
-        protected override Queue<T> GetQueueImplementation<T>()
+        protected override IQueue<T> GetQueueImplementation<T>()
         {
             // Instantiate a big enough array.
             return new CircularArrayQueue<T>(99);

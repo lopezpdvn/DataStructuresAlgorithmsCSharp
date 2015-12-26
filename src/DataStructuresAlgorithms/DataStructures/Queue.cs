@@ -3,7 +3,7 @@ using System;
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {
-    public interface Queue<T>
+    public interface IQueue<T>
     {
         T Dequeue();
         void Enqueue(T item);
@@ -13,7 +13,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         int Length { get; }
     }
 
-    public class QueueSinglyLinkedList<T> : SinglyLinkedList<T>, Queue<T>
+    public class QueueSinglyLinkedList<T> : SinglyLinkedList<T>, IQueue<T>
     {
         public T Dequeue()
         {
@@ -40,7 +40,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         }
     }
 
-    public class CircularArrayQueue<T> : Queue<T>
+    public class CircularArrayQueue<T> : IQueue<T>
     {
         public int Length { get; private set; }
         private T[] arr;

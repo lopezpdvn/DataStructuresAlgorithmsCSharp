@@ -6,12 +6,12 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 {
     public abstract class StackTests
     {
-        protected abstract Stack<T> GetStackImplementation<T>();
+        protected abstract IStack<T> GetStackImplementation<T>();
 
         [Fact]
         public void StackGeneralTest0()
         {
-            Stack<int> stack = GetStackImplementation<int>();
+            IStack<int> stack = GetStackImplementation<int>();
             var fixture = new { TestArray0 = new int[] { 3, 6, 9, 12 } };
             Assert.True(stack.IsEmpty);
             Assert.True(stack.Count == 0);
@@ -43,7 +43,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 
     public class StackSinglyLinkedListTests : StackTests
     {
-        protected override Stack<T> GetStackImplementation<T>()
+        protected override IStack<T> GetStackImplementation<T>()
         {
             return new StackSinglyLinkedList<T>();
         }
@@ -51,7 +51,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 
     public class StackArrayTests : StackTests
     {
-        protected override Stack<T> GetStackImplementation<T>()
+        protected override IStack<T> GetStackImplementation<T>()
         {
             // Instantiate a big enough array.
             return new StackArray<T>(99);

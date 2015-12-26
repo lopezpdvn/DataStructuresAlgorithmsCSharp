@@ -2,7 +2,7 @@
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {
-    public class PriorityQueueIntArray : Queue<int>
+    public class PriorityQueueIntArray : IQueue<int>
     {
         private int[] arr;
         public int Count { get; private set; } = 0;

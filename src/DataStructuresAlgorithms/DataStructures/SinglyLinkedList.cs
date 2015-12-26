@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
 {
-    public class SinglyLinkedList<T> : LinkedList<T>
+    public class SinglyLinkedList<T> : ILinkedList<T>
     {
         public SinglyLinkedList(T value)
         {
@@ -13,14 +13,14 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         }
 
         public SinglyLinkedList() { }
-        public Node<T> LastNode { get; set; }
-        public Node<T> FirstNode { get; set; }
-        public Node<T> Add(T value) => AddLast(value);
+        public INode<T> LastNode { get; set; }
+        public INode<T> FirstNode { get; set; }
+        public INode<T> Add(T value) => AddLast(value);
         public bool IsEmpty => Count == 0;
         public int Length => Count;
         public int Count { get; private set; }
 
-        public Node<T> AddFirst(T value) {
+        public INode<T> AddFirst(T value) {
             var newFirstNode = new SinglyLinkedNode<T>(value);
 
             if(FirstNode == null)
@@ -38,7 +38,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return newFirstNode;
         }
 
-        public Node<T> AddLast(T value) {
+        public INode<T> AddLast(T value) {
             var newLastNode = new SinglyLinkedNode<T>(value);
 
             if(FirstNode == null)
@@ -56,7 +56,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return newLastNode;
         }
 
-        public Node<T> AddBefore(Node<T> node, T value)
+        public INode<T> AddBefore(INode<T> node, T value)
         {
             if(FirstNode == null)
             {
@@ -69,13 +69,13 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
             else
             {
-                Node<T> prevNode = FindPrevious(node);
+                INode<T> prevNode = FindPrevious(node);
                 if (prevNode == null)
                 {
                     throw new InvalidOperationException("node " + node.Value + "not in list");
                 }
 
-                Node<T> newNode = new SinglyLinkedNode<T>(value);
+                INode<T> newNode = new SinglyLinkedNode<T>(value);
                 newNode.Next = node;
                 prevNode.Next = newNode;
                 Count++;
@@ -83,7 +83,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
         }
 
-        public Node<T> AddAfter(Node<T> node, T value)
+        public INode<T> AddAfter(INode<T> node, T value)
         {
             var newNode = new SinglyLinkedNode<T>(value);
             node = Find(node);
@@ -105,9 +105,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
         }
 
-        public bool Contains(Node<T> node) => Find(node) != null;
+        public bool Contains(INode<T> node) => Find(node) != null;
 
-        public Node<T> RemoveFirst()
+        public INode<T> RemoveFirst()
         {
             try
             {
@@ -123,9 +123,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
         }
 
-        public Node<T> Remove(Node<T> node)
+        public INode<T> Remove(INode<T> node)
         {
-            Node<T> prev2Node2Remove = FindPrevious(node);
+            INode<T> prev2Node2Remove = FindPrevious(node);
 
             try
             {
@@ -141,12 +141,12 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
         }
 
-        public static Node<int> Remove(int key, SinglyLinkedList<int> list)
+        public static INode<int> Remove(int key, SinglyLinkedList<int> list)
         {
-            Node<int> node = null;
+            INode<int> node = null;
             try
             {
-                Node<int> prev2Node = FindPrevious(key, list);
+                INode<int> prev2Node = FindPrevious(key, list);
                 node = prev2Node.Next;
                 prev2Node.Next = node.Next;
                 list.Count--;
@@ -160,9 +160,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return node;
         }
 
-        public Node<T> RemoveBefore(Node<T> node)
+        public INode<T> RemoveBefore(INode<T> node)
         {
-            Node<T> node2Remove = FindPrevious(node);
+            INode<T> node2Remove = FindPrevious(node);
             if(node2Remove == null)
             {
                 if(FirstNode == node)
@@ -182,7 +182,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
             else
             {
-                Node<T> nodePrev2Remove = FindPrevious(node2Remove);
+                INode<T> nodePrev2Remove = FindPrevious(node2Remove);
                 nodePrev2Remove.Next = node;
                 node2Remove.Next = null;
                 Count--;
@@ -190,9 +190,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
         }
 
-        public Node<T> RemoveAfter(Node<T> node)
+        public INode<T> RemoveAfter(INode<T> node)
         {
-            Node<T> removedNode = null;
+            INode<T> removedNode = null;
             node = Find(node);
             try
             {
@@ -220,7 +220,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return removedNode;
         }
 
-        public Node<T> RemoveLast() => Remove(LastNode);
+        public INode<T> RemoveLast() => Remove(LastNode);
 
         public void Clear()
         {
@@ -228,9 +228,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             Count = 0;
         }
 
-        public Node<T> Find(Node<T> node)
+        public INode<T> Find(INode<T> node)
         {
-            Node<T> iNode = FirstNode;
+            INode<T> iNode = FirstNode;
             while(iNode != null && iNode != node)
             {
                 iNode = iNode.Next;
@@ -250,9 +250,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return iNode?.Value;
         }
 
-        public Node<T> FindPrevious(Node<T> node)
+        public INode<T> FindPrevious(INode<T> node)
         {
-            Node<T> prevNode = null, iNode = FirstNode;
+            INode<T> prevNode = null, iNode = FirstNode;
 
             while (iNode != null && iNode != node)
             {
@@ -263,10 +263,10 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return iNode == null ? null : prevNode;
         }
 
-        private static Node<int> FindPrevious(int key,
+        private static INode<int> FindPrevious(int key,
             SinglyLinkedList<int> list)
         {
-            Node<int> prevNode = null, iNode = list.FirstNode;
+            INode<int> prevNode = null, iNode = list.FirstNode;
 
             while (iNode != null && iNode.Value != key)
             {
@@ -277,7 +277,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return iNode == null ? null : prevNode;
         }
 
-        public IEnumerator<Node<T>> GetEnumerator()
+        public IEnumerator<INode<T>> GetEnumerator()
         {
             var currentNode = FirstNode;
             while (currentNode != null)
@@ -303,9 +303,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             return strBuild.ToString();
         }
 
-        public Node<T> FindMToLast(int m)
+        public INode<T> FindMToLast(int m)
         {
-            Node<T> mBehind, current;
+            INode<T> mBehind, current;
             current = FirstNode;
 
             for (int i = 0; i < m; i++)
@@ -333,7 +333,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             {
                 try
                 {
-                    Node<T> fast, slow;
+                    INode<T> fast, slow;
                     slow = FirstNode;
                     fast = FirstNode.Next;
                     while (true)
@@ -361,7 +361,7 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         }
     }
 
-    public class SinglyLinkedNode<T> : Node<T>
+    public class SinglyLinkedNode<T> : INode<T>
     {
         public SinglyLinkedNode() { }
 
@@ -370,9 +370,9 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             Value = value;
         }
 
-        public Node<T> Next { get; set; }
+        public INode<T> Next { get; set; }
 
-        public Node<T> Prev
+        public INode<T> Prev
         {
             get
             {
