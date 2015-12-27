@@ -13,8 +13,8 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         }
 
         public SinglyLinkedList() { }
-        public INode<T> LastNode { get; set; }
-        public INode<T> FirstNode { get; set; }
+        public INode<T> LastNode { get; private set; }
+        public INode<T> FirstNode { get; private set; }
         public INode<T> Add(T value) => AddLast(value);
         public bool IsEmpty => Count == 0;
         public int Length => Count;
@@ -127,18 +127,42 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
         {
             INode<T> prev2Node2Remove = FindPrevious(node);
 
-            try
+            if (prev2Node2Remove == null)
             {
-                // prev2Node2Remove.Next == node
+                // Either node == FirstNode or node not in list.
+                if (node == FirstNode)
+                {
+                    // The list at least contains node, Count >= 1.
+                    // If Count == 1 then FirstNode is set to null.
+                    FirstNode = node.Next;
+                    Count--;
+                }
+                else
+                {
+                    // node not in list.
+                    throw new InvalidOperationException(
+                        "node " + node.Value + "not in list");
+                }
+            }
+            else
+            {
+                // Count >= 2, node != FirstNode
+                // and prev2Node2Remove.Next == node.
                 prev2Node2Remove.Next = node.Next;
+                // If node == LastNode, prev2Node2Remove.Next == null.
                 Count--;
-                return node;
             }
-            catch(NullReferenceException)
+
+            if (node == LastNode)
             {
-                throw new InvalidOperationException("node " + node.Value +
-                    "not in list");
+                // This covers 2 cases: 1) Removed node was the only one
+                // in list and list is now empty so LastNode = null.
+                // 2) Removed node was not the only one in list and
+                // LastNode is updated.
+                LastNode = prev2Node2Remove;
             }
+
+            return node;
         }
 
         public static INode<int> Remove(int key, SinglyLinkedList<int> list)

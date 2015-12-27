@@ -97,7 +97,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             Assert.True(L == list.RemoveLast());
             Assert.True(E == list.Remove(E));
             Assert.True(D == list.RemoveAfter(A));
-            Assert.True(C == list.RemoveBefore(E));
+            Assert.True(A == list.RemoveBefore(C));
             Assert.True(list.Count == 7);
             Assert.True(list.Length == 7);
             Assert.True(list.FirstNode == B);
