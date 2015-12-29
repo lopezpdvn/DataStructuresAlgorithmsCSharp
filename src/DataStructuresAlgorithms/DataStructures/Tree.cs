@@ -15,16 +15,6 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
 
         public BinaryTree() : this(null) { }
 
-        private static IStack<Node<T>> GetStackImpl()
-        {
-            return new StackSinglyLinkedList<Node<T>>();
-        }
-
-        private static IQueue<Node<T>> GetQueueImpl()
-        {
-            return new QueueSinglyLinkedList<Node<T>>();
-        }
-
         public int Height
         {
             get
@@ -46,7 +36,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
             }
         }
 
-        public static IEnumerable<Node<T>> PreOrderTraversalRecursiveIterator(Node<T> node)
+        public static IEnumerable<Node<T>>
+            PreOrderTraversalRecursiveIterator(Node<T> node)
         {
             if (node == null) yield break;
 
@@ -57,7 +48,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
                 yield return val;
         }
 
-        public static IEnumerable<Node<T>> InOrderTraversalRecursiveIterator(Node<T> node)
+        public static IEnumerable<Node<T>>
+            InOrderTraversalRecursiveIterator(Node<T> node)
         {
             if (node == null) yield break;
 
@@ -68,7 +60,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
                 yield return val;
         }
 
-        public static IEnumerable<Node<T>> PostOrderTraversalRecursiveIterator(Node<T> node)
+        public static IEnumerable<Node<T>>
+            PostOrderTraversalRecursiveIterator(Node<T> node)
         {
             if (node == null) yield break;
 
@@ -79,11 +72,10 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
             yield return node;
         }
 
-        public static IEnumerable<Node<T>> PreOrderTraversalIterativeIterator(Node<T> node)
+        public static IEnumerable<Node<T>> PreOrderTraversalIterativeIterator(
+            Node<T> node, IStack<Node<T>> stack)
         {
             if (node == null) yield break;
-
-            IStack<Node<T>> stack = GetStackImpl();
             stack.Push(node);
             while (stack.Count > 0)
             {
@@ -96,9 +88,9 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
             }
         }
 
-        public static IEnumerable<Node<T>> InOrderTraversalIterativeIterator(Node<T> node)
+        public static IEnumerable<Node<T>> InOrderTraversalIterativeIterator(
+            Node<T> node, IStack<Node<T>> stack)
         {
-            IStack<Node<T>> stack = GetStackImpl();
             Node<T> curr = node;
             while (stack.Count > 0 || curr != null)
             {
@@ -116,9 +108,9 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
             }
         }
 
-        public static IEnumerable<Node<T>> PostOrderTraversalIterativeIterator(Node<T> node)
+        public static IEnumerable<Node<T>> PostOrderTraversalIterativeIterator(
+            Node<T> node, IStack<Node<T>> stack)
         {
-            IStack<Node<T>> stack = GetStackImpl();
             Node<T> lastNodeVisited = null;
             var curr = node;
             Node<T> peekNode = null;
@@ -146,12 +138,11 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
             }
         }
 
-        public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(Node<T> node)
+        public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(
+            Node<T> node, IQueue<Node<T>> queue)
         {
             if (node == null) yield break;
-
             yield return node;
-            IQueue<Node<T>> queue = GetQueueImpl();
             queue.Enqueue(node);
             while (!queue.IsEmpty)
             {
