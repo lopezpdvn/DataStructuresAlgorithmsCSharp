@@ -15,6 +15,16 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
 
         public BinaryTree() : this(null) { }
 
+        private static IStack<Node<T>> GetStackImpl()
+        {
+            return new StackSinglyLinkedList<Node<T>>();
+        }
+
+        private static IQueue<Node<T>> GetQueueImpl()
+        {
+            return new QueueSinglyLinkedList<Node<T>>();
+        }
+
         public int Height
         {
             get
@@ -73,7 +83,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
         {
             if (node == null) yield break;
 
-            var stack = new StackSinglyLinkedList<Node<T>>();
+            IStack<Node<T>> stack = GetStackImpl();
             stack.Push(node);
             while (stack.Count > 0)
             {
@@ -88,7 +98,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
 
         public static IEnumerable<Node<T>> InOrderTraversalIterativeIterator(Node<T> node)
         {
-            var stack = new StackSinglyLinkedList<Node<T>>();
+            IStack<Node<T>> stack = GetStackImpl();
             Node<T> curr = node;
             while (stack.Count > 0 || curr != null)
             {
@@ -108,7 +118,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
 
         public static IEnumerable<Node<T>> PostOrderTraversalIterativeIterator(Node<T> node)
         {
-            var stack = new StackSinglyLinkedList<Node<T>>();
+            IStack<Node<T>> stack = GetStackImpl();
             Node<T> lastNodeVisited = null;
             var curr = node;
             Node<T> peekNode = null;
@@ -121,7 +131,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
                 }
                 else
                 {
-                    peekNode = stack.FirstNode.Value;
+                    peekNode = stack.Peek();
                     if(peekNode.Right != null && peekNode.Right != lastNodeVisited)
                     {
                         curr = peekNode.Right;
@@ -141,7 +151,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree
             if (node == null) yield break;
 
             yield return node;
-            var queue = new QueueSinglyLinkedList<Node<T>>();
+            IQueue<Node<T>> queue = GetQueueImpl();
             queue.Enqueue(node);
             while (!queue.IsEmpty)
             {
