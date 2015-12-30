@@ -52,7 +52,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public void MiscTests0()
         {
             var list = GetLinkedListImpl<char>();
-            INode<char> A, B, C, D, E, F, G, H, I, J, K, L;
+            INode<char> A, B, C, D, E, F, G, K, L;
+            //INode<char> H, I, J;
 
             list.Clear();
             Assert.True(list.Count == 0);
