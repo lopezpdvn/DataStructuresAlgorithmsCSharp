@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.DataStructures.HashTable
@@ -131,17 +127,5 @@ namespace DataStructuresAlgorithms.DataStructures.HashTable
                 Reassign(key, value);
             }
         }
-    }
-
-    public static class Program
-    {
-        const string SEP = "\n=================== ";
-
-        static internal void Main(string data_fp)
-        {
-            //UsingCLRDataStructure(data_fp);
-            //UsingCustomDataStructure(data_fp);
-        }
-
     }
 }
