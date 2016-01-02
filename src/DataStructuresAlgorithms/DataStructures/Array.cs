@@ -6,11 +6,11 @@ namespace DataStructuresAlgorithms.DataStructures.Array
 {
     public class SortedArrayInt : IEnumerable<int>
     {
-        private int[] arr;
-        public int Length { get; private set; }
-        public int Count { get; private set; } = 0;
+        protected int[] arr;
+        public int Length { get; protected set; }
+        public int Count { get; protected set; } = 0;
 
-        public SortedArrayInt(int length)
+        public SortedArrayInt(int length = 64)
         {
             Length = length;
             arr = new int[Length];

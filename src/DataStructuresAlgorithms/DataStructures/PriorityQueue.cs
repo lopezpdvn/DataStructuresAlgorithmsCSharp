@@ -1,21 +1,17 @@
 ﻿using System;
+using DataStructuresAlgorithms.DataStructures.Array;
 
 namespace DataStructuresAlgorithms.AbstractDataTypes
 {
-    public class PriorityQueueIntArray : IQueue<int>
+    public interface IPriorityQueue<T> : IQueue<T> { }
+
+    public class PriorityQueueIntSortedArray :
+        SortedArrayInt, IPriorityQueue<int>
     {
-        private int[] arr;
-        public int Count { get; private set; } = 0;
-        public int Length { get; private set; }
+        public PriorityQueueIntSortedArray(int length = 64) : base(length) { }
 
         public bool IsEmpty => Count == 0;
         public bool IsFull => Length == Count;
-
-        public PriorityQueueIntArray(int length = 64)
-        {
-            Length = length;
-            arr = new int[Length];
-        }
 
         public int Dequeue()
         {
@@ -28,21 +24,9 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         {
             try
             {
-                if (IsEmpty)
-                {
-                    arr[Count++] = item;
-                    return;
-                }
-
-                var i = Count - 1;
-                for (; i >= 0 && item > arr[i]; i--)
-                {
-                    arr[i + 1] = arr[i];
-                }
-                arr[i + 1] = item;
-                Count++;
+                Insert(item);
             }
-            catch(IndexOutOfRangeException)
+            catch(InvalidOperationException)
             {
                 throw new InvalidOperationException("Priority Queue is full");
             }
@@ -53,7 +37,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         {
             try
             {
-                return arr[Count - 1];
+                return this[Count - 1];
             }
             catch(IndexOutOfRangeException)
             {

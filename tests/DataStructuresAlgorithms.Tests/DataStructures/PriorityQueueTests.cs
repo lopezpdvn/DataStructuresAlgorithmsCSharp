@@ -9,9 +9,9 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         [Fact]
         public void PriorityQueueGeneralTest0()
         {
-            IQueue<int> pqueue = new PriorityQueueIntArray();
+            IPriorityQueue<int> pqueue = new PriorityQueueIntSortedArray();
             var fixture = new { TestArray0 = new int[] { 9, 6, 3, 15, 12, 0, 18 },
-                TestSortedArray0 = new int[] { 0, 3, 6, 9, 12, 15, 18 }
+                TestSortedArray0 = new int[] { 18, 15, 12, 9, 6, 3, 0 }
             };
             Assert.True(pqueue.IsEmpty);
             Assert.True(pqueue.Count == 0);
@@ -23,7 +23,6 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 Assert.True(pqueue.Count == i);
                 pqueue.Enqueue(fixture.TestArray0[i]);
                 Assert.False(pqueue.IsEmpty);
-                //Assert.True(pqueue.Peek() == fixture.TestArray0[0]);
             }
 
             for (var i = 0; i < fixture.TestArray0.Length; i++)
@@ -44,7 +43,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public void FullPriorityQueueTest()
         {
             var length = 5;
-            var pqueue = new PriorityQueueIntArray(length);
+            var pqueue = new PriorityQueueIntSortedArray(length);
 
             for(var j = 0; j < 2; j++)
             {
@@ -59,7 +58,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 {
                     Assert.False(pqueue.IsFull);
                     pqueue.Enqueue(i * 2);
-                    Assert.True(pqueue.Peek() == 0);
+                    Assert.True(pqueue.Peek() == i * 2);
                     Assert.False(pqueue.IsEmpty);
                     Assert.True(pqueue.Count == i + 1);
                 }
@@ -71,8 +70,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 {
                     Assert.True(pqueue.Count == length - i);
                     Assert.False(pqueue.IsEmpty);
-                    Assert.True(pqueue.Peek() == i * 2);
-                    Assert.True(pqueue.Dequeue() == i * 2);
+                    Assert.True((pqueue.Count - 1) * 2 == pqueue.Peek());
+                    Assert.True((pqueue.Count - 1) * 2 == pqueue.Dequeue());
                     Assert.True(pqueue.Count == length - i - 1);
                     Assert.False(pqueue.IsFull);
                 }
