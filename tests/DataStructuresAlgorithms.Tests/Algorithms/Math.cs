@@ -1,6 +1,5 @@
 ﻿using System;
 using Xunit;
-using DataStructuresAlgorithms.DataStructures.Graph;
 using MathAlgs = DataStructuresAlgorithms.Algorithms;
 
 namespace DataStructuresAlgorithms.Tests.Algorithms.Math
@@ -18,8 +17,6 @@ namespace DataStructuresAlgorithms.Tests.Algorithms.Math
     {
         protected MathTestsFixture fixture;
         protected Func<int, int> TriangularFunc, FactorialFunc;
-        protected string traversalType;
-        protected DirectedGraphAdjacencyList<char> graph;
 
         [Fact]
         public void TriangleTest0()

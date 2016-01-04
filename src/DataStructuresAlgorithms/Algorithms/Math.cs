@@ -31,14 +31,7 @@ namespace DataStructuresAlgorithms.Algorithms
 
         private static int _TriangularRecursive(int n)
         {
-            if(n <= 1)
-            {
-                return n;
-            }
-            else
-            {
-                return n + _TriangularRecursive(n - 1);
-            }
+            return n <= 1 ? n : n + _TriangularRecursive(n - 1);
         }
 
         public static int FactorialIterative(int n)
