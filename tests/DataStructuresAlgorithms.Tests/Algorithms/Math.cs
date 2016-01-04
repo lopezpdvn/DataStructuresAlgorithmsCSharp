@@ -10,12 +10,14 @@ namespace DataStructuresAlgorithms.Tests.Algorithms.Math
         public readonly int[] TriangularNumbers = { 0, 1, 3, 6, 10, 15, 21,
             28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210,
             231, 253, 276, 300, 325, 351, 378, 406 };
+        public readonly int[] Factorials = { 1, 1, 2, 6, 24, 120, 720, 5040,
+            40320, 362880, 3628800, 39916800 };
     }
 
     public abstract class MathTests
     {
         protected MathTestsFixture fixture;
-        protected Func<int, int> IntFunc;
+        protected Func<int, int> TriangularFunc, FactorialFunc;
         protected string traversalType;
         protected DirectedGraphAdjacencyList<char> graph;
 
@@ -25,7 +27,17 @@ namespace DataStructuresAlgorithms.Tests.Algorithms.Math
             var i = 0;
             foreach(var triangularNumber in fixture.TriangularNumbers)
             {
-                Assert.True(triangularNumber == IntFunc(i++));
+                Assert.True(triangularNumber == TriangularFunc(i++));
+            }
+        }
+
+        [Fact]
+        public void FactorialTest0()
+        {
+            var i = 0;
+            foreach(var iFactorial in fixture.Factorials)
+            {
+                Assert.True(iFactorial == FactorialFunc(i++));
             }
         }
     }
@@ -34,22 +46,24 @@ namespace DataStructuresAlgorithms.Tests.Algorithms.Math
     public class MathTestsCollection : ICollectionFixture<MathTestsFixture> { }
 
     [Collection("Math Tests Collection")]
-    public class TriangularNumbersIterative : MathTests
+    public class MathTestsIterative : MathTests
     {
-        public TriangularNumbersIterative(MathTestsFixture fixture)
+        public MathTestsIterative(MathTestsFixture fixture)
         {
             this.fixture = fixture;
-            IntFunc = MathAlgs.Math.TriangularIterative;
+            TriangularFunc = MathAlgs.Math.TriangularIterative;
+            FactorialFunc = MathAlgs.Math.FactorialIterative;
         }
     }
 
     [Collection("Math Tests Collection")]
-    public class TriangularNumbersRecursive : MathTests
+    public class MathTestsRecursive : MathTests
     {
-        public TriangularNumbersRecursive(MathTestsFixture fixture)
+        public MathTestsRecursive(MathTestsFixture fixture)
         {
             this.fixture = fixture;
-            IntFunc = MathAlgs.Math.TriangularRecursive;
+            TriangularFunc = MathAlgs.Math.TriangularRecursive;
+            FactorialFunc = MathAlgs.Math.FactorialRecursive;
         }
     }
 }

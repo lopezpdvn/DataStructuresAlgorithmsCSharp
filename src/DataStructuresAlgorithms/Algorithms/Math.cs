@@ -40,5 +40,35 @@ namespace DataStructuresAlgorithms.Algorithms
                 return n + _TriangularRecursive(n - 1);
             }
         }
+
+        public static int FactorialIterative(int n)
+        {
+            if (n < 0)
+            {
+                throw new InvalidOperationException(
+                    "Argument is not natural number");
+            }
+            int total = 1;
+            while (n > 0)
+            {
+                total *= n--;
+            }
+            return total;
+       }
+
+        public static int FactorialRecursive(int n)
+        {
+            if (n < 0)
+            {
+                throw new InvalidOperationException(
+                    "Argument is not natural number");
+            }
+            return _FactorialRecursive(n);
+        }
+
+        private static int _FactorialRecursive(int n)
+        {
+            return n < 2 ? 1 : n *_FactorialRecursive(n - 1);
+        }
     }
 }
