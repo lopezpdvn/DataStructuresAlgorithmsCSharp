@@ -13,6 +13,8 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
     {
         public SinglyLinkedList<Node> Nodes { get; private set; }
         public int Count { get; private set; }
+        public IQueue<Node> Queue { get; set; }
+        public IStack<Node> Stack { get; set; }
 
         public DirectedGraphAdjacencyList()
         {
@@ -110,6 +112,20 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
         public IEnumerable<Node>
             BreadthFirstTraversalIterativeIterator(Node node)
         {
+            // Queue.Clear();
+            for (var i = 0; i < Queue.Count; i++)
+            {
+                Queue.Dequeue();
+            }
+            foreach(var iNode in BreadthFirstTraversalIterativeIterator(node, Queue))
+            {
+                yield return iNode;
+            }
+        }
+
+        public IEnumerable<Node>
+            BreadthFirstTraversalIterativeIterator(Node node, IQueue<Node> queue)
+        {
             if (node == null || node.State == State.Visited)
             {
                 yield break;
@@ -117,7 +133,6 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
 
             yield return node;
             node.State = State.Visited;
-            var queue = new QueueSinglyLinkedList<Node>();
             queue.Enqueue(node);
 
             while (!queue.IsEmpty)

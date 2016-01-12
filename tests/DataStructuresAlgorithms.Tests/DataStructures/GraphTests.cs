@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 using DataStructuresAlgorithms.DataStructures.Graph;
+using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
 {
@@ -46,6 +47,9 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
                 graph0[nodeKey] = new Hashtable();
                 ((Hashtable)graph0[nodeKey])["node"] = node;
             }
+
+            graph0Graph.Queue = new QueueSinglyLinkedList<
+                DirectedGraphAdjacencyList<char>.Node>();
 
             graph0["graph"] = graph0Graph;
             ((Hashtable)graph0["A"])["dft-string"] = "ABCDHEKFJI";
