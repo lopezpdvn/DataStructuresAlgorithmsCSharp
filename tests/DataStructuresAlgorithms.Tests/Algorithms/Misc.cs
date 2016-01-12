@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Xunit;
 using Algs = DataStructuresAlgorithms.Algorithms;
 
@@ -34,17 +35,19 @@ namespace DataStructuresAlgorithms.Tests.Algorithms.Misc
     public abstract class MiscTests
     {
         protected MiscTestsFixture fixture;
-        protected Func<int, int, int, int, int[]> TowersOfHanoiSolver;
+        protected Func<int, int, int, int, IEnumerable<int[]>>
+            TowersOfHanoiSolver;
 
         [Fact]
         public void TowersOfHanoiSolverTest()
         {
-            for(var i = 0; i < fixture.TowersOfHanoiSolutions.Length; i++)
+            for (var i = 0; i < fixture.TowersOfHanoiSolutions.Length; i++)
             {
-                foreach(var sol in fixture.TowersOfHanoiSolutions[i])
+                var j = 0;
+                foreach (var step in TowersOfHanoiSolver(i + 1, 0, 1, 2))
                 {
-                    Assert.True(sol.SequenceEqual(
-                        TowersOfHanoiSolver(i + 1, 0, 1, 2)));
+                    var answer = fixture.TowersOfHanoiSolutions[i][j++];
+                    Assert.True(step.SequenceEqual(answer));
                 }
             }
         }
@@ -52,17 +55,6 @@ namespace DataStructuresAlgorithms.Tests.Algorithms.Misc
 
     [CollectionDefinition("Misc Tests Collection")]
     public class MiscTestsCollection : ICollectionFixture<MiscTestsFixture> { }
-
-    //[Collection("Misc Tests Collection")]
-    //public class MiscTestsIterative : MiscTests
-    //{
-    //    public MiscTestsIterative(MiscTestsFixture fixture)
-    //    {
-    //        this.fixture = fixture;
-    //        TriangularFunc = MathAlgs.Math.TriangularIterative;
-    //        FactorialFunc = MathAlgs.Math.FactorialIterative;
-    //    }
-    //}
 
     [Collection("Misc Tests Collection")]
     public class MiscTestsRecursive : MiscTests
