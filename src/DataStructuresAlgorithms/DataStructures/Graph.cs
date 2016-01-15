@@ -150,11 +150,6 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             }
         }
 
-        public enum State
-        {
-            Unvisited, Visited
-        }
-
         public class Node : IEnumerable<Node>
         {
             private SinglyLinkedList<Node> adjacent =
@@ -194,5 +189,10 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
                     Vertex, Count);
             }
         }
+    }
+
+    public enum State
+    {
+        Unvisited, Visited
     }
 }
