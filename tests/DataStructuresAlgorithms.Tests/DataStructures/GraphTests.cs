@@ -15,18 +15,18 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public GraphTraversalFixture()
         {
             var graph0Graph = new DirectedGraphAdjacencyList<char>();
-            var _A = new DirectedGraphAdjacencyList<char>.Node('A');
-            var _B = new DirectedGraphAdjacencyList<char>.Node('B');
-            var _C = new DirectedGraphAdjacencyList<char>.Node('C');
-            var _D = new DirectedGraphAdjacencyList<char>.Node('D');
-            var _E = new DirectedGraphAdjacencyList<char>.Node('E');
-            var _F = new DirectedGraphAdjacencyList<char>.Node('F');
-            var _G = new DirectedGraphAdjacencyList<char>.Node('G');
-            var _H = new DirectedGraphAdjacencyList<char>.Node('H');
-            var _I = new DirectedGraphAdjacencyList<char>.Node('I');
-            var _J = new DirectedGraphAdjacencyList<char>.Node('J');
-            var _K = new DirectedGraphAdjacencyList<char>.Node('K');
-            var nodes = new DirectedGraphAdjacencyList<char>.Node[]
+            var _A = new Node<char>('A');
+            var _B = new Node<char>('B');
+            var _C = new Node<char>('C');
+            var _D = new Node<char>('D');
+            var _E = new Node<char>('E');
+            var _F = new Node<char>('F');
+            var _G = new Node<char>('G');
+            var _H = new Node<char>('H');
+            var _I = new Node<char>('I');
+            var _J = new Node<char>('J');
+            var _K = new Node<char>('K');
+            var nodes = new Node<char>[]
                 { _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K };
             _A.AddAdjacent(_B);
             _B.AddAdjacent(_A, _C, _J);
@@ -49,7 +49,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             }
 
             graph0Graph.Queue = new QueueSinglyLinkedList<
-                DirectedGraphAdjacencyList<char>.Node>();
+                Node<char>>();
 
             graph0["graph"] = graph0Graph;
             ((Hashtable)graph0["A"])["dft-string"] = "ABCDHEKFJI";
@@ -85,8 +85,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
     public abstract class GraphTraversalTests
     {
         protected GraphTraversalFixture fixture;
-        protected Func<DirectedGraphAdjacencyList<char>.Node,
-            IEnumerable<DirectedGraphAdjacencyList<char>.Node>>
+        protected Func<Node<char>,
+            IEnumerable<Node<char>>>
             TraversalAlgorithm;
         protected string traversalType;
         protected DirectedGraphAdjacencyList<char> graph;
@@ -95,7 +95,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public void TraversalTest0()
         {
             graph = (DirectedGraphAdjacencyList<char>)fixture.graph0["graph"];
-            DirectedGraphAdjacencyList<char>.Node startNode = null;
+            Node<char> startNode = null;
             string traversalSequence = null;
             string str = null;
             var nodeKeys = new string[]
@@ -105,7 +105,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             {
                 graph.FlagNodesUnvisited();
                 str = "";
-                startNode = (DirectedGraphAdjacencyList<char>.Node)
+                startNode = (Node<char>)
                     ((Hashtable)fixture.graph0[nodeKey])["node"];
                 traversalSequence = (string)
                     ((Hashtable)fixture.graph0[nodeKey])[traversalType];
@@ -122,7 +122,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public void NullGraphTraversalTest()
         {
             graph = (DirectedGraphAdjacencyList<char>)fixture.graph1["graph"];
-            DirectedGraphAdjacencyList<char>.Node startNode = null;
+            Node<char> startNode = null;
             string traversalSequence = "", str = "";
             graph.FlagNodesUnvisited();
             foreach (var node in TraversalAlgorithm(startNode))
@@ -196,15 +196,15 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public void NodeToStringTest()
         {
             var strCheckTmpl = "Vertex {0} with {1} adjacent nodes";
-            DirectedGraphAdjacencyList<char>.Node node = null;
+            Node<char> node = null;
             string strCheck = null;
 
-            node = (DirectedGraphAdjacencyList<char>.Node)
+            node = (Node<char>)
                 ((Hashtable)fixture.graph0["A"])["node"];
             strCheck = String.Format(strCheckTmpl, 'A', 1);
             Assert.True(strCheck.Equals(node.ToString()));
 
-            node = (DirectedGraphAdjacencyList<char>.Node)
+            node = (Node<char>)
                 ((Hashtable)fixture.graph0["B"])["node"];
             strCheck = String.Format(strCheckTmpl, 'B', 3);
             Assert.True(strCheck.Equals(node.ToString()));

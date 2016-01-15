@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DataStructuresAlgorithms.DataStructures.LinkedList;
 using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
@@ -9,16 +10,16 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
     // Based in code from
     // https://github.com/gaylemcd/ctci/blob/master/c-sharp/Chapter04/Q04_2.cs
     public class DirectedGraphAdjacencyList<T> :
-        IEnumerable<DirectedGraphAdjacencyList<T>.Node>
+        IEnumerable<Node<T>>
     {
-        public SinglyLinkedList<Node> Nodes { get; private set; }
+        public SinglyLinkedList<Node<T>> Nodes { get; private set; }
         public int Count { get; private set; }
-        public IQueue<Node> Queue { get; set; }
-        public IStack<Node> Stack { get; set; }
+        public IQueue<Node<T>> Queue { get; set; }
+        public IStack<Node<T>> Stack { get; set; }
 
         public DirectedGraphAdjacencyList()
         {
-            Nodes = new SinglyLinkedList<Node>();
+            Nodes = new SinglyLinkedList<Node<T>>();
         }
 
         public void FlagNodes(State state = State.Unvisited)
@@ -32,13 +33,13 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             FlagNodes(State.Unvisited);
         }
 
-        public void Add(Node node)
+        public void Add(Node<T> node)
         {
             Nodes.Add(node);
             Count++;
         }
 
-        public IEnumerator<Node> GetEnumerator()
+        public IEnumerator<Node<T>> GetEnumerator()
         {
             foreach(var node in Nodes)
                 yield return node.Value;
@@ -49,8 +50,8 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             return GetEnumerator();
         }
 
-        public IEnumerable<Node>
-            PreOrderDepthFirstTraversalRecursiveIterator(Node node)
+        public IEnumerable<Node<T>>
+            PreOrderDepthFirstTraversalRecursiveIterator(Node<T> node)
         {
             if (node == null || node.State == State.Visited)
             {
@@ -63,8 +64,8 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             }
         }
 
-        private IEnumerable<Node>
-            _PreOrderDepthFirstTraversalRecursiveIterator(Node node)
+        private IEnumerable<Node<T>>
+            _PreOrderDepthFirstTraversalRecursiveIterator(Node<T> node)
         {
             yield return node;
             node.State = State.Visited;
@@ -82,16 +83,16 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             }
         }
 
-        public IEnumerable<Node>
-            PreOrderDepthFirstTraversalIterativeIterator(Node node)
+        public IEnumerable<Node<T>>
+            PreOrderDepthFirstTraversalIterativeIterator(Node<T> node)
         {
             if (node == null)
             {
                 yield break;
             }
 
-            Node curr = null;
-            var stack = new StackSinglyLinkedList<Node>();
+            Node<T> curr = null;
+            var stack = new StackSinglyLinkedList<Node<T>>();
             stack.Push(node);
 
             while (stack.Count > 0)
@@ -109,8 +110,8 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             }
         }
 
-        public IEnumerable<Node>
-            BreadthFirstTraversalIterativeIterator(Node node)
+        public IEnumerable<Node<T>>
+            BreadthFirstTraversalIterativeIterator(Node<T> node)
         {
             // Queue.Clear();
             for (var i = 0; i < Queue.Count; i++)
@@ -123,8 +124,8 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
             }
         }
 
-        public IEnumerable<Node>
-            BreadthFirstTraversalIterativeIterator(Node node, IQueue<Node> queue)
+        public IEnumerable<Node<T>>
+            BreadthFirstTraversalIterativeIterator(Node<T> node, IQueue<Node<T>> queue)
         {
             if (node == null || node.State == State.Visited)
             {
@@ -149,50 +150,50 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
                 }
             }
         }
-
-        public class Node : IEnumerable<Node>
-        {
-            private SinglyLinkedList<Node> adjacent =
-                new SinglyLinkedList<Node>();
-            public int Count { get; private set; }
-            public T Vertex { get; set; }
-            public State State { get; set; }
-
-            public Node(T vertex)
-            {
-                Vertex = vertex;
-            }
-
-            public void AddAdjacent(params Node[] nodes)
-            {
-                foreach(var node in nodes)
-                {
-                    adjacent.Add(node);
-                    Count++;
-                }
-            }
-
-            public IEnumerator<Node> GetEnumerator()
-            {
-                foreach(var node in adjacent)
-                    yield return node.Value;
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
-
-            public override string ToString()
-            {
-                return string.Format("Vertex {0} with {1} adjacent nodes",
-                    Vertex, Count);
-            }
-        }
     }
 
     public enum State
     {
         Unvisited, Visited
+    }
+
+    public class Node<T> : IEnumerable<Node<T>>
+    {
+        private ILinkedList<Node<T>> adjacent =
+            new SinglyLinkedList<Node<T>>();
+        public int Count { get; private set; }
+        public T Vertex { get; set; }
+        public State State { get; set; }
+
+        public Node(T vertex)
+        {
+            Vertex = vertex;
+        }
+
+        public void AddAdjacent(params Node<T>[] nodes)
+        {
+            foreach (var node in nodes)
+            {
+                adjacent.Add(node);
+                Count++;
+            }
+        }
+
+        public IEnumerator<Node<T>> GetEnumerator()
+        {
+            foreach (var node in adjacent)
+                yield return node.Value;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Vertex {0} with {1} adjacent nodes",
+                Vertex, Count);
+        }
     }
 }
