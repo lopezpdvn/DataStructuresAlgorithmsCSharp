@@ -49,7 +49,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             }
 
             graph0Graph.Queue = new QueueSinglyLinkedList<
-                Node<char>>();
+                INode<char>>();
 
             graph0["graph"] = graph0Graph;
             ((Hashtable)graph0["A"])["dft-string"] = "ABCDHEKFJI";
@@ -85,8 +85,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
     public abstract class GraphTraversalTests
     {
         protected GraphTraversalFixture fixture;
-        protected Func<Node<char>,
-            IEnumerable<Node<char>>>
+        protected Func<INode<char>,
+            IEnumerable<INode<char>>>
             TraversalAlgorithm;
         protected string traversalType;
         protected DirectedGraphAdjacencyList<char> graph;
