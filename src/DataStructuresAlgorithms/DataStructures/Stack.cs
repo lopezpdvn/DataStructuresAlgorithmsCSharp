@@ -8,6 +8,7 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         void Push(T item);
         T Pop();
         T Peek();
+        void Clear();
         bool IsEmpty { get; }
         int Count { get; }
         int Length { get; }
@@ -49,9 +50,11 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         public StackArray(int length = 64)
         {
             Length = length;
-            arr = new T[length];
-            top = -1;
+            arr = new T[Length];
+            Clear();
         }
+
+        public void Clear() => top = -1;
 
         public bool IsEmpty => top == -1;
         public bool IsFull => top == Length - 1;
