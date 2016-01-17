@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 using DataStructuresAlgorithms.DataStructures.Graph;
+using DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyList;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
