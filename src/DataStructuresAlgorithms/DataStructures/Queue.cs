@@ -5,12 +5,13 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
 {
     public interface IQueue<T>
     {
-        T Dequeue();
-        void Enqueue(T item);
-        T Peek();
         bool IsEmpty { get; }
         int Count { get; }
         int Length { get; }
+        T Dequeue();
+        void Enqueue(T item);
+        T Peek();
+        void Clear();
     }
 
     public class QueueSinglyLinkedList<T> : SinglyLinkedList<T>, IQueue<T>
@@ -50,10 +51,8 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         public CircularArrayQueue(int length = 64)
         {
             Length = length;
-            arr = new T[length];
-            head = 0;
-            tail = -1;
-            Count = 0;
+            arr = new T[Length];
+            Clear();
         }
 
         public bool IsEmpty => Count == 0;
@@ -91,6 +90,13 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
                 throw new InvalidOperationException("Queue is empty");
             }
             return arr[head];
+        }
+
+        public void Clear()
+        {
+            head = 0;
+            tail = -1;
+            Count = 0;
         }
     }
 }

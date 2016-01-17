@@ -13,6 +13,8 @@ namespace DataStructuresAlgorithms.AbstractDataTypes
         public bool IsEmpty => Count == 0;
         public bool IsFull => Length == Count;
 
+        public void Clear() => Count = 0;
+
         public int Dequeue()
         {
             var tmp = Peek();
