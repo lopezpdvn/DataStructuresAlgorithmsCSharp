@@ -15,8 +15,19 @@ namespace DataStructuresAlgorithms.DataStructures.Graph
         void AddAdjacent(params INode<T>[] nodes);
     }
 
-    public class DirectedGraphAdjacencyList<T> :
-        IEnumerable<INode<T>>
+    public interface IGraph<T> : IEnumerable<INode<T>>
+    {
+        ILinkedList<INode<T>> Nodes { get; }
+        int Count { get; }
+        IQueue<INode<T>> Queue { get; set; }
+        IStack<INode<T>> Stack { get; set; }
+
+        void FlagNodes(State state);
+        void FlagNodesUnvisited();
+        void Add(INode<T> node);
+    }
+
+    public class DirectedGraphAdjacencyList<T> : IGraph<T>
     {
         public ILinkedList<INode<T>> Nodes { get; private set; }
         public int Count { get; private set; }
