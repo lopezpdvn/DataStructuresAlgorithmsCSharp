@@ -19,6 +19,14 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
             Nodes = new SinglyLinkedList<INode<T>>();
         }
 
+        public DirectedGraphAdjacencyList(ILinkedList<INode<T>> nodeList,
+            IStack<INode<T>> stack, IQueue<INode<T>> queue)
+        {
+            Nodes = nodeList;
+            Stack = stack;
+            Queue = queue;
+        }
+
         public void FlagNodes(State state = State.Unvisited)
         {
             foreach(var node in this)
