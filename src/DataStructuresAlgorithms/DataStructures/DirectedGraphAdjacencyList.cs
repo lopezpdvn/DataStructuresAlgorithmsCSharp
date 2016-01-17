@@ -118,18 +118,14 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
         public IEnumerable<INode<T>>
             BreadthFirstTraversalIterativeIterator(INode<T> node)
         {
-            // Queue.Clear();
-            for (var i = 0; i < Queue.Count; i++)
-            {
-                Queue.Dequeue();
-            }
+            Queue.Clear();
             foreach(var iNode in BreadthFirstTraversalIterativeIterator(node, Queue))
             {
                 yield return iNode;
             }
         }
 
-        public IEnumerable<INode<T>>
+        public static IEnumerable<INode<T>>
             BreadthFirstTraversalIterativeIterator(INode<T> node, IQueue<INode<T>> queue)
         {
             if (node == null || node.State == State.Visited)
