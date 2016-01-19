@@ -55,7 +55,7 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
             return GetEnumerator();
         }
 
-        public IEnumerable<INode<T>>
+        public static IEnumerable<INode<T>>
             PreOrderDepthFirstTraversalRecursiveIterator(INode<T> node)
         {
             if (node == null || node.State == State.Visited)
@@ -69,7 +69,7 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
             }
         }
 
-        private IEnumerable<INode<T>>
+        private static IEnumerable<INode<T>>
             _PreOrderDepthFirstTraversalRecursiveIterator(INode<T> node)
         {
             yield return node;
@@ -88,26 +88,23 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
             }
         }
 
-        public IEnumerable<INode<T>>
-            PreOrderDepthFirstTraversalIterativeIterator(INode<T> node)
+        public static IEnumerable<INode<T>>
+            PreOrderDepthFirstTraversalIterativeIterator(INode<T> node,
+            IStack<INode<T>> stack)
         {
             if (node == null)
             {
                 yield break;
             }
-
-            INode<T> curr = null;
-            var stack = new StackSinglyLinkedList<INode<T>>();
             stack.Push(node);
-
             while (stack.Count > 0)
             {
-                curr = stack.Pop();
-                if(curr.State == State.Unvisited)
+                node = stack.Pop();
+                if(node.State == State.Unvisited)
                 {
-                    yield return curr;
-                    curr.State = State.Visited;
-                    foreach (var adjacentNode in curr.Reverse())
+                    yield return node;
+                    node.State = State.Visited;
+                    foreach (var adjacentNode in node.Reverse())
                     {
                         stack.Push(adjacentNode);
                     }
@@ -115,18 +112,9 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
             }
         }
 
-        public IEnumerable<INode<T>>
-            BreadthFirstTraversalIterativeIterator(INode<T> node)
-        {
-            Queue.Clear();
-            foreach(var iNode in BreadthFirstTraversalIterativeIterator(node, Queue))
-            {
-                yield return iNode;
-            }
-        }
-
         public static IEnumerable<INode<T>>
-            BreadthFirstTraversalIterativeIterator(INode<T> node, IQueue<INode<T>> queue)
+            BreadthFirstTraversalIterativeIterator(INode<T> node,
+            IQueue<INode<T>> queue)
         {
             if (node == null || node.State == State.Visited)
             {

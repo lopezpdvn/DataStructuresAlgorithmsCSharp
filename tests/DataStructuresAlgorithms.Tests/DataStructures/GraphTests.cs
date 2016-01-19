@@ -147,8 +147,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         {
             this.fixture = fixture;
             traversalType = "dft-string";
-            TraversalAlgorithm =
-                ((DirectedGraphAdjacencyList<char>)fixture.graph0["graph"])
+            TraversalAlgorithm = DirectedGraphAdjacencyList<char>
                 .PreOrderDepthFirstTraversalRecursiveIterator;
         }
     }
@@ -162,9 +161,9 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         {
             this.fixture = fixture;
             traversalType = "dft-string";
-            TraversalAlgorithm =
-                ((DirectedGraphAdjacencyList<char>)fixture.graph0["graph"])
-                .PreOrderDepthFirstTraversalIterativeIterator;
+            TraversalAlgorithm = (INode<char> node) => DirectedGraphAdjacencyList<char>
+                .PreOrderDepthFirstTraversalIterativeIterator(
+                node, new StackSinglyLinkedList<INode<char>>());
         }
     }
 
@@ -177,9 +176,9 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         {
             this.fixture = fixture;
             traversalType = "bft-string";
-            TraversalAlgorithm =
-                ((DirectedGraphAdjacencyList<char>)fixture.graph0["graph"])
-                .BreadthFirstTraversalIterativeIterator;
+            TraversalAlgorithm = (INode<char> node) => DirectedGraphAdjacencyList<char>
+                .BreadthFirstTraversalIterativeIterator(
+                node, new QueueSinglyLinkedList<INode<char>>());
         }
     }
 
