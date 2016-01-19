@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresAlgorithms.DataStructures.LinkedList;
-using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyList
@@ -14,10 +13,8 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
         public IQueue<INode<T>> Queue { get; set; }
         public IStack<INode<T>> Stack { get; set; }
 
-        public DirectedGraphAdjacencyList()
-        {
-            Nodes = new SinglyLinkedList<INode<T>>();
-        }
+        public DirectedGraphAdjacencyList(ILinkedList<INode<T>> nodeList)
+            : this(nodeList, null, null) { }
 
         public DirectedGraphAdjacencyList(ILinkedList<INode<T>> nodeList,
             IStack<INode<T>> stack, IQueue<INode<T>> queue)
@@ -97,7 +94,7 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
                 yield break;
             }
             stack.Push(node);
-            while (stack.Count > 0)
+            while (!stack.IsEmpty)
             {
                 node = stack.Pop();
                 if(node.State == State.Unvisited)

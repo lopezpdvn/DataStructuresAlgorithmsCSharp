@@ -5,6 +5,7 @@ using Xunit;
 using DataStructuresAlgorithms.DataStructures.Graph;
 using DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyList;
 using DataStructuresAlgorithms.AbstractDataTypes;
+using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
 {
@@ -15,29 +16,32 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
 
         public GraphTraversalFixture()
         {
-            var graph0Graph = new DirectedGraphAdjacencyList<char>();
+            var graph0Graph = new DirectedGraphAdjacencyList<char>(
+                new SinglyLinkedList<INode<char>>(),
+                new StackSinglyLinkedList<INode<char>>(),
+                new QueueSinglyLinkedList<INode<char>>());
             var _A = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'A');
+                new SinglyLinkedList<INode<char>>(), 'A');
             var _B = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'B');
+                new SinglyLinkedList<INode<char>>(), 'B');
             var _C = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'C');
+                new SinglyLinkedList<INode<char>>(), 'C');
             var _D = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'D');
+                new SinglyLinkedList<INode<char>>(), 'D');
             var _E = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'E');
+                new SinglyLinkedList<INode<char>>(), 'E');
             var _F = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'F');
+                new SinglyLinkedList<INode<char>>(), 'F');
             var _G = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'G');
+                new SinglyLinkedList<INode<char>>(), 'G');
             var _H = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'H');
+                new SinglyLinkedList<INode<char>>(), 'H');
             var _I = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'I');
+                new SinglyLinkedList<INode<char>>(), 'I');
             var _J = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'J');
+                new SinglyLinkedList<INode<char>>(), 'J');
             var _K = new Node<char>(
-                new StackSinglyLinkedList<INode<char>>(), 'K');
+                new SinglyLinkedList<INode<char>>(), 'K');
             var nodes = new Node<char>[]
                 { _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K };
             _A.AddAdjacent(_B);
@@ -89,7 +93,10 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             ((Hashtable)graph0["J"])["bft-string"] = "JIF";
             ((Hashtable)graph0["K"])["bft-string"] = "K";
 
-            var graph1Graph = new DirectedGraphAdjacencyList<char>();
+            var graph1Graph = new DirectedGraphAdjacencyList<char>(
+                new SinglyLinkedList<INode<char>>(),
+                new StackSinglyLinkedList<INode<char>>(),
+                new QueueSinglyLinkedList<INode<char>>());
             graph1["graph"] = graph1Graph;
         }
     }
