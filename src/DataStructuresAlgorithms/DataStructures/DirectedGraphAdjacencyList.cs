@@ -143,16 +143,19 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
 
     public class Node<T> : INode<T>
     {
-        private ILinkedList<INode<T>> adjacent =
-            new SinglyLinkedList<INode<T>>();
+        private ILinkedList<INode<T>> adjacent;
         public int Count { get; private set; }
         public T Vertex { get; set; }
         public State State { get; set; }
 
-        public Node(T vertex)
+        public Node(ILinkedList<INode<T>> linkedList, T vertex)
         {
+            adjacent = linkedList;
             Vertex = vertex;
         }
+
+        public Node(ILinkedList<INode<T>> linkedList)
+            : this(linkedList, default(T)) { }
 
         public void AddAdjacent(params INode<T>[] nodes)
         {

@@ -16,17 +16,28 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         public GraphTraversalFixture()
         {
             var graph0Graph = new DirectedGraphAdjacencyList<char>();
-            var _A = new Node<char>('A');
-            var _B = new Node<char>('B');
-            var _C = new Node<char>('C');
-            var _D = new Node<char>('D');
-            var _E = new Node<char>('E');
-            var _F = new Node<char>('F');
-            var _G = new Node<char>('G');
-            var _H = new Node<char>('H');
-            var _I = new Node<char>('I');
-            var _J = new Node<char>('J');
-            var _K = new Node<char>('K');
+            var _A = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'A');
+            var _B = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'B');
+            var _C = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'C');
+            var _D = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'D');
+            var _E = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'E');
+            var _F = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'F');
+            var _G = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'G');
+            var _H = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'H');
+            var _I = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'I');
+            var _J = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'J');
+            var _K = new Node<char>(
+                new StackSinglyLinkedList<INode<char>>(), 'K');
             var nodes = new Node<char>[]
                 { _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K };
             _A.AddAdjacent(_B);
