@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Xunit;
-using DataStructuresAlgorithms.DataStructures.Tree;
+using DataStructuresAlgorithms.DataStructures.Tree.BinaryTree;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures
