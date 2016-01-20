@@ -4,14 +4,14 @@ using Xunit;
 using DataStructuresAlgorithms.DataStructures.Tree.BinaryTree;
 using DataStructuresAlgorithms.AbstractDataTypes;
 
-namespace DataStructuresAlgorithms.Tests.DataStructures
+namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
 {
-    public class TreeTests
+    public class BinaryTreeTests
     {
         BinaryTree<int> travTree0;
         BinaryTree<char> treeLetters;
         IDictionary treeLetter = new Hashtable();
-        public TreeTests()
+        public BinaryTreeTests()
         {
             /*
                 100
@@ -184,13 +184,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             int i = 0;
             foreach (var nodeVal in BinaryTree<int>
                 .PreOrderTraversalIterativeIterator(travTree0.Root,
-                new StackSinglyLinkedList<Node<int>>()))
+                new StackSinglyLinkedList<INode<int>>()))
             {
                 Assert.True(nodeVal.Value == orderedVals[i++]);
             }
             foreach (var nodeVal in BinaryTree<int>
                 .PreOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<Node<int>>()))
+                new StackSinglyLinkedList<INode<int>>()))
             {
                 Assert.True(false);
             }
@@ -198,13 +198,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             i = 0;
             foreach (var nodeLetter in BinaryTree<char>
                 .PreOrderTraversalIterativeIterator(treeLetters.Root,
-                new StackSinglyLinkedList<Node<char>>()))
+                new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
             foreach (var nodeLetter in BinaryTree<char>
                 .PreOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<Node<char>>()))
+                new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(false);
             }
@@ -220,13 +220,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             int i = 0;
             foreach (var nodeVal in BinaryTree<int>
                 .InOrderTraversalIterativeIterator(travTree0.Root,
-                new StackSinglyLinkedList<Node<int>>()))
+                new StackSinglyLinkedList<INode<int>>()))
             {
                 Assert.True(nodeVal.Value == orderedVals[i++]);
             }
             foreach (var nodeVal in BinaryTree<int>
                 .InOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<Node<int>>()))
+                new StackSinglyLinkedList<INode<int>>()))
             {
                 Assert.True(false);
             }
@@ -234,13 +234,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             i = 0;
             foreach (var nodeLetter in BinaryTree<char>
                 .InOrderTraversalIterativeIterator(treeLetters.Root,
-                new StackSinglyLinkedList<Node<char>>()))
+                new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
             foreach (var nodeLetter in BinaryTree<char>
                 .InOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<Node<char>>()))
+                new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(false);
             }
@@ -256,13 +256,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             int i = 0;
             foreach (var nodeVal in BinaryTree<int>
                 .PostOrderTraversalIterativeIterator(travTree0.Root,
-                new StackSinglyLinkedList<Node<int>>()))
+                new StackSinglyLinkedList<INode<int>>()))
             {
                 Assert.True(nodeVal.Value == orderedVals[i++]);
             }
             foreach (var nodeVal in BinaryTree<int>
                 .PostOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<Node<int>>()))
+                new StackSinglyLinkedList<INode<int>>()))
             {
                 Assert.True(false);
             }
@@ -270,13 +270,13 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             i = 0;
             foreach (var nodeLetter in BinaryTree<char>
                 .PostOrderTraversalIterativeIterator(treeLetters.Root,
-                new StackSinglyLinkedList<Node<char>>()))
+                new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
             foreach (var nodeLetter in BinaryTree<char>
                 .PostOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<Node<char>>()))
+                new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(false);
             }
@@ -287,7 +287,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
         {
             foreach (var nodeLetter in BinaryTree<char>
                 .BreadthFirstTraversalQueue(null,
-                new QueueSinglyLinkedList<Node<char>>()))
+                new QueueSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(false);
             }
@@ -297,7 +297,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             int i = 0;
             foreach (var nodeLetter in BinaryTree<char>
                 .BreadthFirstTraversalQueue(treeLetters.Root,
-                new QueueSinglyLinkedList<Node<char>>()))
+                new QueueSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
