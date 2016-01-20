@@ -6,9 +6,9 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
 {
     public class BinaryTree<T>
     {
-        public Node<T> Root { get; private set; }
+        public INode<T> Root { get; private set; }
 
-        public BinaryTree(Node<T> root)
+        public BinaryTree(INode<T> root)
         {
             Root = root;
         }
@@ -23,7 +23,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             }
         }
 
-        public static int ComputeHeight(Node<T> node)
+        public static int ComputeHeight(INode<T> node)
         {
             if (node == null)
             {
@@ -36,8 +36,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             }
         }
 
-        public static IEnumerable<Node<T>>
-            PreOrderTraversalRecursiveIterator(Node<T> node)
+        public static IEnumerable<INode<T>>
+            PreOrderTraversalRecursiveIterator(INode<T> node)
         {
             if (node == null) yield break;
 
@@ -48,8 +48,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
                 yield return val;
         }
 
-        public static IEnumerable<Node<T>>
-            InOrderTraversalRecursiveIterator(Node<T> node)
+        public static IEnumerable<INode<T>>
+            InOrderTraversalRecursiveIterator(INode<T> node)
         {
             if (node == null) yield break;
 
@@ -60,8 +60,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
                 yield return val;
         }
 
-        public static IEnumerable<Node<T>>
-            PostOrderTraversalRecursiveIterator(Node<T> node)
+        public static IEnumerable<INode<T>>
+            PostOrderTraversalRecursiveIterator(INode<T> node)
         {
             if (node == null) yield break;
 
@@ -72,14 +72,14 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             yield return node;
         }
 
-        public static IEnumerable<Node<T>> PreOrderTraversalIterativeIterator(
-            Node<T> node, IStack<Node<T>> stack)
+        public static IEnumerable<INode<T>> PreOrderTraversalIterativeIterator(
+            INode<T> node, IStack<INode<T>> stack)
         {
             if (node == null) yield break;
             stack.Push(node);
             while (stack.Count > 0)
             {
-                Node<T> curr = stack.Pop();
+                INode<T> curr = stack.Pop();
                 yield return curr;
                 foreach (var child in curr.EnumerateRL())
                 {
@@ -88,10 +88,10 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             }
         }
 
-        public static IEnumerable<Node<T>> InOrderTraversalIterativeIterator(
-            Node<T> node, IStack<Node<T>> stack)
+        public static IEnumerable<INode<T>> InOrderTraversalIterativeIterator(
+            INode<T> node, IStack<INode<T>> stack)
         {
-            Node<T> curr = node;
+            INode<T> curr = node;
             while (stack.Count > 0 || curr != null)
             {
                 if (curr != null)
@@ -108,12 +108,12 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             }
         }
 
-        public static IEnumerable<Node<T>> PostOrderTraversalIterativeIterator(
-            Node<T> node, IStack<Node<T>> stack)
+        public static IEnumerable<INode<T>> PostOrderTraversalIterativeIterator(
+            INode<T> node, IStack<INode<T>> stack)
         {
-            Node<T> lastNodeVisited = null;
+            INode<T> lastNodeVisited = null;
             var curr = node;
-            Node<T> peekNode = null;
+            INode<T> peekNode = null;
             while(stack.Count > 0 || curr != null)
             {
                 if(curr != null)
@@ -138,8 +138,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             }
         }
 
-        public static IEnumerable<Node<T>> BreadthFirstTraversalQueue(
-            Node<T> node, IQueue<Node<T>> queue)
+        public static IEnumerable<INode<T>> BreadthFirstTraversalQueue(
+            INode<T> node, IQueue<INode<T>> queue)
         {
             if (node == null) yield break;
             yield return node;
@@ -156,13 +156,13 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         }
     }
 
-    public class Node<T>
+    public class Node<T> : INode<T>
     {
-        public Node<T> Left { get; set; }
-        public Node<T> Right { get; set; }
+        public INode<T> Left { get; set; }
+        public INode<T> Right { get; set; }
         public T Value { get; set; }
 
-        public Node(Node<T> left, Node<T> right, T value)
+        public Node(INode<T> left, INode<T> right, T value)
         {
             Left = left;
             Right = right;
@@ -176,16 +176,25 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             return Value.ToString();
         }
 
-        public IEnumerable<Node<T>> EnumerateLR()
+        public IEnumerable<INode<T>> EnumerateLR()
         {
             if(Left != null) yield return Left;
             if(Right != null) yield return Right;
         }
 
-        public IEnumerable<Node<T>> EnumerateRL()
+        public IEnumerable<INode<T>> EnumerateRL()
         {
             if (Right != null) yield return Right;
             if (Left != null) yield return Left;
         }
+    }
+
+    public interface INode<T>
+    {
+        INode<T> Left { get; set; }
+        INode<T> Right { get; set; }
+        T Value { get; set; }
+        IEnumerable<INode<T>> EnumerateLR();
+        IEnumerable<INode<T>> EnumerateRL();
     }
 }
