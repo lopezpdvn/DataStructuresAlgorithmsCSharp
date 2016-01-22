@@ -206,14 +206,26 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
 
         public IEnumerable<INode<T>> EnumerateLR()
         {
-            if(Left != null) yield return Left;
-            if(Right != null) yield return Right;
+            if (Left != null)
+            {
+                yield return Left;
+            }
+            if (Right != null)
+            {
+                yield return Right;
+            }
         }
 
         public IEnumerable<INode<T>> EnumerateRL()
         {
-            if (Right != null) yield return Right;
-            if (Left != null) yield return Left;
+            if (Right != null)
+            {
+                yield return Right;
+            }
+            if (Left != null)
+            {
+                yield return Left;
+            }
         }
     }
 }
