@@ -77,7 +77,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         {
             if (node == null) yield break;
             stack.Push(node);
-            while (stack.Count > 0)
+            while (!stack.IsEmpty)
             {
                 INode<T> curr = stack.Pop();
                 yield return curr;
@@ -92,7 +92,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             INode<T> node, IStack<INode<T>> stack)
         {
             INode<T> curr = node;
-            while (stack.Count > 0 || curr != null)
+            while (!stack.IsEmpty || curr != null)
             {
                 if (curr != null)
                 {
@@ -111,28 +111,26 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         public static IEnumerable<INode<T>> PostOrderTraversalIterativeIterator(
             INode<T> node, IStack<INode<T>> stack)
         {
-            INode<T> lastNodeVisited = null;
-            var curr = node;
-            INode<T> peekNode = null;
-            while(stack.Count > 0 || curr != null)
+            INode<T> lastNodeVisited = null, peekNode = null;
+            while(!stack.IsEmpty || node != null)
             {
-                if(curr != null)
+                if(node != null)
                 {
-                    stack.Push(curr);
-                    curr = curr.Left;
+                    stack.Push(node);
+                    node = node.Left;
                 }
                 else
                 {
                     peekNode = stack.Peek();
                     if(peekNode.Right != null && peekNode.Right != lastNodeVisited)
                     {
-                        curr = peekNode.Right;
+                        node = peekNode.Right;
                     }
                     else
                     {
                         lastNodeVisited = stack.Pop();
                         yield return lastNodeVisited;
-                        curr = null;
+                        node = null;
                     }
                 }
             }
