@@ -99,15 +99,18 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         public static IEnumerable<INode<T>> PreOrderTraversalIterativeIterator(
             INode<T> node, IStack<INode<T>> stack)
         {
-            if (node == null) yield break;
+            if (node == null)
+            {
+                yield break;
+            }
             stack.Push(node);
             while (!stack.IsEmpty)
             {
-                INode<T> curr = stack.Pop();
-                yield return curr;
-                foreach (var child in curr.EnumerateRL())
+                node = stack.Pop();
+                yield return node;
+                foreach (var childNode in node.EnumerateRL())
                 {
-                    stack.Push(child);
+                    stack.Push(childNode);
                 }
             }
         }
@@ -115,24 +118,24 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         public static IEnumerable<INode<T>> InOrderTraversalIterativeIterator(
             INode<T> node, IStack<INode<T>> stack)
         {
-            INode<T> curr = node;
-            while (!stack.IsEmpty || curr != null)
+            while (!stack.IsEmpty || node != null)
             {
-                if (curr != null)
+                if (node != null)
                 {
-                    stack.Push(curr);
-                    curr = curr.Left;
+                    stack.Push(node);
+                    node = node.Left;
                 }
                 else
                 {
-                    curr = stack.Pop();
-                    yield return curr;
-                    curr = curr.Right;
+                    node = stack.Pop();
+                    yield return node;
+                    node = node.Right;
                 }
             }
         }
 
-        public static IEnumerable<INode<T>> PostOrderTraversalIterativeIterator(
+        public static IEnumerable<INode<T>>
+            PostOrderTraversalIterativeIterator(
             INode<T> node, IStack<INode<T>> stack)
         {
             INode<T> lastNodeVisited = null, peekNode = null;
@@ -163,16 +166,19 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         public static IEnumerable<INode<T>> BreadthFirstTraversalQueue(
             INode<T> node, IQueue<INode<T>> queue)
         {
-            if (node == null) yield break;
+            if (node == null)
+            {
+                yield break;
+            }
             yield return node;
             queue.Enqueue(node);
             while (!queue.IsEmpty)
             {
-                var parent = queue.Dequeue();
-                foreach(var child in parent.EnumerateLR())
+                node = queue.Dequeue();
+                foreach(var childNode in node.EnumerateLR())
                 {
-                    yield return child;
-                    queue.Enqueue(child);
+                    yield return childNode;
+                    queue.Enqueue(childNode);
                 }
             }
         }
