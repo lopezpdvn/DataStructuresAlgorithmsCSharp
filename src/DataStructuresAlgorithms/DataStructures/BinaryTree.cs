@@ -13,6 +13,7 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             Root = root;
         }
 
+        // Empty tree.
         public BinaryTree() : this(null) { }
 
         public int Height
@@ -39,36 +40,59 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
         public static IEnumerable<INode<T>>
             PreOrderTraversalRecursiveIterator(INode<T> node)
         {
-            if (node == null) yield break;
-
+            if (node == null)
+            {
+                yield break;
+            }
             yield return node;
-            foreach (var val in PreOrderTraversalRecursiveIterator(node.Left))
-                yield return val;
-            foreach (var val in PreOrderTraversalRecursiveIterator(node.Right))
-                yield return val;
+            foreach (var iNode in
+                PreOrderTraversalRecursiveIterator(node.Left))
+            {
+                yield return iNode;
+            }
+            foreach (var iNode in
+                PreOrderTraversalRecursiveIterator(node.Right))
+            {
+                yield return iNode;
+            }
         }
 
         public static IEnumerable<INode<T>>
             InOrderTraversalRecursiveIterator(INode<T> node)
         {
-            if (node == null) yield break;
-
-            foreach (var val in InOrderTraversalRecursiveIterator(node.Left))
-                yield return val;
+            if (node == null)
+            {
+                yield break;
+            }
+            foreach (var iNode in InOrderTraversalRecursiveIterator(node.Left))
+            {
+                yield return iNode;
+            }
             yield return node;
-            foreach (var val in InOrderTraversalRecursiveIterator(node.Right))
-                yield return val;
+            foreach (var iNode in
+                InOrderTraversalRecursiveIterator(node.Right))
+            {
+                yield return iNode;
+            }
         }
 
         public static IEnumerable<INode<T>>
             PostOrderTraversalRecursiveIterator(INode<T> node)
         {
-            if (node == null) yield break;
-
-            foreach (var val in PostOrderTraversalRecursiveIterator(node.Left))
-                yield return val;
-            foreach (var val in PostOrderTraversalRecursiveIterator(node.Right))
-                yield return val;
+            if (node == null)
+            {
+                yield break;
+            }
+            foreach (var iNode in
+                PostOrderTraversalRecursiveIterator(node.Left))
+            {
+                yield return iNode;
+            }
+            foreach (var iNode in
+                PostOrderTraversalRecursiveIterator(node.Right))
+            {
+                yield return iNode;
+            }
             yield return node;
         }
 
