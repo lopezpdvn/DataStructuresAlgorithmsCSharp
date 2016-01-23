@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xunit;
 using DataStructuresAlgorithms.DataStructures.Array;
 
@@ -82,6 +83,18 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Array
             sortedArrays = fixture;
             ArraySortingAlgorithm = SortedArrayInt.SelectionSort;
         }
+
+        [Fact]
+        public void MergeTest0()
+        {
+            int[] arrA = { 23, 47, 81, 95 },
+                arrB = { 7, 14, 39, 55, 62, 74 },
+                arrCAnswer = { 7, 14, 23, 39, 47, 55, 62, 74, 81, 95 },
+                arrC = new int[arrA.Length + arrB.Length];
+
+            SortedArrayInt.Merge(arrA, arrA.Length, arrB, arrB.Length, arrC);
+            Assert.True(arrC.SequenceEqual(arrCAnswer));
+        }
     }
 
     [Collection("Int Array Sorting Collection")]
@@ -91,6 +104,16 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Array
         {
             sortedArrays = fixture;
             ArraySortingAlgorithm = SortedArrayInt.InsertionSort;
+        }
+    }
+
+    [Collection("Int Array Sorting Collection")]
+    public class MergeSortTests : IntArraySortingTests
+    {
+        public MergeSortTests(SortedIntArraysFixture fixture)
+        {
+            sortedArrays = fixture;
+            ArraySortingAlgorithm = SortedArrayInt.MergeSort;
         }
     }
 

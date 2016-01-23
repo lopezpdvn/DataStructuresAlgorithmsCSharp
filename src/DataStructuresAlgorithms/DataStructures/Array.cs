@@ -146,6 +146,17 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             }
         }
 
+        public static void MergeSort(int[] arr)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Merge(int[] arrA, int sizeA,
+            int[] arrB, int sizeB, int[] arrC)
+        {
+
+        }
+
         public static void Swap<V>(ref V i, ref V j)
         {
             V tmp = i;
