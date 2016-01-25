@@ -154,7 +154,19 @@ namespace DataStructuresAlgorithms.DataStructures.Array
         public static void Merge(int[] arrA, int sizeA,
             int[] arrB, int sizeB, int[] arrC)
         {
-
+            int iA = 0, iB = 0, iC = 0;
+            while(iA < sizeA && iB < sizeB)
+            {
+                arrC[iC++] = arrA[iA] < arrB[iB] ? arrA[iA++] : arrB[iB++];
+            }
+            while(iA < sizeA)
+            {
+                arrC[iC++] = arrA[iA++];
+            }
+            while(iB < sizeB)
+            {
+                arrC[iC++] = arrB[iB++];
+            }
         }
 
         public static void Swap<V>(ref V i, ref V j)
