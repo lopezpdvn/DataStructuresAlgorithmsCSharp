@@ -148,13 +148,56 @@ namespace DataStructuresAlgorithms.DataStructures.Array
 
         public static void MergeSort(int[] arr)
         {
-            throw new NotImplementedException();
+            if(arr.Length > 0)
+            {
+                int[] workspace = new int[arr.Length];
+                _MergeSort(arr, workspace, 0, arr.Length - 1);
+            }
+        }
+
+        private static void _MergeSort(int[] arr, int[] workspace, int min,
+            int max)
+        {
+            if(min == max)
+            {
+                return;
+            }
+            int mid = (min + max) / 2;
+            _MergeSort(arr, workspace, min, mid);
+            _MergeSort(arr, workspace, mid + 1, max);
+            _Merge(arr, workspace, min, mid + 1, max);
+        }
+
+        private static void _Merge(int[] arr, int[] workspace, int lowPtr, int highPtr,
+            int upperBound)
+        {
+            int j = 0;
+            int lowerBound = lowPtr;
+            int mid = highPtr - 1;
+            int n = upperBound - lowerBound + 1;
+            while (lowPtr <= mid && highPtr <= upperBound)
+            {
+                workspace[j++] = arr[lowPtr] < arr[highPtr]
+                    ? arr[lowPtr++] : arr[highPtr++];
+            }
+            while (lowPtr <= mid)
+            {
+                workspace[j++] = arr[lowPtr++];
+            }
+            while (highPtr <= upperBound)
+            {
+                workspace[j++] = arr[highPtr++];
+            }
+            for (j = 0; j < n; j++)
+            {
+                arr[lowerBound + j] = workspace[j];
+            }
         }
 
         public static void Merge(int[] arrA, int sizeA,
-            int[] arrB, int sizeB, int[] arrC)
+            int[] arrB, int sizeB, int[] arrC,
+            int iA = 0, int iB = 0, int iC = 0)
         {
-            int iA = 0, iB = 0, iC = 0;
             while(iA < sizeA && iB < sizeB)
             {
                 arrC[iC++] = arrA[iA] < arrB[iB] ? arrA[iA++] : arrB[iB++];
