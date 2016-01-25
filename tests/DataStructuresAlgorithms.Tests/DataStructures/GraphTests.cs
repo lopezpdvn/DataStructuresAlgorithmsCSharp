@@ -7,7 +7,7 @@ using DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyList;
 using DataStructuresAlgorithms.AbstractDataTypes;
 using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 
-namespace DataStructuresAlgorithms.Tests.DataStructures
+namespace DataStructuresAlgorithms.Tests.DataStructures.Graph
 {
     public class GraphTraversalFixture
     {
