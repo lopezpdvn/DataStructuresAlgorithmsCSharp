@@ -1,32 +1,36 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using Xunit;
+using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 using DataStructuresAlgorithms.DataStructures.Tree;
 using DataStructuresAlgorithms.DataStructures.Tree.BinaryTree;
 using DataStructuresAlgorithms.AbstractDataTypes;
 using System.Collections.Generic;
+using System.Text;
+using L = DataStructuresAlgorithms.DataStructures.LinkedList;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
 {
     public class BinaryTreeTraversalFixture
     {
-        public BinaryTree<int> travTree0;
         public IDictionary charTree = new Hashtable();
+        public IDictionary intTree = new Hashtable();
 
         public BinaryTreeTraversalFixture()
         {
-            /*
-           100
-          /  \
-         /    \
-        /      \
-       50      150
-      / \      /  \
-     25  75   125  175
-              /
-            110
-            */
-            travTree0 = new BinaryTree<int>(new Node<int>(
+                    /*
+                   100
+                  /  \
+                 /    \
+                /      \
+               50      150
+              / \      /  \
+             25  75   125  175
+                      /
+                    110
+                    */
+            var _intTree = new BinaryTree<int>(new Node<int>(
 
                 new Node<int>(
                     new Node<int>(25), new Node<int>(75), 50),
@@ -39,6 +43,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
                  , 150)
 
                  , 100));
+            intTree["tree"] = _intTree;
+            intTree["bft"] = new int[] { 100, 50, 150, 25, 75, 125, 175, 110 };
 
             var _J = new Node<char>('J');
             var _I = new Node<char>(_J, null, 'I');
@@ -61,8 +67,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
             var _A = new Node<char>(_B, _C, 'A');
             var _charTree = new BinaryTree<char>(_A);
             charTree["tree"] = _charTree;
-            charTree["bf_traversal_char_array"] =
-                "ABCDEFGHKNOILRPJMSQ".ToCharArray();
+            charTree["bft"] = "ABCDEFGHKNOILRPJMSQ";
         }
     }
 
@@ -70,12 +75,56 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
     {
         protected BinaryTreeTraversalFixture fixture;
         protected Func<INode<char>, IEnumerable<INode<char>>>
-            TraversalAlgorithm;
+            TraversalAlgorithmChar;
+        protected Func<INode<int>, IEnumerable<INode<int>>>
+            TraversalAlgorithmInt;
+        protected string traversalType;
 
         [Fact]
         public void TraversalTest()
         {
+            var traversalCharSeq = new StringBuilder();
+            var traversalCharSeqCorrect =
+                (string)fixture.charTree[traversalType];
+            var charTree = (BinaryTree<char>) fixture.charTree["tree"];
+            foreach (var node in TraversalAlgorithmChar(charTree.Root))
+            {
+                traversalCharSeq.Append(node.Value);
+            }
+            Assert.True(traversalCharSeqCorrect.SequenceEqual(
+                    traversalCharSeq.ToString()));
 
+            var traversalIntSeqCorrect = (int[])fixture.intTree["bft"];
+            var traversalIntSeq = new int[traversalIntSeqCorrect.Length];
+            var intTree = (BinaryTree<int>)fixture.intTree["tree"];
+            var i = 0;
+            foreach(var node in TraversalAlgorithmInt(intTree.Root))
+            {
+                traversalIntSeq[i++] = node.Value;
+            }
+            Assert.True(traversalIntSeqCorrect.SequenceEqual(traversalIntSeq));
+        }
+    }
+
+    [CollectionDefinition("Binary Tree Traversal Collection")]
+    public class GraphTraversalCollection :
+        ICollectionFixture<BinaryTreeTraversalFixture> { }
+
+    [Collection("Binary Tree Traversal Collection")]
+    public class BinaryTreeBreadthFirstTraversalTests
+        : BinaryTreeTraversalTests
+    {
+        public BinaryTreeBreadthFirstTraversalTests(
+            BinaryTreeTraversalFixture fixture)
+        {
+            this.fixture = fixture;
+            traversalType = "bft";
+            TraversalAlgorithmChar = (INode<char> node)
+                => BinaryTree<char>.BreadthFirstTraversalIterativeIterator(
+                    node, new QueueSinglyLinkedList<INode<char>>());
+            TraversalAlgorithmInt = (INode<int> node)
+                => BinaryTree<int>.BreadthFirstTraversalIterativeIterator(
+                    node, new QueueSinglyLinkedList<INode<int>>());
         }
     }
 
@@ -352,27 +401,6 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
                 new StackSinglyLinkedList<INode<char>>()))
             {
                 Assert.True(false);
-            }
-        }
-
-        [Fact]
-        public void BreadthFirstTraversalQueue()
-        {
-            foreach (var nodeLetter in BinaryTree<char>
-                .BreadthFirstTraversalQueue(null,
-                new QueueSinglyLinkedList<INode<char>>()))
-            {
-                Assert.True(false);
-            }
-
-            var treeLetters = (BinaryTree<char>)treeLetter["tree"];
-            var orderedLetters = (char[])treeLetter["bf_traversal_char_array"];
-            int i = 0;
-            foreach (var nodeLetter in BinaryTree<char>
-                .BreadthFirstTraversalQueue(treeLetters.Root,
-                new QueueSinglyLinkedList<INode<char>>()))
-            {
-                Assert.True(nodeLetter.Value == orderedLetters[i++]);
             }
         }
 

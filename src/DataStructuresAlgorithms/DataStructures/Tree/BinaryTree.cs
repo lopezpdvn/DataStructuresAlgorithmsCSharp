@@ -163,8 +163,9 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
             }
         }
 
-        public static IEnumerable<INode<T>> BreadthFirstTraversalQueue(
-            INode<T> node, IQueue<INode<T>> queue)
+        public static IEnumerable<INode<T>>
+            BreadthFirstTraversalIterativeIterator(INode<T> node,
+            IQueue<INode<T>> queue)
         {
             if (node == null)
             {
