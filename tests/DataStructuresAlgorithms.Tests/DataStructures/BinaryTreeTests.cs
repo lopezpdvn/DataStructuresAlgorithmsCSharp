@@ -2,13 +2,11 @@
 using System.Linq;
 using System.Collections;
 using Xunit;
-using DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList;
 using DataStructuresAlgorithms.DataStructures.Tree;
 using DataStructuresAlgorithms.DataStructures.Tree.BinaryTree;
 using DataStructuresAlgorithms.AbstractDataTypes;
 using System.Collections.Generic;
 using System.Text;
-using L = DataStructuresAlgorithms.DataStructures.LinkedList;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
 {
