@@ -43,6 +43,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
                  , 100));
             intTree["tree"] = _intTree;
             intTree["bft"] = new int[] { 100, 50, 150, 25, 75, 125, 175, 110 };
+            intTree["dft-post"] = new int[] { 25, 75, 50, 110, 125, 175, 150, 100 };
 
             var _J = new Node<char>('J');
             var _I = new Node<char>(_J, null, 'I');
@@ -66,6 +67,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
             var _charTree = new BinaryTree<char>(_A);
             charTree["tree"] = _charTree;
             charTree["bft"] = "ABCDEFGHKNOILRPJMSQ";
+            charTree["dft-post"] = "JIHDMLKEBFSRNQPOGCA";
         }
     }
 
@@ -92,7 +94,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
             Assert.True(traversalCharSeqCorrect.SequenceEqual(
                     traversalCharSeq.ToString()));
 
-            var traversalIntSeqCorrect = (int[])fixture.intTree["bft"];
+            var traversalIntSeqCorrect = (int[])fixture.intTree[traversalType];
             var traversalIntSeq = new int[traversalIntSeqCorrect.Length];
             var intTree = (BinaryTree<int>)fixture.intTree["tree"];
             var i = 0;
@@ -123,6 +125,22 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
             TraversalAlgorithmInt = (INode<int> node)
                 => BinaryTree<int>.BreadthFirstTraversalIterativeIterator(
                     node, new QueueSinglyLinkedList<INode<int>>());
+        }
+    }
+
+    [Collection("Binary Tree Traversal Collection")]
+    public class BinaryTreePostOrderTraversalRecursiveIteratorTests
+        : BinaryTreeTraversalTests
+    {
+        public BinaryTreePostOrderTraversalRecursiveIteratorTests(
+            BinaryTreeTraversalFixture fixture)
+        {
+            this.fixture = fixture;
+            traversalType = "dft-post";
+            TraversalAlgorithmChar =
+                BinaryTree<char>.PostOrderTraversalRecursiveIterator;
+            TraversalAlgorithmInt =
+                BinaryTree<int>.PostOrderTraversalRecursiveIterator;
         }
     }
 
@@ -181,33 +199,6 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
             treeLetter["tree"] = treeLetters;
             treeLetter["bf_traversal_char_array"] =
                 "ABCDEFGHKNOILRPJMSQ".ToCharArray();
-        }
-
-        [Fact]
-        public void PostOrderTraversalRecursiveIteratorTest()
-        {
-            Console.WriteLine("\nPostOrderTraversalRecursionTest1");
-            var orderedVals = new int[] { 25, 75, 50, 110, 125, 175, 150, 100 };
-            var orderedLetters = "JIHDMLKEBFSRNQPOGCA".ToCharArray();
-            int i = 0;
-            foreach(var nodeVal in BinaryTree<int>.PostOrderTraversalRecursiveIterator(travTree0.Root))
-            {
-                Assert.True(nodeVal.Value == orderedVals[i++]);
-            }
-            foreach (var nodeVal in BinaryTree<int>.PostOrderTraversalRecursiveIterator(null))
-            {
-                Assert.True(false);
-            }
-
-            i = 0;
-            foreach (var nodeLetter in BinaryTree<char>.PostOrderTraversalRecursiveIterator(treeLetters.Root))
-            {
-                Assert.True(nodeLetter.Value == orderedLetters[i++]);
-            }
-            foreach (var nodeLetter in BinaryTree<char>.PostOrderTraversalRecursiveIterator(null))
-            {
-                Assert.True(false);
-            }
         }
 
         [Fact]
