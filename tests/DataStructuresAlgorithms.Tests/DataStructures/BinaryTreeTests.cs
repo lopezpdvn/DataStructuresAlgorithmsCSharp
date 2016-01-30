@@ -219,6 +219,24 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
         }
     }
 
+    [Collection("Binary Tree Traversal Collection")]
+    public class BinaryTreePostOrderTraversalIterativeIteratorTests
+        : BinaryTreeTraversalTests
+    {
+        public BinaryTreePostOrderTraversalIterativeIteratorTests(
+            BinaryTreeTraversalFixture fixture)
+        {
+            this.fixture = fixture;
+            traversalType = "dft-post";
+            TraversalAlgorithmChar = (INode<char> node)
+                => BinaryTree<char>.PostOrderTraversalIterativeIterator(node,
+                new StackSinglyLinkedList<INode<char>>());
+            TraversalAlgorithmInt = (INode<int> node)
+                => BinaryTree<int>.PostOrderTraversalIterativeIterator(node,
+                new StackSinglyLinkedList<INode<int>>());
+        }
+    }
+
     public class BinaryTreeTests
     {
         BinaryTree<int> travTree0;
@@ -302,42 +320,6 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
 
             var oneNodeTree = new BinaryTree<int>(new Node<int>(15));
             Assert.True(oneNodeTree.Height == 0);
-        }
-
-        [Fact]
-        public void PostOrderTraversalIterativeIteratorTest()
-        {
-            Console.WriteLine("\nPostOrderTraversalIterativeIteratorTest");
-            var orderedVals = new int[] { 25, 75, 50, 110, 125, 175, 150, 100 };
-            var orderedLetters = "JIHDMLKEBFSRNQPOGCA".ToCharArray();
-
-            int i = 0;
-            foreach (var nodeVal in BinaryTree<int>
-                .PostOrderTraversalIterativeIterator(travTree0.Root,
-                new StackSinglyLinkedList<INode<int>>()))
-            {
-                Assert.True(nodeVal.Value == orderedVals[i++]);
-            }
-            foreach (var nodeVal in BinaryTree<int>
-                .PostOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<INode<int>>()))
-            {
-                Assert.True(false);
-            }
-
-            i = 0;
-            foreach (var nodeLetter in BinaryTree<char>
-                .PostOrderTraversalIterativeIterator(treeLetters.Root,
-                new StackSinglyLinkedList<INode<char>>()))
-            {
-                Assert.True(nodeLetter.Value == orderedLetters[i++]);
-            }
-            foreach (var nodeLetter in BinaryTree<char>
-                .PostOrderTraversalIterativeIterator(null,
-                new StackSinglyLinkedList<INode<char>>()))
-            {
-                Assert.True(false);
-            }
         }
 
         [Fact]
