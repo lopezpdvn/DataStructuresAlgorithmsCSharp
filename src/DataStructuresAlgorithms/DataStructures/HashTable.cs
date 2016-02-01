@@ -4,15 +4,16 @@ using DataStructuresAlgorithms.AbstractDataTypes;
 
 namespace DataStructuresAlgorithms.DataStructures.HashTable
 {
-    internal interface IHashTable<TKey, TValue> : IAssociativeArray<TKey, TValue>
-    {
-    }
+    internal interface IHashTable<TKey, TValue>
+        : IAssociativeArray<TKey, TValue> { }
 
-    // Handles collisions by separate chaining. Each array element is another structure that holds the values.
+    // Handles collisions by separate chaining. Each array element is another
+    // structure that holds the values.
     public class HashTableLinkedList<TKey, TValue> : IHashTable<TKey, TValue>
     {
         private const int TABLE_SIZE = 137;
-        private LinkedList<TValue>[] table = new LinkedList<TValue>[TABLE_SIZE];
+        private LinkedList<TValue>[] table =
+            new LinkedList<TValue>[TABLE_SIZE];
 
         public HashTableLinkedList()
         {
@@ -80,7 +81,8 @@ namespace DataStructuresAlgorithms.DataStructures.HashTable
                     table[hashKey].AddLast(value);
                     break;
                 default:
-                    throw new NotImplementedException("Reassignment in a bucket that handles collision not implemented");
+                    throw new NotImplementedException("Reassignment in a"
+                        +"bucket that handles collision not implemented");
             }
         }
 
@@ -97,7 +99,8 @@ namespace DataStructuresAlgorithms.DataStructures.HashTable
                     table[hashKey].RemoveLast();
                     break;
                 default:
-                    throw new NotImplementedException("Removing with collision not implemented");
+                    throw new NotImplementedException(
+                        "Removing with collision not implemented");
             }
         }
 

@@ -64,7 +64,8 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
             }
             else if (FirstNode == node)
             {
-                // There's no previous node since it's the first one, possibly because this.Count == 1.
+                // There's no previous node since it's the first one,
+                // possibly because this.Count == 1.
                 return AddFirst(value);
             }
             else
@@ -72,7 +73,8 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                 INode<T> prevNode = FindPrevious(node);
                 if (prevNode == null)
                 {
-                    throw new InvalidOperationException("node " + node.Value + "not in list");
+                    throw new InvalidOperationException(
+                        "node " + node.Value + "not in list");
                 }
 
                 INode<T> newNode = new SinglyLinkedNode<T>(value);
@@ -192,12 +194,14 @@ namespace DataStructuresAlgorithms.DataStructures.LinkedList.SinglyLinkedList
                 if(FirstNode == node)
                 {
                     // node is first Node
-                    throw new InvalidOperationException("node " + node + "is first in list.");
+                    throw new InvalidOperationException(
+                        "node " + node + "is first in list.");
                 }
                 else 
                 {
                     // Find(node) == null
-                    throw new InvalidOperationException("node " + node + "not in list.");
+                    throw new InvalidOperationException(
+                        "node " + node + "not in list.");
                 }
             }
             else if (node2Remove == FirstNode)

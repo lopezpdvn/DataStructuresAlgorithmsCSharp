@@ -149,7 +149,8 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree
                 else
                 {
                     peekNode = stack.Peek();
-                    if(peekNode.Right != null && peekNode.Right != lastNodeVisited)
+                    if(peekNode.Right != null
+                        && peekNode.Right != lastNodeVisited)
                     {
                         node = peekNode.Right;
                     }
