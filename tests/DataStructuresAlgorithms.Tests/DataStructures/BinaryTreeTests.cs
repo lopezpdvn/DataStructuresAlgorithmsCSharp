@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using Xunit;
 using DataStructuresAlgorithms.DataStructures.Tree;
 using DataStructuresAlgorithms.DataStructures.Tree.BinaryTree;
 using DataStructuresAlgorithms.AbstractDataTypes;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
 {
@@ -237,68 +237,24 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
         }
     }
 
-    public class BinaryTreeTests
+    [Collection("Binary Tree Traversal Collection")]
+    public class BinaryTreeMiscTests
     {
+        private BinaryTreeTraversalFixture fixture;
         BinaryTree<int> travTree0;
         BinaryTree<char> treeLetters;
         IDictionary treeLetter = new Hashtable();
-        public BinaryTreeTests()
+
+        public BinaryTreeMiscTests(BinaryTreeTraversalFixture fixture)
         {
-            /*
-                100
-               /  \
-              /    \
-             /      \
-            50      150
-           / \      /  \
-          25  75   125  175
-                    /
-                  110
-            */
-            travTree0 = new BinaryTree<int>(new Node<int>(
-
-                new Node<int>(
-                    new Node<int>(25), new Node<int>(75), 50),
-
-                new Node<int>(
-                    new Node<int>(
-                        new Node<int>(110), null, 125),
-                    new Node<int>(null, null, 175)
-
-                 , 150)
-
-                 , 100));
-
-            var _J = new Node<char>('J');
-            var _I = new Node<char>(_J, null, 'I');
-            var _H = new Node<char>(null, _I, 'H');
-            var _D = new Node<char>(_H, null, 'D');
-            var _M = new Node<char>(null, null, 'M');
-            var _L = new Node<char>(null, _M, 'L');
-            var _K = new Node<char>(_L, null, 'K');
-            var _E = new Node<char>(_K, null, 'E');
-            var _B = new Node<char>(_D, _E, 'B');
-            var _F = new Node<char>(null, null, 'F');
-            var _S = new Node<char>(null, null, 'S');
-            var _R = new Node<char>(_S, null, 'R');
-            var _N = new Node<char>(_R, null, 'N');
-            var _Q = new Node<char>(null, null, 'Q');
-            var _P = new Node<char>(null, _Q, 'P');
-            var _O = new Node<char>(null, _P, 'O');
-            var _G = new Node<char>(_N, _O, 'G');
-            var _C = new Node<char>(_F, _G, 'C');
-            var _A = new Node<char>(_B, _C, 'A');
-            treeLetters = new BinaryTree<char>(_A);
-            treeLetter["tree"] = treeLetters;
-            treeLetter["bf_traversal_char_array"] =
-                "ABCDEFGHKNOILRPJMSQ".ToCharArray();
+            this.fixture = fixture;
         }
 
         [Fact]
         public void HeightTest()
         {
-            Console.WriteLine("\nHeightTest");
-            Assert.True(travTree0.Height == 3);
+            var intTree = (BinaryTree<int>)fixture.intTree["tree"];
+            Assert.True(intTree.Height == 3);
 
             var nodeI = new Node<char>(null, null, 'I');
             var nodeF = new Node<char>(null, null, 'F');
@@ -312,7 +268,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
             BinaryTree<char> tree = new BinaryTree<char>(nodeA);
             Assert.True(tree.Height == 4);
 
-            BinaryTree<int> tree1 = new BinaryTree<int>(new Node<int>(new Node<int>(1), null, 0));
+            BinaryTree<int> tree1 = new BinaryTree<int>(
+                new Node<int>(new Node<int>(1), null, 0));
             Assert.True(tree1.Height == 1);
 
             var emptyTree = new BinaryTree<int>();
