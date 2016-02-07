@@ -146,6 +146,11 @@ namespace DataStructuresAlgorithms.DataStructures.Array
             }
         }
 
+        public static void QuickSort(int[] arr)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void MergeSort(int[] arr)
         {
             if(arr.Length > 0)

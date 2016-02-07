@@ -96,6 +96,16 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Array
     }
 
     [Collection("Int Array Sorting Collection")]
+    public class QuickSortSortTests : IntArraySortingTests
+    {
+        public QuickSortSortTests(SortedIntArraysFixture fixture)
+        {
+            sortedArrays = fixture;
+            ArraySortingAlgorithm = SortedArrayInt.QuickSort;
+        }
+    }
+
+    [Collection("Int Array Sorting Collection")]
     public class MergeSortTests : IntArraySortingTests
     {
         public MergeSortTests(SortedIntArraysFixture fixture)

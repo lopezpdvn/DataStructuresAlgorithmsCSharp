@@ -241,8 +241,6 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinaryTree
     public class BinaryTreeMiscTests
     {
         private BinaryTreeTraversalFixture fixture;
-        BinaryTree<int> travTree0;
-        BinaryTree<char> treeLetters;
         IDictionary treeLetter = new Hashtable();
 
         public BinaryTreeMiscTests(BinaryTreeTraversalFixture fixture)
