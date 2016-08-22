@@ -6,18 +6,29 @@
   "projectUrl": "",
   "licenseUrl": "",
 
-  "dependencies": {
-    "DataStructuresAlgorithms": "1.0.0-*",
-    "xunit": "2.1.0-*",
-    "xunit.runner.dnx": "2.1.0-*"
-  },
+  "testRunner": "xunit",
 
   "commands": {
     "DataStructuresAlgorithms.Tests": "DataStructuresAlgorithms.Tests",
     "test": "xunit.runner.dnx"
   },
 
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type":"platform",
+      "version": "1.0.0"
+    },
+    "System.Collections": "4.0.11",
+    "System.Collections.NonGeneric": "4.0.1",
+    "xunit":"2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "DataStructuresAlgorithms": "1.0.0-*"
+  },
   "frameworks": {
-    "dnx451": { }
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50"
+      ]
+    }
   }
 }
