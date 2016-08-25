@@ -132,7 +132,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Graph
                 {
                     str += node.Vertex;
                 }
-                Console.WriteLine(str);
+                //Console.WriteLine(str);
                 Assert.True(str.Equals(traversalSequence));
             }
         }

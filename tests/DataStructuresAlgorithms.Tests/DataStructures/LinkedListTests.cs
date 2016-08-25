@@ -35,7 +35,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures
             {
                 list.AddLast(i);
             }
-            Console.WriteLine(list);
+            //Console.WriteLine(list);
             Assert.True(list.LastNode.Next == null);
 
             Assert.False(list.IsCyclic);

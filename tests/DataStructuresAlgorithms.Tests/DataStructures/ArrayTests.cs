@@ -95,6 +95,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Array
         }
     }
 
+    /*
     [Collection("Int Array Sorting Collection")]
     public class QuickSortSortTests : IntArraySortingTests
     {
@@ -104,6 +105,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Array
             ArraySortingAlgorithm = SortedArrayInt.QuickSort;
         }
     }
+    */
 
     [Collection("Int Array Sorting Collection")]
     public class MergeSortTests : IntArraySortingTests
