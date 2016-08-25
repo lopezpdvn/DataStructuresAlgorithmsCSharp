@@ -2,9 +2,11 @@
   "version": "1.0.0-*",
   "description": "DataStructuresAlgorithms.Tests Console Application",
   "authors": [ "Pedro Ivan Lopez" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "packOptions": {
+    "projectUrl": "",
+    "licenseUrl": "",
+    "tags": [ "" ]
+  },
 
   "testRunner": "xunit",
 

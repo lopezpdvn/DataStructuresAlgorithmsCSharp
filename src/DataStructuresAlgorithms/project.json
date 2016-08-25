@@ -2,9 +2,11 @@
   "version": "1.0.0-*",
   "description": "",
   "authors": [ "" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "packOptions": {
+    "projectUrl": "",
+    "licenseUrl": "",
+    "tags": [ "" ]
+  },
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
