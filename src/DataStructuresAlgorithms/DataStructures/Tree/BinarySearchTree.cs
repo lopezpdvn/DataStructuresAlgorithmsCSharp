@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DataStructuresAlgorithms.AbstractDataTypes;
 using System.Collections.Generic;
 
 namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree.BinarySearchTree
@@ -41,7 +41,12 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree.BinarySearchTr
 
         public IEnumerable<NodeInt> IODFTraversal()
         {
-            throw new NotImplementedException();
+            var stack = new StackSinglyLinkedList<INode<int>>();
+            foreach(var i in
+                BinaryTree<int>.InOrderTraversalIterativeIterator(Root, stack))
+            {
+                yield return (NodeInt)i;
+            }
         }
     }
 
@@ -60,11 +65,5 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree.BinarySearchTr
 
         public static bool operator > (NodeInt a, NodeInt b)
             => a.Value > b.Value;
-
-        //public static bool operator == (NodeInt a, NodeInt b)
-          //  => a.Value == b.Value;
-
-        //public static bool operator != (NodeInt a, NodeInt b)
-          //  => a.Value != b.Value;
     }
 }

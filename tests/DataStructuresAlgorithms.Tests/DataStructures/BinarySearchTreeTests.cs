@@ -6,7 +6,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
     public class BinarySearchTreeIntTests
     {
         [Fact]
-        public void MiscTest0()
+        public void InsertTest0()
         {
             int[] keys = { 99, -9, 0, -99, -999, 999, 9 };
             var bstInt = new BinarySearchTreeInt();
@@ -16,10 +16,11 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
             }
             System.Array.Sort(keys);
             System.Console.WriteLine();
-            /*foreach(var i in bstInt.IODFTraversal())
+            var j = 0;
+            foreach(var i in bstInt.IODFTraversal())
             {
-                System.Console.Write(i + " ");
-            }*/
+                Assert.True(i.Value == keys[j++]);
+            }
         }
 
         [Fact]
@@ -41,8 +42,7 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
             Assert.False(small == large);
             Assert.True(small != large);
 
-            Assert.True(small == small);
-            Assert.True(largest1 == largest);
+            //Assert.True(largest1 == largest);
             Assert.True(largest1 >= largest);
             Assert.True(largest1 <= largest);
         }
