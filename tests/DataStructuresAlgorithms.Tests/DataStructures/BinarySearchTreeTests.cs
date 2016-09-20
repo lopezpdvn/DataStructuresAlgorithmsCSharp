@@ -3,23 +3,53 @@ using DataStructuresAlgorithms.DataStructures.Tree.BinaryTree.BinarySearchTree;
 
 namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
 {
+    public class BinarySearchTreeIntFixture
+    {
+        public int[] keys;
+        public int[] sortedKeys;
+        public NodeInt[] nodes;
+
+        public BinarySearchTreeIntFixture()
+        {
+            keys = new int[]{ 99, -9, 0, -99, -999, 999, 9 };
+            sortedKeys = new int[keys.Length];
+            keys.CopyTo(sortedKeys, 0);
+            System.Array.Sort(sortedKeys);
+            nodes = new NodeInt[keys.Length];
+            var j = 0;
+            foreach(var i in keys)
+            {
+                nodes[j++] = new NodeInt(i);
+            }
+        }
+    }
+
+    [CollectionDefinition("BST Collection")]
+    public class BSTCollection :
+        ICollectionFixture<BinarySearchTreeIntFixture> { }
+
+    [Collection("BST Collection")]
     public class BinarySearchTreeIntTests
     {
+        BinarySearchTreeIntFixture fixture;
+
+        public BinarySearchTreeIntTests(BinarySearchTreeIntFixture fixture)
+        {
+            this.fixture = fixture;
+        }
+
         [Fact]
         public void InsertTest0()
         {
-            int[] keys = { 99, -9, 0, -99, -999, 999, 9 };
             var bstInt = new BinarySearchTreeInt();
-            foreach(var i in keys)
+            foreach(var node in fixture.nodes)
             {
-                bstInt.Insert(new NodeInt(i));
+                bstInt.Insert(node);
             }
-            System.Array.Sort(keys);
-            System.Console.WriteLine();
             var j = 0;
             foreach(var i in bstInt.IODFTraversal())
             {
-                Assert.True(i.Value == keys[j++]);
+                Assert.True(i.Value == fixture.sortedKeys[j++]);
             }
         }
 
