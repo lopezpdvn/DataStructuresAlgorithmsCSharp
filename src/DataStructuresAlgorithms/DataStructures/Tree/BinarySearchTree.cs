@@ -48,6 +48,23 @@ namespace DataStructuresAlgorithms.DataStructures.Tree.BinaryTree.BinarySearchTr
                 yield return (NodeInt)i;
             }
         }
+
+        public NodeInt Find(NodeInt target)
+        {
+            var node = Root;
+            while(node != null && node.Value != target.Value)
+            {
+                if(target < node)
+                {
+                    node = (NodeInt)node.Left;
+                }
+                else
+                {
+                    node = (NodeInt)node.Right;
+                }
+            }
+            return node;
+        }
     }
 
     public class NodeInt : Node<int>

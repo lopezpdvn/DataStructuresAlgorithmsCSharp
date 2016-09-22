@@ -8,18 +8,30 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
         public int[] keys;
         public int[] sortedKeys;
         public NodeInt[] nodes;
+        public NodeInt[] nonExistentNodes;
+        public int[] nonExistentKeys;
+        public BinarySearchTreeInt bstInt;
 
         public BinarySearchTreeIntFixture()
         {
             keys = new int[]{ 99, -9, 0, -99, -999, 999, 9 };
+            nonExistentKeys = new int[]{-500, 500, 50, -5, 5};
             sortedKeys = new int[keys.Length];
             keys.CopyTo(sortedKeys, 0);
             System.Array.Sort(sortedKeys);
             nodes = new NodeInt[keys.Length];
+            nonExistentNodes = new NodeInt[nonExistentKeys.Length];
+            bstInt = new BinarySearchTreeInt();
             var j = 0;
             foreach(var i in keys)
             {
-                nodes[j++] = new NodeInt(i);
+                nodes[j] = new NodeInt(i);
+                bstInt.Insert(nodes[j++]);
+            }
+            j = 0;
+            foreach(var i in nonExistentKeys)
+            {
+                nonExistentNodes[j++] = new NodeInt(i);
             }
         }
     }
@@ -41,13 +53,8 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
         [Fact]
         public void InsertTest0()
         {
-            var bstInt = new BinarySearchTreeInt();
-            foreach(var node in fixture.nodes)
-            {
-                bstInt.Insert(node);
-            }
             var j = 0;
-            foreach(var i in bstInt.IODFTraversal())
+            foreach(var i in fixture.bstInt.IODFTraversal())
             {
                 Assert.True(i.Value == fixture.sortedKeys[j++]);
             }
@@ -75,6 +82,19 @@ namespace DataStructuresAlgorithms.Tests.DataStructures.Tree.BinarySearchTree
             //Assert.True(largest1 == largest);
             Assert.True(largest1 >= largest);
             Assert.True(largest1 <= largest);
+        }
+
+        [Fact]
+        public void FindTest0()
+        {
+            foreach(var target in fixture.nodes)
+            {
+                Assert.True(target == fixture.bstInt.Find(target));
+            }
+            foreach(var nonExistentNode in fixture.nonExistentNodes)
+            {
+                Assert.True(null == fixture.bstInt.Find(nonExistentNode));
+            }
         }
     }
 }
