@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "Libuv/1.9.0": {
+      "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
@@ -119,15 +119,15 @@
           "lib/netstandard1.3/_._": {}
         }
       },
-      "Microsoft.NETCore.App/1.0.0": {
+      "Microsoft.NETCore.App/1.1.0": {
         "type": "package",
         "dependencies": {
-          "Libuv": "1.9.0",
+          "Libuv": "1.9.1",
           "Microsoft.CSharp": "4.0.1",
           "Microsoft.CodeAnalysis.CSharp": "1.3.0",
           "Microsoft.CodeAnalysis.VisualBasic": "1.3.0",
           "Microsoft.NETCore.DotNetHostPolicy": "1.0.1",
-          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2",
+          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.4",
           "Microsoft.VisualBasic": "10.0.1",
           "NETStandard.Library": "1.6.0",
           "System.Buffers": "4.0.0",
@@ -186,7 +186,7 @@
           "Microsoft.NETCore.DotNetHost": "1.0.1"
         }
       },
-      "Microsoft.NETCore.Jit/1.0.2": {
+      "Microsoft.NETCore.Jit/1.0.4": {
         "type": "package"
       },
       "Microsoft.NETCore.Platforms/1.0.1": {
@@ -198,10 +198,10 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+      "Microsoft.NETCore.Runtime.CoreCLR/1.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Jit": "1.0.2",
+          "Microsoft.NETCore.Jit": "1.0.4",
           "Microsoft.NETCore.Windows.ApiSets": "1.0.1"
         }
       },
@@ -1995,12 +1995,12 @@
     }
   },
   "libraries": {
-    "Libuv/1.9.0": {
-      "sha512": "gbKv3oS7WxC1Rur8eS1myZq6GVNwvlGmzwhOkW754wPStaPwAciLQBmXwF/kb4sgIah6uJpcEFWc+X7KsdBApA==",
+    "Libuv/1.9.1": {
+      "sha512": "1zLcOb4wgiuO87jzJ7p2/zpc8VY0wvoFMPhafx4P+Ef8InquMcVbPBOGJLJoDMaC0li0LEPVA6dDyiBMymiXUw==",
       "type": "package",
-      "path": "Libuv/1.9.0",
+      "path": "Libuv/1.9.1",
       "files": [
-        "Libuv.1.9.0.nupkg.sha512",
+        "Libuv.1.9.1.nupkg.sha512",
         "Libuv.nuspec",
         "License.txt",
         "runtimes/debian-x64/native/libuv.so",
@@ -2134,12 +2134,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Microsoft.NETCore.App/1.0.0": {
-      "sha512": "oUnc9F/iqqGcYkmaENQaVwmwndDl/hMJMk5l/9tqdRY8zdbT/be9goEfVsX99AuHff9JV0c3izcoNOiSroCEew==",
+    "Microsoft.NETCore.App/1.1.0": {
+      "sha512": "NQR5HsTcG4N/14q2pXYTdcabodcqjI05wIbzMC2umB/NhX0j6uM+HOgdXV5yxs6aSzvb7hDXp6mQn3wZUL6v/g==",
       "type": "package",
-      "path": "Microsoft.NETCore.App/1.0.0",
+      "path": "Microsoft.NETCore.App/1.1.0",
       "files": [
-        "Microsoft.NETCore.App.1.0.0.nupkg.sha512",
+        "Microsoft.NETCore.App.1.1.0.nupkg.sha512",
         "Microsoft.NETCore.App.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -2182,12 +2182,12 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.Jit/1.0.2": {
-      "sha512": "M+cqSr/gRHHy5S/ioP4u9YpToMl+wvH1y6/QDz0BrfDykiN1xTppm7cLW4yT7DD9z4CchQf3+I4f0vqb+2HXGw==",
+    "Microsoft.NETCore.Jit/1.0.4": {
+      "sha512": "s336ryZlopR+pQ4VfKlILX1LxiQzpCPnmiGot0p5aFPeCjwmKtHC88MI8jXdvdGPySON9i1bPUKJP8jiiPIAjA==",
       "type": "package",
-      "path": "Microsoft.NETCore.Jit/1.0.2",
+      "path": "Microsoft.NETCore.Jit/1.0.4",
       "files": [
-        "Microsoft.NETCore.Jit.1.0.2.nupkg.sha512",
+        "Microsoft.NETCore.Jit.1.0.4.nupkg.sha512",
         "Microsoft.NETCore.Jit.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -2207,12 +2207,12 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
-      "sha512": "2mP8vtLgE7AAaiiSHdIzE8mWeCHu767Xg19qYwCM861hEi3rdGn2z4DbuS9uS+VYjd8lkTGSI8NeCuFI68pZog==",
+    "Microsoft.NETCore.Runtime.CoreCLR/1.0.4": {
+      "sha512": "NTd+F7MQJi5wFh6Hq3uVH0L3om+pVcfF+bpw0hSd+Ka92QSZ4IfDJw/IWqTQ9jUtLyWYR4XR+52HD5HW+a+zoQ==",
       "type": "package",
-      "path": "Microsoft.NETCore.Runtime.CoreCLR/1.0.2",
+      "path": "Microsoft.NETCore.Runtime.CoreCLR/1.0.4",
       "files": [
-        "Microsoft.NETCore.Runtime.CoreCLR.1.0.2.nupkg.sha512",
+        "Microsoft.NETCore.Runtime.CoreCLR.1.0.4.nupkg.sha512",
         "Microsoft.NETCore.Runtime.CoreCLR.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -6589,7 +6589,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.App >= 1.0.0"
+      "Microsoft.NETCore.App >= 1.1.0"
     ],
     ".NETCoreApp,Version=v1.0": []
   },
