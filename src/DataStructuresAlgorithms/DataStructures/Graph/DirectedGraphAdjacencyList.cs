@@ -74,13 +74,14 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
 
             foreach (var adjNode in node)
             {
-                if (adjNode.State == State.Unvisited)
+                if (adjNode.State == State.Visited)
                 {
-                    foreach (var iAdjNode in
-                        _PreOrderDepthFirstTraversalRecursiveIterator(adjNode))
-                    {
+                    continue;
+                }
+                foreach (var iAdjNode in
+                    _PreOrderDepthFirstTraversalRecursiveIterator(adjNode))
+                {
                         yield return iAdjNode;
-                    }
                 }
             }
         }
@@ -97,14 +98,15 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
             while (!stack.IsEmpty)
             {
                 node = stack.Pop();
-                if(node.State == State.Unvisited)
+                if(node.State == State.Visited)
                 {
-                    yield return node;
-                    node.State = State.Visited;
-                    foreach (var adjacentNode in node.Reverse())
-                    {
-                        stack.Push(adjacentNode);
-                    }
+                    continue;
+                }
+                yield return node;
+                node.State = State.Visited;
+                foreach (var adjacentNode in node.Reverse())
+                {
+                    stack.Push(adjacentNode);
                 }
             }
         }
@@ -127,12 +129,13 @@ namespace DataStructuresAlgorithms.DataStructures.Graph.DirectedGraphAdjacencyLi
                 node = queue.Dequeue();
                 foreach (var adjacentNode in node)
                 {
-                    if(adjacentNode.State == State.Unvisited)
+                    if(adjacentNode.State == State.Visited)
                     {
-                        yield return adjacentNode;
-                        adjacentNode.State = State.Visited;
-                        queue.Enqueue(adjacentNode);
+                        continue;
                     }
+                    yield return adjacentNode;
+                    adjacentNode.State = State.Visited;
+                    queue.Enqueue(adjacentNode);
                 }
             }
         }
